@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Mail, Sparkles } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/common/icons";
+import { ArrowDown, Mail, Sparkles, Phone } from "lucide-react";
+import { GithubIcon, LinkedinIcon, FacebookIcon } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/data/site";
 
@@ -18,9 +18,9 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] },
+    transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
   },
-};
+} as const;
 
 const floatingIcons = [
   { icon: "⚛️", x: "10%", y: "20%", delay: 0 },
@@ -37,6 +37,10 @@ function SocialIcon({ icon, className }: { icon: string; className?: string }) {
       return <GithubIcon className={className} />;
     case "linkedin":
       return <LinkedinIcon className={className} />;
+    case "facebook":
+      return <FacebookIcon className={className} />;
+    case "phone":
+      return <Phone className={className} />;
     default:
       return <Mail className={className} />;
   }
@@ -125,7 +129,7 @@ export function Hero() {
         <motion.div variants={itemVariants} className="mt-4 md:mt-6">
           <p className="text-lg font-medium text-muted-foreground sm:text-xl md:text-2xl">
             <Sparkles className="mr-2 inline-block h-5 w-5" style={{ color: "oklch(0.65 0.25 285)" }} />
-            Full Stack Developer &amp; IoT Engineer
+            Full-Stack Developer
           </p>
         </motion.div>
 
@@ -134,9 +138,9 @@ export function Hero() {
           variants={itemVariants}
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg"
         >
-          I craft premium digital experiences with modern web technologies,
-          build intelligent IoT systems, and turn creative ideas into
-          production-ready solutions.
+          Production experience building scalable web and mobile apps — from
+          real-time chat, JWT/RBAC auth, and online payment integrations to IoT
+          dashboards. Proficient in React, Next.js, Node.js, TypeScript, and PostgreSQL.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -181,8 +185,8 @@ export function Hero() {
             <a
               key={link.name}
               href={link.url}
-              target={link.icon !== "mail" ? "_blank" : undefined}
-              rel={link.icon !== "mail" ? "noopener noreferrer" : undefined}
+              target={link.icon !== "mail" && link.icon !== "phone" ? "_blank" : undefined}
+              rel={link.icon !== "mail" && link.icon !== "phone" ? "noopener noreferrer" : undefined}
               className="rounded-full border border-border/30 bg-white/5 p-3 text-muted-foreground transition-all hover:bg-white/10 hover:text-foreground hover:border-border/60"
               aria-label={link.name}
             >

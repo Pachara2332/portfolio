@@ -49,7 +49,7 @@ export function ExperienceTimeline() {
                   transition={{
                     duration: 0.5,
                     delay: index * 0.15,
-                    ease: [0.25, 0.4, 0.25, 1],
+                    ease: [0.25, 0.4, 0.25, 1] as const,
                   }}
                   className={`relative flex items-start gap-6 ${
                     isEven ? "md:flex-row" : "md:flex-row-reverse"

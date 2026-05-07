@@ -2,33 +2,23 @@ import { Experience } from "@/types";
 
 export const experiences: Experience[] = [
   {
-    id: "exp-1",
-    company: "Tech Startup",
-    role: "Full Stack Developer",
-    period: "2024 — Present",
+    id: "bussing-fullstack",
+    company: "Bussing Transit Co., Ltd.",
+    role: "Full-Stack Developer Intern",
+    period: "Dec 2025 — May 2026",
     description:
-      "Leading development of web applications and IoT dashboards. Architecting scalable solutions with Next.js, designing real-time data pipelines, and mentoring junior developers.",
-    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Docker", "AWS"],
-    type: "work",
+      "Built production digital bus card system for ticket purchase & online payment, live with real public bus passengers across LINE LIFF and web. Implemented LINE Login & Email Login with secure session management; designed full backend schema with Node.js and Prisma ORM.",
+    techStack: ["React", "Node.js", "Prisma ORM", "LINE LIFF"],
+    type: "internship",
   },
   {
-    id: "exp-2",
-    company: "Freelance",
-    role: "IoT & Web Developer",
-    period: "2023 — 2024",
+    id: "bussing-frontend",
+    company: "Bussing Transit Co., Ltd.",
+    role: "Frontend Developer Intern",
+    period: "Dec 2025 — May 2026",
     description:
-      "Delivered custom IoT monitoring systems and web applications for agricultural and industrial clients. Specialized in ESP32-based solutions with cloud integration.",
-    techStack: ["ESP32", "React", "Python", "MQTT", "Firebase"],
-    type: "freelance",
-  },
-  {
-    id: "exp-3",
-    company: "University Project Lab",
-    role: "Software Engineer Intern",
-    period: "2022 — 2023",
-    description:
-      "Developed computer vision systems for quality inspection. Built full-stack dashboards for data visualization and implemented machine learning pipelines.",
-    techStack: ["Python", "OpenCV", "Flask", "TensorFlow", "MySQL"],
+      "Built real-time dashboard for camera feeds, live maps, and operational activity monitoring. Automated bash scripts for video recording pipelines on Linux servers.",
+    techStack: ["React", "Linux", "Bash"],
     type: "internship",
   },
 ];

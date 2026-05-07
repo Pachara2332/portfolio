@@ -2,9 +2,9 @@ import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
   name: "Pachara",
-  title: "Pachara | Full Stack Developer",
+  title: "Pachara | Full-Stack Developer",
   description:
-    "Full Stack Developer specializing in modern web applications, IoT systems, and creative engineering solutions. Building premium digital experiences with Next.js, React, and cutting-edge technologies.",
+    "Full-Stack Developer with production experience building scalable web and mobile apps — from real-time chat, JWT/RBAC auth, and online payment integrations to IoT dashboards. Proficient in React, Next.js, Node.js, TypeScript, and PostgreSQL.",
   url: "https://pachara.dev",
   ogImage: "/og-image.png",
   navItems: [
@@ -17,19 +17,29 @@ export const siteConfig: SiteConfig = {
   socialLinks: [
     {
       name: "GitHub",
-      url: "https://github.com/pachara",
+      url: "https://github.com/Pachara2332",
       icon: "github",
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/pachara",
+      url: "https://www.linkedin.com/in/pachara-wongsasri-9256103bb/",
       icon: "linkedin",
     },
     {
+      name: "Facebook",
+      url: "https://www.facebook.com/ltawannnnnnl",
+      icon: "facebook",
+    },
+    {
       name: "Email",
-      url: "mailto:contact@pachara.dev",
+      url: "mailto:mrpacharawongsasri@gmail.com",
       icon: "mail",
     },
+    {
+      name: "Phone",
+      url: "tel:+66990094187",
+      icon: "phone",
+    },
   ],
-  email: "contact@pachara.dev",
+  email: "mrpacharawongsasri@gmail.com",
 };

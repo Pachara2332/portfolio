@@ -5,7 +5,6 @@ import { ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/common/icons";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import type { Project } from "@/types";
 
 interface ProjectCardProps {
@@ -22,7 +21,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       transition={{
         duration: 0.5,
         delay: index * 0.1,
-        ease: [0.25, 0.4, 0.25, 1],
+        ease: [0.25, 0.4, 0.25, 1] as const,
       }}
     >
       <Card className="group relative overflow-hidden border-border/30 bg-card/50 backdrop-blur-sm transition-all duration-500 hover:border-border/60 hover:bg-card/80 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
@@ -92,38 +91,26 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {/* Actions */}
           <div className="flex items-center gap-2 pt-2">
             {project.github && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-8 gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-                asChild
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 h-8 px-2.5 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
               >
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <GithubIcon className="h-3.5 w-3.5" />
-                  Source
-                </a>
-              </Button>
+                <GithubIcon className="h-3.5 w-3.5" />
+                Source
+              </a>
             )}
             {project.demo && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-8 gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-                asChild
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 h-8 px-2.5 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
               >
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink className="h-3.5 w-3.5" />
-                  Live Demo
-                </a>
-              </Button>
+                <ExternalLink className="h-3.5 w-3.5" />
+                Live Demo
+              </a>
             )}
           </div>
         </CardContent>

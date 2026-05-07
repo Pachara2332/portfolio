@@ -24,6 +24,8 @@ import {
   GitBranch,
   ScanEye,
   Monitor,
+  Send,
+  Cloud,
   type LucideIcon,
 } from "lucide-react";
 import { FigmaIcon } from "@/components/common/icons";
@@ -50,6 +52,8 @@ const iconMap: Record<string, LucideIcon | typeof FigmaIcon> = {
   "scan-eye": ScanEye,
   figma: FigmaIcon,
   monitor: Monitor,
+  send: Send,
+  cloud: Cloud,
 };
 
 function SkillPill({ name, icon }: { name: string; icon: string }) {

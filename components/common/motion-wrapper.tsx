@@ -21,7 +21,7 @@ export function FadeUp({
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration, delay, ease: [0.25, 0.4, 0.25, 1] }}
+      transition={{ duration, delay, ease: [0.25, 0.4, 0.25, 1] as const }}
       className={className}
       {...props}
     >
@@ -102,7 +102,7 @@ export function StaggerItem({
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] },
+          transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] as const },
         },
       }}
       className={className}
@@ -149,7 +149,7 @@ export function SlideInLeft({
       initial={{ opacity: 0, x: -40 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.4, 0.25, 1] }}
+      transition={{ duration: 0.6, delay, ease: [0.25, 0.4, 0.25, 1] as const }}
       className={className}
     >
       {children}

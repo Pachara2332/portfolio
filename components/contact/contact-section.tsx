@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Mail, CheckCircle2, Loader2 } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/common/icons";
+import { Send, Mail, CheckCircle2, Loader2, Phone } from "lucide-react";
+import { GithubIcon, LinkedinIcon, FacebookIcon } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { FadeUp } from "@/components/common/motion-wrapper";
 import { SectionHeading } from "@/components/common/section-heading";
 import { siteConfig } from "@/data/site";
-import type { LucideIcon } from "lucide-react";
 
 function SocialIcon({ icon, className, style }: { icon: string; className?: string; style?: React.CSSProperties }) {
   switch (icon) {
@@ -17,6 +16,10 @@ function SocialIcon({ icon, className, style }: { icon: string; className?: stri
       return <GithubIcon className={className} />;
     case "linkedin":
       return <LinkedinIcon className={className} />;
+    case "facebook":
+      return <FacebookIcon className={className} />;
+    case "phone":
+      return <Phone className={className} style={style} />;
     default:
       return <Mail className={className} style={style} />;
   }
@@ -91,8 +94,8 @@ export function ContactSection() {
                 <a
                   key={link.name}
                   href={link.url}
-                  target={link.icon !== "mail" ? "_blank" : undefined}
-                  rel={link.icon !== "mail" ? "noopener noreferrer" : undefined}
+                  target={link.icon !== "mail" && link.icon !== "phone" ? "_blank" : undefined}
+                  rel={link.icon !== "mail" && link.icon !== "phone" ? "noopener noreferrer" : undefined}
                   className="flex items-center gap-3 rounded-lg border border-border/30 bg-white/[0.02] p-3 text-sm text-muted-foreground transition-all hover:bg-white/[0.05] hover:text-foreground hover:border-border/50"
                 >
                   <div
@@ -106,7 +109,7 @@ export function ContactSection() {
                   <div>
                     <p className="font-medium text-foreground">{link.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      {link.url.replace("mailto:", "").replace("https://", "")}
+                      {link.url.replace("mailto:", "").replace("https://", "").replace("tel:", "")}
                     </p>
                   </div>
                 </a>
