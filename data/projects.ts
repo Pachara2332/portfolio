@@ -3,13 +3,17 @@ import { Project } from "@/types";
 export const projects: Project[] = [
   {
     id: "eleven-lineup",
-    title: "Eleven Lineup — Premier League Lineup Builder",
+    title: "Eleven Lineup - Premier League Lineup Builder",
     description:
       "Interactive drag-and-drop pitch UI with custom JWT auth in HTTP-only cookies via Next.js Edge Middleware. Features RBAC, social community, streak-based prediction mini-games, and PostgreSQL/Prisma schema for user profiles.",
     techStack: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "JWT"],
     image: "/projects/eleven-lineup.jpg",
     github: "https://github.com/Pachara2332/ElevenLineUp",
     demo: "https://elevenlineup-production.up.railway.app/",
+    impact: [
+      "Built a full football lineup builder with drag-and-drop squad management",
+      "Implemented secure JWT auth, RBAC, profiles, and daily prediction game flows",
+    ],
     features: [
       "Interactive drag-and-drop pitch UI with @dnd-kit",
       "Custom JWT auth with HTTP-only cookies",
@@ -28,6 +32,10 @@ export const projects: Project[] = [
     image: "/projects/patient-system.jpg",
     github: "https://github.com/Pachara2332/patient-system",
     demo: "https://patient-system-production-8241.up.railway.app/",
+    impact: [
+      "Built patient records and appointment workflows for healthcare operations",
+      "Designed a full-stack PostgreSQL/Prisma data layer for reliable clinical data handling",
+    ],
     features: [
       "Patient records management",
       "Appointment scheduling system",
@@ -45,6 +53,10 @@ export const projects: Project[] = [
     image: "/projects/childcare.jpg",
     github: "https://github.com/Pachara2332/childrencare",
     demo: "https://childcare-dashboard-ten.vercel.app/",
+    impact: [
+      "Created dashboards for tracking child development, activities, savings, and payments",
+      "Added CSV/PDF export flows so reports can be shared outside the system",
+    ],
     features: [
       "Child development tracking",
       "Activity & payment management",
@@ -60,7 +72,11 @@ export const projects: Project[] = [
       "Real-time chat platform with Socket.io featuring typing indicators, persisted chat history, and automated image uploads to AWS S3. Advanced preference-based matching with peer-to-peer review & rating system.",
     techStack: ["Next.js", "TypeScript", "PostgreSQL", "Socket.io", "JWT", "AWS S3"],
     image: "/projects/roommate.jpg",
-    github: "https://github.com/Pachara004/IshowSpeed",
+    github: "https://github.com/Pachara2332/roommate-finder",
+    impact: [
+      "Built real-time chat with Socket.io, typing status, persisted history, and AWS S3 uploads",
+      "Created preference-based matching plus peer review and rating flows",
+    ],
     features: [
       "Real-time chat with typing indicators",
       "Persisted chat history via Socket.io",
@@ -78,6 +94,10 @@ export const projects: Project[] = [
     techStack: ["Angular", "Firebase", "ESP32", "C++", "RS485 NPK", "GPS"],
     image: "/projects/soil-iot.jpg",
     github: "https://github.com/Pachara004/soil-sensor-frontend",
+    impact: [
+      "Connected ESP32, RS485 NPK sensors, and GPS to stream field data into Firebase",
+      "Built an Angular dashboard with role access and crop/fertilizer recommendations",
+    ],
     features: [
       "ESP32 firmware with RS485 NPK sensor integration",
       "GPS-based location tracking",
@@ -88,19 +108,40 @@ export const projects: Project[] = [
     category: "iot",
   },
   {
-    id: "lotto-rider",
-    title: "Lotto & Rider Applications",
+    id: "lotto-app",
+    title: "Lotto App",
     description:
-      "Two Flutter mobile apps: a lottery platform with real-time stock management and 1–5 ticket bundle purchases, and a delivery app with dual-role system (customer/rider) featuring live map tracking via Firebase.",
+      "Flutter lottery platform with real-time stock management, bundle ticket purchasing, and vendor inventory controls.",
     techStack: ["Flutter", "Node.js", "Firebase"],
-    image: "/projects/lotto-rider.jpg",
+    image: "/projects/lotto-app.jpg",
     github: "https://github.com/Pachara004/LottoApp",
+    impact: [
+      "Built lottery purchase flows with stock management and bundle ticket buying",
+      "Created vendor inventory controls for managing available lottery stock",
+    ],
     features: [
       "Real-time lottery stock management",
-      "1–5 ticket bundle purchase flow",
+      "1-5 ticket bundle purchase flow",
       "Vendor admin panel for inventory",
+    ],
+    category: "mobile",
+  },
+  {
+    id: "rider-app",
+    title: "Rider Delivery App",
+    description:
+      "Flutter delivery application with customer/rider roles, order handling, and Firebase-backed live map tracking.",
+    techStack: ["Flutter", "Dart", "Android", "Firebase", "Maps"],
+    image: "/projects/rider-app.jpg",
+    github: "https://github.com/Pachara004/IshowSpeed",
+    impact: [
+      "Built dual-role delivery flows for customer and rider use cases",
+      "Integrated Firebase-backed live map tracking for delivery status visibility",
+    ],
+    features: [
       "Dual-role delivery system (customer/rider)",
       "Live map tracking with Firebase",
+      "Delivery order status flow",
     ],
     category: "mobile",
   },

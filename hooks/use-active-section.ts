@@ -20,9 +20,12 @@ export function useActiveSection(sectionIds: string[]) {
   }, [sectionIds]);
 
   useEffect(() => {
-    handleScroll();
+    const frame = window.requestAnimationFrame(handleScroll);
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [handleScroll]);
 
   return activeSection;

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { FileText, Menu } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { cn } from "@/lib/utils";
@@ -96,7 +96,19 @@ export function Navbar() {
           })}
           <Button
             size="sm"
-            className="ml-3 bg-violet text-white hover:bg-violet/90 glow-violet"
+            variant="outline"
+            nativeButton={false}
+            className="ml-3 border-border/50 bg-white/5 backdrop-blur-sm hover:bg-white/10"
+            render={
+              <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" />
+            }
+          >
+            <FileText className="h-4 w-4" />
+            Resume
+          </Button>
+          <Button
+            size="sm"
+            className="bg-violet text-white hover:bg-violet/90 glow-violet"
             style={{
               backgroundColor: "oklch(0.65 0.25 285)",
             }}
@@ -144,6 +156,17 @@ export function Navbar() {
                   </button>
                 );
               })}
+              <Button
+                variant="outline"
+                nativeButton={false}
+                className="mt-4 w-full border-border/50 bg-white/5 backdrop-blur-sm hover:bg-white/10"
+                render={
+                  <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" />
+                }
+              >
+                <FileText className="h-4 w-4" />
+                Resume
+              </Button>
               <Button
                 className="mt-4 w-full"
                 style={{

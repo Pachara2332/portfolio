@@ -7,6 +7,7 @@ export interface Project {
   image: string;
   github?: string;
   demo?: string;
+  impact?: string[];
   features?: string[];
   category: "web" | "iot" | "mobile" | "ai" | "other";
 }
@@ -17,6 +18,7 @@ export interface Experience {
   role: string;
   period: string;
   description: string;
+  highlights?: string[];
   techStack: string[];
   type: "work" | "freelance" | "internship";
 }
@@ -44,6 +46,7 @@ export interface SiteConfig {
   description: string;
   url: string;
   ogImage: string;
+  resumeUrl: string;
   navItems: NavItem[];
   socialLinks: SocialLink[];
   email: string;

@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 export function ProjectsSection() {
   return (
     <section id="projects" className="relative py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <FadeUp>
           <SectionHeading
             title="Featured Projects"
@@ -16,7 +16,7 @@ export function ProjectsSection() {
           />
         </FadeUp>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}

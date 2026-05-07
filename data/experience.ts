@@ -5,20 +5,15 @@ export const experiences: Experience[] = [
     id: "bussing-fullstack",
     company: "Bussing Transit Co., Ltd.",
     role: "Full-Stack Developer Intern",
-    period: "Dec 2025 — May 2026",
+    period: "Dec 2025 - May 2026",
     description:
-      "Built production digital bus card system for ticket purchase & online payment, live with real public bus passengers across LINE LIFF and web. Implemented LINE Login & Email Login with secure session management; designed full backend schema with Node.js and Prisma ORM.",
-    techStack: ["React", "Node.js", "Prisma ORM", "LINE LIFF"],
-    type: "internship",
-  },
-  {
-    id: "bussing-frontend",
-    company: "Bussing Transit Co., Ltd.",
-    role: "Frontend Developer Intern",
-    period: "Dec 2025 — May 2026",
-    description:
-      "Built real-time dashboard for camera feeds, live maps, and operational activity monitoring. Automated bash scripts for video recording pipelines on Linux servers.",
-    techStack: ["React", "Linux", "Bash"],
+      "Built production systems for public bus operations across passenger-facing LINE LIFF/web apps and internal operation dashboards.",
+    highlights: [
+      "Digital bus card system for ticket purchase, online payment, LINE Login, Email Login, and secure session management",
+      "Realtime operations dashboard for camera feeds, live maps, and activity monitoring",
+      "Backend schema design with Node.js and Prisma ORM plus Linux automation scripts for video recording pipelines",
+    ],
+    techStack: ["React", "Node.js", "Prisma ORM", "LINE LIFF", "Linux", "Bash"],
     type: "internship",
   },
 ];

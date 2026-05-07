@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { experiences } from "@/data/experience";
 import { FadeUp } from "@/components/common/motion-wrapper";
 import { SectionHeading } from "@/components/common/section-heading";
-import { Briefcase, Code2, GraduationCap } from "lucide-react";
+import { Briefcase, CheckCircle2, Code2, GraduationCap } from "lucide-react";
 
 const typeIcons = {
   work: Briefcase,
@@ -106,6 +106,23 @@ export function ExperienceTimeline() {
                       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                         {exp.description}
                       </p>
+
+                      {exp.highlights && (
+                        <ul className="mt-3 space-y-2">
+                          {exp.highlights.map((item) => (
+                            <li
+                              key={item}
+                              className="flex gap-2 text-xs leading-relaxed text-muted-foreground"
+                            >
+                              <CheckCircle2
+                                className="mt-0.5 h-3.5 w-3.5 shrink-0"
+                                style={{ color: "oklch(0.65 0.25 285)" }}
+                              />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
 
                       {/* Tech badges */}
                       <div className="mt-3 flex flex-wrap gap-1.5">

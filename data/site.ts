@@ -7,6 +7,7 @@ export const siteConfig: SiteConfig = {
     "Full-Stack Developer with production experience building scalable web and mobile apps — from real-time chat, JWT/RBAC auth, and online payment integrations to IoT dashboards. Proficient in React, Next.js, Node.js, TypeScript, and PostgreSQL.",
   url: "https://pachara.dev",
   ogImage: "/og-image.png",
+  resumeUrl: "/Pachara_RESUME.pdf",
   navItems: [
     { label: "Home", href: "#home" },
     { label: "Tech Stack", href: "#tech-stack" },

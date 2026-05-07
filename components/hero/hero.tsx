@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Mail, Sparkles, Phone } from "lucide-react";
+import { ArrowDown, FileText, Mail, Sparkles, Phone } from "lucide-react";
 import { GithubIcon, LinkedinIcon, FacebookIcon } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/data/site";
@@ -164,6 +164,18 @@ export function Hero() {
                   "linear-gradient(135deg, oklch(0.65 0.25 285), oklch(0.78 0.15 195))",
               }}
             />
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            nativeButton={false}
+            className="border-border/50 bg-white/5 backdrop-blur-sm hover:bg-white/10"
+            render={
+              <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" />
+            }
+          >
+            <FileText className="mr-2 h-4 w-4" />
+            Resume
           </Button>
           <Button
             size="lg"
