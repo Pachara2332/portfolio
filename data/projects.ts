@@ -2,6 +2,27 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    id: "tawan-chatbot",
+    title: "Tawan Chatbot",
+    description:
+      "Thai-language chatbot web app built with Next.js and Gemini 2.5 Flash for friendly conversations, Q&A, and helpful recommendations through a simple browser-based chat UI.",
+    techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Google Gen AI SDK"],
+    image: "/projects/tawan-chatbot.jpg",
+    github: "https://github.com/Pachara2332/tawan-chatbot",
+    impact: [
+      "Built a real-time Thai chat experience backed by Gemini 2.5 Flash",
+      "Added server-side AI routing with fallback providers to keep responses available",
+    ],
+    features: [
+      "Real-time chat interface with loading and error states",
+      "Server API route at /api/chat to keep API keys hidden from the client",
+      "Uses gemini-2.5-flash through @google/genai",
+      "Limits recent message history to 20 items before sending to the model",
+      "Fallback support for Gemini, Groq, and OpenRouter providers",
+    ],
+    category: "ai",
+  },
+  {
     id: "eleven-lineup",
     title: "Eleven Lineup - Premier League Lineup Builder",
     description:
