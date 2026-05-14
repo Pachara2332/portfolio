@@ -140,7 +140,18 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
               >
                 <GithubIcon className="h-3.5 w-3.5" />
-                Source
+                {project.githubBackend ? "Frontend" : "Source"}
+              </a>
+            )}
+            {project.githubBackend && (
+              <a
+                href={project.githubBackend}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+              >
+                <GithubIcon className="h-3.5 w-3.5" />
+                Backend
               </a>
             )}
             {project.demo && (

@@ -2,6 +2,29 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    id: "movie-management",
+    title: "Movie Management Frontend",
+    description:
+      "React + TypeScript movie management system with authenticated dashboard, role-based delete permissions, poster uploads, and CRUD workflows powered by a REST API.",
+    techStack: ["React 19", "TypeScript", "Vite", "React Router", "Axios", "Tailwind CSS"],
+    image: "/projects/movie-management.jpg",
+    github: "https://github.com/Pachara2332/movie-frontend-management",
+    githubBackend: "https://github.com/Pachara2332/movie-backend-management",
+    demo: "https://movie-frontend-management.vercel.app",
+    impact: [
+      "Built protected login, registration, and dashboard flows using cookie-based authentication",
+      "Added MANAGER-only delete controls with backend permission validation for safer movie management",
+    ],
+    features: [
+      "Movie CRUD with title, release year, rating, and poster image upload",
+      "List and grid views with title search plus year, title, and rating sorting",
+      "Dashboard summary cards and responsive desktop/mobile UI",
+      "Role support for MANAGER, TEAMLEADER, and FLOORSTAFF",
+      "Same-origin /api rewrite to Render backend for HttpOnly cookie sessions",
+    ],
+    category: "web",
+  },
+  {
     id: "tawan-chatbot",
     title: "Tawan Chatbot",
     description:
