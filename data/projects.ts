@@ -32,6 +32,7 @@ export const projects: Project[] = [
     techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Google Gen AI SDK"],
     image: "/projects/tawan-chatbot.jpg",
     github: "https://github.com/Pachara2332/tawan-chatbot",
+    demo: "https://tawan-chatbot.vercel.app/",
     impact: [
       "Built a real-time Thai chat experience backed by Gemini 2.5 Flash",
       "Added server-side AI routing with fallback providers to keep responses available",
