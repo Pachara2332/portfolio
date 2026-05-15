@@ -2,6 +2,34 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+  id: "trainee-knowledge-assistant",
+  title: "Trainee Knowledge Assistant",
+  description:
+    "Next.js 15 web app using Gemini 2.5 Flash to provide real-time Q&A and study assistance for trainees. Features a chat interface with server-side AI routing and fallback providers for reliable responses.",
+  techStack: [
+    "Next.js 15",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS 4",
+    "Google Gen AI SDK",
+  ],
+  image: "/projects/trainee-knowledge-assistant.jpg",
+  github: "https://github.com/Pachara2332/trainee-knowledge-assistant",
+  impact: [
+    "Built a real-time chat experience backed by Gemini 2.5 Flash",
+    "Added server-side AI routing with fallback providers to keep responses available",
+    "Can upload files and ask questions about the file",
+  ],
+  features: [
+    "Real-time chat interface with loading and error states",
+    "Server API route at /api/chat to keep API keys hidden from the client",
+    "Uses gemini-2.5-flash through @google/genai",
+    "Limits recent message history to 20 items before sending to the model",
+    "Fallback support for Gemini, Groq, and OpenRouter providers",
+  ],
+  category: "ai",
+},
+  {
     id: "movie-management",
     title: "Movie Management Frontend",
     description:
