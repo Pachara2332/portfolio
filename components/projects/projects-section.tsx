@@ -16,7 +16,6 @@ export function ProjectsSection() {
         <SectionHeading
           eyebrow={t.projects.eyebrow}
           title={t.projects.title}
-          subtitle={t.projects.subtitle}
         />
       </FadeUp>
 
