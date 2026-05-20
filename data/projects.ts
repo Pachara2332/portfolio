@@ -2,220 +2,139 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
-  id: "trainee-knowledge-assistant",
-  title: "Trainee Knowledge Assistant",
-  description:
-    "Next.js 15 web app using Gemini 2.5 Flash to provide real-time Q&A and study assistance for trainees. Features a chat interface with server-side AI routing and fallback providers for reliable responses.",
-  techStack: [
-    "Next.js 15",
-    "React 19",
-    "TypeScript",
-    "Tailwind CSS 4",
-    "Google Gen AI SDK",
-  ],
-  image: "/projects/trainee-knowledge-assistant.jpg",
-  github: "https://github.com/Pachara2332/trainee-knowledge-assistant",
-  impact: [
-    "Built a real-time chat experience backed by Gemini 2.5 Flash",
-    "Added server-side AI routing with fallback providers to keep responses available",
-    "Can upload files and ask questions about the file",
-  ],
-  features: [
-    "Real-time chat interface with loading and error states",
-    "Server API route at /api/chat to keep API keys hidden from the client",
-    "Uses gemini-2.5-flash through @google/genai",
-    "Limits recent message history to 20 items before sending to the model",
-    "Fallback support for Gemini, Groq, and OpenRouter providers",
-  ],
-  category: "ai",
-},
+    id: "trainee-knowledge-assistant",
+    title: "Trainee Knowledge Assistant",
+    description:
+      "AI study workspace that helps trainees ask questions against lessons and uploaded files through a secure chat interface.",
+    challenge:
+      "Kept model credentials server-side, reduced prompt payload size, handled file-aware Q&A states, and added provider fallbacks so the app stays useful during API issues.",
+    outcome:
+      "Turned training material into a faster self-service support channel with clear loading, error, and recovery states.",
+    techStack: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Google Gen AI SDK"],
+    github: "https://github.com/Pachara2332/trainee-knowledge-assistant",
+    category: "ai",
+  },
   {
     id: "movie-management",
-    title: "Movie Management Frontend",
+    title: "Movie Operations Dashboard",
     description:
-      "React + TypeScript movie management system with authenticated dashboard, role-based delete permissions, poster uploads, and CRUD workflows powered by a REST API.",
+      "Authenticated movie catalog dashboard for teams managing titles, posters, roles, and review-ready content workflows.",
+    challenge:
+      "Designed protected dashboard flows, cookie-based auth, role-aware destructive actions, poster uploads, search, sorting, and API integration against a separate backend.",
+    outcome:
+      "Created an internal tool pattern that makes content operations safer and faster without exposing manager-only actions to staff roles.",
     techStack: ["React 19", "TypeScript", "Vite", "React Router", "Axios", "Tailwind CSS"],
-    image: "/projects/movie-management.jpg",
     github: "https://github.com/Pachara2332/movie-frontend-management",
     githubBackend: "https://github.com/Pachara2332/movie-backend-management",
     demo: "https://movie-frontend-management.vercel.app",
-    impact: [
-      "Built protected login, registration, and dashboard flows using cookie-based authentication",
-      "Added MANAGER-only delete controls with backend permission validation for safer movie management",
-    ],
-    features: [
-      "Movie CRUD with title, release year, rating, and poster image upload",
-      "List and grid views with title search plus year, title, and rating sorting",
-      "Dashboard summary cards and responsive desktop/mobile UI",
-      "Role support for MANAGER, TEAMLEADER, and FLOORSTAFF",
-      "Same-origin /api rewrite to Render backend for HttpOnly cookie sessions",
-    ],
     category: "web",
   },
   {
-    id: "tawan-chatbot",
-    title: "Tawan Chatbot",
+    id: "thai-ai-chatbot",
+    title: "Thai AI Chat Assistant",
     description:
-      "Thai-language chatbot web app built with Next.js and Gemini 2.5 Flash for friendly conversations, Q&A, and helpful recommendations through a simple browser-based chat UI.",
-    techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Google Gen AI SDK"],
-    image: "/projects/tawan-chatbot.jpg",
+      "Thai-language AI assistant for everyday Q&A and recommendations, optimized for a simple browser-based chat experience.",
+    challenge:
+      "Built the full chat loop with server-side AI routing, guarded API keys, recent-history trimming, error states, and provider fallback behavior.",
+    outcome:
+      "Delivered a responsive AI product that feels approachable for Thai users while keeping operational concerns out of the client.",
+    techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Google Gen AI SDK"],
     github: "https://github.com/Pachara2332/tawan-chatbot",
     demo: "https://tawan-chatbot.vercel.app/",
-    impact: [
-      "Built a real-time Thai chat experience backed by Gemini 2.5 Flash",
-      "Added server-side AI routing with fallback providers to keep responses available",
-    ],
-    features: [
-      "Real-time chat interface with loading and error states",
-      "Server API route at /api/chat to keep API keys hidden from the client",
-      "Uses gemini-2.5-flash through @google/genai",
-      "Limits recent message history to 20 items before sending to the model",
-      "Fallback support for Gemini, Groq, and OpenRouter providers",
-    ],
     category: "ai",
   },
   {
     id: "eleven-lineup",
-    title: "Eleven Lineup - Premier League Lineup Builder",
+    title: "Eleven Lineup",
     description:
-      "Interactive drag-and-drop pitch UI with custom JWT auth in HTTP-only cookies via Next.js Edge Middleware. Features RBAC, social community, streak-based prediction mini-games, and PostgreSQL/Prisma schema for user profiles.",
+      "Football lineup builder with drag-and-drop squad creation, social profiles, RBAC, and prediction game mechanics.",
+    challenge:
+      "Combined interactive pitch state, custom JWT auth in HTTP-only cookies, middleware-based permissions, Prisma models, and streak-based game flows.",
+    outcome:
+      "Shipped a full-stack SaaS-style product with clear user identity, community behavior, and replayable engagement loops.",
     techStack: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "JWT"],
-    image: "/projects/eleven-lineup.jpg",
     github: "https://github.com/Pachara2332/ElevenLineUp",
     demo: "https://elevenlineup-production.up.railway.app/",
-    impact: [
-      "Built a full football lineup builder with drag-and-drop squad management",
-      "Implemented secure JWT auth, RBAC, profiles, and daily prediction game flows",
-    ],
-    features: [
-      "Interactive drag-and-drop pitch UI with @dnd-kit",
-      "Custom JWT auth with HTTP-only cookies",
-      "RBAC via Next.js Edge Middleware",
-      "Social community features & user profiles",
-      "Streak-based daily prediction mini-games",
-    ],
     category: "web",
   },
   {
-    id: "patient-system",
-    title: "Patient Management System",
+    id: "patient-operations-system",
+    title: "Patient Operations System",
     description:
-      "Full-stack patient management system for healthcare facilities. Features appointment scheduling, patient records management, and real-time data synchronization.",
+      "Healthcare operations app for managing patient records, appointment scheduling, and facility-level workflows.",
+    challenge:
+      "Modeled clinical data carefully, designed role-aware workflows, and built operational screens that prioritize accuracy over decoration.",
+    outcome:
+      "Improved visibility into patient and appointment status for teams that need dependable, scan-friendly interfaces.",
     techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
-    image: "/projects/patient-system.jpg",
     github: "https://github.com/Pachara2332/patient-system",
     demo: "https://patient-system-production-8241.up.railway.app/",
-    impact: [
-      "Built patient records and appointment workflows for healthcare operations",
-      "Designed a full-stack PostgreSQL/Prisma data layer for reliable clinical data handling",
-    ],
-    features: [
-      "Patient records management",
-      "Appointment scheduling system",
-      "Real-time data sync",
-      "Role-based access control",
-    ],
     category: "web",
   },
   {
     id: "childcare-dashboard",
     title: "Childcare Dashboard",
     description:
-      "Comprehensive childcare management dashboard for tracking child development, activities, savings, and payments. Features data visualization and CSV/PDF export functionality.",
+      "Management dashboard for childcare teams tracking development, activities, savings, payments, and reports.",
+    challenge:
+      "Organized multiple operational domains into a dashboard with data visualization, export flows, and responsive information density.",
+    outcome:
+      "Helped non-technical users understand child progress and payment status quickly, then export reports for offline sharing.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    image: "/projects/childcare.jpg",
     github: "https://github.com/Pachara2332/childrencare",
     demo: "https://childcare-dashboard-ten.vercel.app/",
-    impact: [
-      "Created dashboards for tracking child development, activities, savings, and payments",
-      "Added CSV/PDF export flows so reports can be shared outside the system",
-    ],
-    features: [
-      "Child development tracking",
-      "Activity & payment management",
-      "Data visualization dashboards",
-      "CSV & PDF export functionality",
-    ],
     category: "web",
   },
   {
     id: "roommate-finder",
     title: "Roommate Finder Platform",
     description:
-      "Real-time chat platform with Socket.io featuring typing indicators, persisted chat history, and automated image uploads to AWS S3. Advanced preference-based matching with peer-to-peer review & rating system.",
+      "Matching platform with real-time chat, profile reviews, preference filters, and AWS S3 image handling.",
+    challenge:
+      "Built persisted Socket.io conversations, typing indicators, image upload automation, matching preferences, and peer review flows.",
+    outcome:
+      "Created a trust-focused marketplace experience where users can compare compatibility before committing to a shared living decision.",
     techStack: ["Next.js", "TypeScript", "PostgreSQL", "Socket.io", "JWT", "AWS S3"],
-    image: "/projects/roommate.jpg",
     github: "https://github.com/Pachara2332/roommate-finder",
-    impact: [
-      "Built real-time chat with Socket.io, typing status, persisted history, and AWS S3 uploads",
-      "Created preference-based matching plus peer review and rating flows",
-    ],
-    features: [
-      "Real-time chat with typing indicators",
-      "Persisted chat history via Socket.io",
-      "Automated image uploads to AWS S3",
-      "Preference-based matching (cleanliness, noise, schedule)",
-      "Peer-to-peer review & rating system",
-    ],
     category: "web",
   },
   {
     id: "soil-iot-dashboard",
-    title: "Soil Mineral & Moisture IoT Dashboard",
+    title: "Soil Intelligence IoT Dashboard",
     description:
-      "Engineered ESP32 firmware integrating RS485 NPK sensors and GPS to collect real-time soil mineral and moisture data to Firebase. Built Angular dashboard with role-based access and recommendation engine for crops.",
+      "Field data system that streams soil minerals, moisture, and GPS readings from ESP32 devices into an Angular dashboard.",
+    challenge:
+      "Integrated RS485 NPK sensors, GPS, ESP32 firmware, Firebase streaming, role-based access, and crop recommendation logic.",
+    outcome:
+      "Converted raw sensor readings into practical farming insight for crop selection and fertilizer planning.",
     techStack: ["Angular", "Firebase", "ESP32", "C++", "RS485 NPK", "GPS"],
-    image: "/projects/soil-iot.jpg",
     github: "https://github.com/Pachara004/soil-sensor-frontend",
-    impact: [
-      "Connected ESP32, RS485 NPK sensors, and GPS to stream field data into Firebase",
-      "Built an Angular dashboard with role access and crop/fertilizer recommendations",
-    ],
-    features: [
-      "ESP32 firmware with RS485 NPK sensor integration",
-      "GPS-based location tracking",
-      "Real-time data streaming to Firebase",
-      "Role-based access dashboard",
-      "Crop & fertilizer recommendation engine",
-    ],
     category: "iot",
   },
   {
     id: "lotto-app",
     title: "Lotto App",
     description:
-      "Flutter lottery platform with real-time stock management, bundle ticket purchasing, and vendor inventory controls.",
-    techStack: ["Flutter", "Node.js", "Firebase"],
-    image: "/projects/lotto-app.jpg",
+      "Flutter lottery platform for customers and vendors with ticket stock visibility, bundle purchasing, and inventory controls.",
+    challenge:
+      "Designed mobile purchase flows around real-time stock state, bundle selection, vendor-side inventory management, and Firebase-backed data updates.",
+    outcome:
+      "Created a clearer buying and stock management experience so vendors can control availability while customers avoid unavailable tickets.",
+    techStack: ["Flutter", "Dart", "Node.js", "Firebase"],
     github: "https://github.com/Pachara004/LottoApp",
-    impact: [
-      "Built lottery purchase flows with stock management and bundle ticket buying",
-      "Created vendor inventory controls for managing available lottery stock",
-    ],
-    features: [
-      "Real-time lottery stock management",
-      "1-5 ticket bundle purchase flow",
-      "Vendor admin panel for inventory",
-    ],
     category: "mobile",
   },
   {
-    id: "rider-app",
+    id: "rider-delivery-app",
     title: "Rider Delivery App",
     description:
-      "Flutter delivery application with customer/rider roles, order handling, and Firebase-backed live map tracking.",
+      "Flutter delivery app with customer and rider roles, order status handling, and Firebase-backed live map tracking.",
+    challenge:
+      "Built role-specific mobile flows, delivery status transitions, map-based tracking, and Firebase synchronization for real-time visibility.",
+    outcome:
+      "Gave customers and riders a shared delivery state, reducing uncertainty around pickup, transit, and arrival progress.",
     techStack: ["Flutter", "Dart", "Android", "Firebase", "Maps"],
-    image: "/projects/rider-app.jpg",
     github: "https://github.com/Pachara004/IshowSpeed",
-    impact: [
-      "Built dual-role delivery flows for customer and rider use cases",
-      "Integrated Firebase-backed live map tracking for delivery status visibility",
-    ],
-    features: [
-      "Dual-role delivery system (customer/rider)",
-      "Live map tracking with Firebase",
-      "Delivery order status flow",
-    ],
     category: "mobile",
   },
 ];

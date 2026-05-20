@@ -2,14 +2,12 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  longDescription?: string;
+  challenge: string;
+  outcome: string;
   techStack: string[];
-  image: string;
   github?: string;
   githubBackend?: string;
   demo?: string;
-  impact?: string[];
-  features?: string[];
   category: "web" | "iot" | "mobile" | "ai" | "other";
 }
 
@@ -43,6 +41,7 @@ export interface SocialLink {
 
 export interface SiteConfig {
   name: string;
+  role: string;
   title: string;
   description: string;
   url: string;
@@ -51,4 +50,6 @@ export interface SiteConfig {
   navItems: NavItem[];
   socialLinks: SocialLink[];
   email: string;
+  phone: string;
+  location: string;
 }

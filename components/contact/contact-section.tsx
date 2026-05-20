@@ -1,218 +1,174 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Mail, CheckCircle2, Loader2, Phone } from "lucide-react";
-import { GithubIcon, LinkedinIcon, FacebookIcon } from "@/components/common/icons";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import type React from "react";
+import { CheckCircle2, Loader2, Mail, Phone, Send } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/common/icons";
 import { FadeUp } from "@/components/common/motion-wrapper";
 import { SectionHeading } from "@/components/common/section-heading";
+import { useLanguage } from "@/components/i18n/language-provider";
+import { SectionShell } from "@/components/layout/section-shell";
 import { siteConfig } from "@/data/site";
 
-function SocialIcon({ icon, className, style }: { icon: string; className?: string; style?: React.CSSProperties }) {
-  switch (icon) {
-    case "github":
-      return <GithubIcon className={className} />;
-    case "linkedin":
-      return <LinkedinIcon className={className} />;
-    case "facebook":
-      return <FacebookIcon className={className} />;
-    case "phone":
-      return <Phone className={className} style={style} />;
-    default:
-      return <Mail className={className} style={style} />;
-  }
-}
-
 export function ContactSection() {
+  const { t } = useLanguage();
   const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setFormState("loading");
 
     try {
-      const res = await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (res.ok) {
-        setFormState("success");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setFormState("idle"), 5000);
-      } else {
-        setFormState("error");
-        setTimeout(() => setFormState("idle"), 3000);
+      if (!response.ok) {
+        throw new Error("Failed to send message");
       }
+
+      setFormState("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setFormState("idle"), 4500);
     } catch {
       setFormState("error");
-      setTimeout(() => setFormState("idle"), 3000);
+      setTimeout(() => setFormState("idle"), 3500);
     }
   };
 
   return (
-    <section id="contact" className="relative py-20 md:py-28">
-      {/* Background accent */}
-      <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[400px] w-[600px] rounded-full opacity-10 blur-[120px]"
-          style={{ background: "oklch(0.65 0.25 285)" }}
+    <SectionShell id="contact">
+      <FadeUp>
+        <SectionHeading
+          eyebrow={t.contact.eyebrow}
+          title={t.contact.title}
+          subtitle={t.contact.subtitle}
         />
-      </div>
+      </FadeUp>
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <FadeUp>
-          <SectionHeading
-            title="Get in Touch"
-            subtitle="Have a project idea or want to collaborate? I'd love to hear from you"
-          />
+      <div className="grid gap-6 lg:grid-cols-[0.78fr_1fr]">
+        <FadeUp delay={0.05}>
+          <div className="rounded-lg border border-border bg-card p-5">
+            <p className="text-sm font-semibold text-foreground">{t.contact.directChannels}</p>
+            <div className="mt-5 space-y-3">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/35 p-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <Mail className="size-4 shrink-0" />
+                <span className="min-w-0 break-all">{siteConfig.email}</span>
+              </a>
+              <a
+                href="tel:+66990094187"
+                className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/35 p-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <Phone className="size-4 shrink-0" />
+                <span className="min-w-0 break-all">{siteConfig.phone}</span>
+              </a>
+              <a
+                href="https://github.com/Pachara2332"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/35 p-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <GithubIcon className="size-4 shrink-0" />
+                <span className="min-w-0 break-all">github.com/Pachara2332</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/pachara-wongsasri-9256103bb/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/35 p-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <LinkedinIcon className="size-4 shrink-0" />
+                <span className="min-w-0 break-words">{t.contact.linkedinProfile}</span>
+              </a>
+            </div>
+          </div>
         </FadeUp>
 
-        <div className="grid gap-10 md:grid-cols-5">
-          {/* Contact Info */}
-          <FadeUp delay={0.1} className="md:col-span-2 space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold text-foreground">
-                Let&apos;s build something amazing
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Whether you need a web application, IoT system, or mobile app —
-                I&apos;m here to help bring your vision to life.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              {siteConfig.socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target={link.icon !== "mail" && link.icon !== "phone" ? "_blank" : undefined}
-                  rel={link.icon !== "mail" && link.icon !== "phone" ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-3 rounded-lg border border-border/30 bg-white/[0.02] p-3 text-sm text-muted-foreground transition-all hover:bg-white/[0.05] hover:text-foreground hover:border-border/50"
-                >
-                  <div
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                    style={{
-                      background: "oklch(0.65 0.25 285 / 0.1)",
-                    }}
-                  >
-                    <SocialIcon icon={link.icon} className="h-4 w-4" style={{ color: "oklch(0.65 0.25 285)" }} />
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground">{link.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {link.url.replace("mailto:", "").replace("https://", "").replace("tel:", "")}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </FadeUp>
-
-          {/* Contact Form */}
-          <FadeUp delay={0.2} className="md:col-span-3">
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-4 rounded-xl border border-border/30 bg-card/30 p-6 backdrop-blur-sm"
-            >
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="contact-name"
-                    className="text-sm font-medium text-foreground"
-                  >
-                    Name
-                  </label>
-                  <Input
-                    id="contact-name"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    required
-                    className="border-border/30 bg-white/[0.03] placeholder:text-muted-foreground/50"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="contact-email"
-                    className="text-sm font-medium text-foreground"
-                  >
-                    Email
-                  </label>
-                  <Input
-                    id="contact-email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    required
-                    className="border-border/30 bg-white/[0.03] placeholder:text-muted-foreground/50"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label
-                  htmlFor="contact-message"
-                  className="text-sm font-medium text-foreground"
-                >
-                  Message
+        <FadeUp delay={0.1}>
+          <form onSubmit={handleSubmit} className="rounded-lg border border-border bg-card p-5">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="contact-name" className="text-sm font-medium text-foreground">
+                  {t.contact.name}
                 </label>
-                <Textarea
-                  id="contact-message"
-                  placeholder="Tell me about your project..."
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
+                <input
+                  id="contact-name"
+                  value={formData.name}
+                  onChange={(event) => setFormData({ ...formData, name: event.target.value })}
                   required
-                  rows={5}
-                  className="border-border/30 bg-white/[0.03] placeholder:text-muted-foreground/50 resize-none"
+                  autoComplete="name"
+                  className="mt-2 h-10 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none transition focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
+                  placeholder={t.contact.namePlaceholder}
                 />
               </div>
-              <Button
-                type="submit"
-                className="w-full text-white"
-                style={{ backgroundColor: "oklch(0.65 0.25 285)" }}
-                disabled={formState === "loading" || formState === "success"}
-              >
-                {formState === "loading" ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : formState === "success" ? (
-                  <>
-                    <CheckCircle2 className="mr-2 h-4 w-4" />
-                    Message Sent!
-                  </>
-                ) : (
-                  <>
-                    <Send className="mr-2 h-4 w-4" />
-                    Send Message
-                  </>
-                )}
-              </Button>
-              {formState === "error" && (
-                <p className="text-sm text-destructive text-center">
-                  Something went wrong. Please try again.
-                </p>
+              <div>
+                <label htmlFor="contact-email" className="text-sm font-medium text-foreground">
+                  {t.contact.email}
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(event) => setFormData({ ...formData, email: event.target.value })}
+                  required
+                  autoComplete="email"
+                  className="mt-2 h-10 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none transition focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
+                  placeholder={t.contact.emailPlaceholder}
+                />
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <label htmlFor="contact-message" className="text-sm font-medium text-foreground">
+                {t.contact.message}
+              </label>
+              <textarea
+                id="contact-message"
+                value={formData.message}
+                onChange={(event) => setFormData({ ...formData, message: event.target.value })}
+                required
+                rows={6}
+                className="mt-2 w-full resize-none rounded-md border border-border bg-background px-3 py-3 text-sm text-foreground outline-none transition focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
+                placeholder={t.contact.messagePlaceholder}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={formState === "loading" || formState === "success"}
+              className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-foreground px-5 py-2 text-center text-sm font-medium text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {formState === "loading" ? (
+                <>
+                  <Loader2 className="size-4 animate-spin" />
+                  {t.contact.sending}
+                </>
+              ) : formState === "success" ? (
+                <>
+                  <CheckCircle2 className="size-4" />
+                  {t.contact.success}
+                </>
+              ) : (
+                <>
+                  <Send className="size-4" />
+                  {t.contact.send}
+                </>
               )}
-            </form>
-          </FadeUp>
-        </div>
+            </button>
+            {formState === "error" ? (
+              <p className="mt-3 text-center text-sm text-destructive">
+                {t.contact.error}
+              </p>
+            ) : null}
+          </form>
+        </FadeUp>
       </div>
-    </section>
+    </SectionShell>
   );
 }

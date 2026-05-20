@@ -1,229 +1,138 @@
 "use client";
 
+import { ArrowRight, FileText, Mail } from "lucide-react";
 import { motion } from "framer-motion";
-import { ArrowDown, FileText, Mail, Sparkles, Phone } from "lucide-react";
-import { GithubIcon, LinkedinIcon, FacebookIcon } from "@/components/common/icons";
-import { Button } from "@/components/ui/button";
+import { GithubIcon } from "@/components/common/icons";
+import { useLanguage } from "@/components/i18n/language-provider";
+import { coreStack } from "@/data/profile";
 import { siteConfig } from "@/data/site";
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
-  },
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0 },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
-  },
-} as const;
-
-const floatingIcons = [
-  { icon: "⚛️", x: "10%", y: "20%", delay: 0 },
-  { icon: "🔧", x: "85%", y: "15%", delay: 0.5 },
-  { icon: "📡", x: "75%", y: "70%", delay: 1 },
-  { icon: "🐍", x: "15%", y: "75%", delay: 1.5 },
-  { icon: "💻", x: "90%", y: "45%", delay: 0.8 },
-  { icon: "🚀", x: "5%", y: "50%", delay: 1.2 },
-];
-
-function SocialIcon({ icon, className }: { icon: string; className?: string }) {
-  switch (icon) {
-    case "github":
-      return <GithubIcon className={className} />;
-    case "linkedin":
-      return <LinkedinIcon className={className} />;
-    case "facebook":
-      return <FacebookIcon className={className} />;
-    case "phone":
-      return <Phone className={className} />;
-    default:
-      return <Mail className={className} />;
-  }
-}
-
 export function Hero() {
-  const handleScroll = (href: string) => {
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+  const { t } = useLanguage();
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section
-      id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-16"
-    >
-      {/* Background gradient orbs */}
-      <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full opacity-20 blur-[120px]"
-          style={{ background: "oklch(0.65 0.25 285)" }}
-        />
-        <div
-          className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full opacity-15 blur-[120px]"
-          style={{ background: "oklch(0.78 0.15 195)" }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] rounded-full opacity-10 blur-[100px]"
-          style={{ background: "oklch(0.65 0.25 285)" }}
-        />
-      </div>
-
-      {/* Floating emoji icons */}
-      {floatingIcons.map((item, i) => (
+    <section id="home" className="relative overflow-hidden pt-28 sm:pt-32 lg:pt-36">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent" />
+      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-6xl items-center gap-12 px-4 pb-16 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8">
         <motion.div
-          key={i}
-          className="pointer-events-none absolute text-2xl opacity-20 hidden lg:block"
-          style={{ left: item.x, top: item.y }}
-          animate={{
-            y: [0, -15, 0],
-            rotate: [0, 5, -5, 0],
-          }}
-          transition={{
-            duration: 4 + i * 0.5,
-            repeat: Infinity,
-            repeatType: "loop",
-            delay: item.delay,
-            ease: "easeInOut",
-          }}
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+          className="max-w-3xl"
         >
-          {item.icon}
-        </motion.div>
-      ))}
-
-      {/* Content */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 mx-auto max-w-5xl text-center"
-      >
-        {/* Status badge */}
-        <motion.div variants={itemVariants} className="mb-6 inline-block">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-white/5 px-4 py-1.5 text-sm text-muted-foreground backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-            </span>
-            Available for new opportunities
-          </div>
-        </motion.div>
-
-        {/* Name */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
-        >
-          <span className="block text-foreground">Hi, I&apos;m</span>
-          <span className="mt-2 block text-gradient">
-            {siteConfig.name}
-          </span>
-        </motion.h1>
-
-        {/* Title */}
-        <motion.div variants={itemVariants} className="mt-4 md:mt-6">
-          <p className="text-lg font-medium text-muted-foreground sm:text-xl md:text-2xl">
-            <Sparkles className="mr-2 inline-block h-5 w-5" style={{ color: "oklch(0.65 0.25 285)" }} />
-            Full-Stack Developer
-          </p>
-        </motion.div>
-
-        {/* Description */}
-        <motion.p
-          variants={itemVariants}
-          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg"
-        >
-          Production experience building scalable web and mobile apps — from
-          real-time chat, JWT/RBAC auth, and online payment integrations to IoT
-          dashboards. Proficient in React, Next.js, Node.js, TypeScript, and PostgreSQL.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
-        >
-          <Button
-            size="lg"
-            className="group relative overflow-hidden px-8 text-white"
-            style={{
-              backgroundColor: "oklch(0.65 0.25 285)",
-            }}
-            onClick={() => handleScroll("#projects")}
+          <motion.div
+            variants={item}
+            className="mb-6 inline-flex max-w-full items-center gap-2 rounded-md border border-border bg-secondary/60 px-3 py-1 text-xs font-medium leading-5 text-muted-foreground sm:rounded-full"
           >
-            <span className="relative z-10">View Projects</span>
-            <div
-              className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100"
-              style={{
-                background:
-                  "linear-gradient(135deg, oklch(0.65 0.25 285), oklch(0.78 0.15 195))",
-              }}
-            />
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            nativeButton={false}
-            className="border-border/50 bg-white/5 backdrop-blur-sm hover:bg-white/10"
-            render={
-              <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" />
-            }
-          >
-            <FileText className="mr-2 h-4 w-4" />
-            Resume
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-border/50 bg-white/5 backdrop-blur-sm hover:bg-white/10"
-            onClick={() => handleScroll("#contact")}
-          >
-            <Mail className="mr-2 h-4 w-4" />
-            Contact Me
-          </Button>
-        </motion.div>
+            <span className="size-1.5 rounded-full bg-emerald-400" />
+            <span>{t.hero.availability}</span>
+          </motion.div>
 
-        {/* Social Links */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-10 flex items-center justify-center gap-4"
-        >
-          {siteConfig.socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target={link.icon !== "mail" && link.icon !== "phone" ? "_blank" : undefined}
-              rel={link.icon !== "mail" && link.icon !== "phone" ? "noopener noreferrer" : undefined}
-              className="rounded-full border border-border/30 bg-white/5 p-3 text-muted-foreground transition-all hover:bg-white/10 hover:text-foreground hover:border-border/60"
-              aria-label={link.name}
+          <motion.h1
+            variants={item}
+            className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-7xl"
+          >
+            {t.hero.headline}
+          </motion.h1>
+
+          <motion.p
+            variants={item}
+            className="mt-6 max-w-2xl text-pretty text-base leading-8 text-muted-foreground sm:text-lg"
+          >
+            {t.hero.intro}
+          </motion.p>
+
+          <motion.div variants={item} className="mt-8 flex flex-col gap-3 md:flex-row">
+            <button
+              onClick={() => scrollTo("projects")}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-foreground px-5 py-2 text-center text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
-              <SocialIcon icon={link.icon} className="h-5 w-5" />
+              {t.hero.viewWork}
+              <ArrowRight className="size-4" />
+            </button>
+            <a
+              href={siteConfig.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-border bg-secondary/50 px-5 py-2 text-center text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+            >
+              <FileText className="size-4" />
+              {t.hero.downloadResume}
             </a>
-          ))}
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-2 text-center text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary/70 hover:text-foreground"
+            >
+              <Mail className="size-4" />
+              {t.hero.emailMe}
+            </a>
+          </motion.div>
+
+          <motion.div variants={item} className="mt-10 flex flex-wrap gap-2">
+            {coreStack.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground"
+              >
+                {tech}
+              </span>
+            ))}
+          </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-16"
+        <motion.aside
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="rounded-lg border border-border bg-card p-5 shadow-2xl shadow-black/20"
+          aria-label={t.hero.profileAria}
         >
-          <motion.button
-            onClick={() => handleScroll("#tech-stack")}
-            className="mx-auto flex flex-col items-center gap-2 text-muted-foreground/50 transition-colors hover:text-muted-foreground"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            aria-label="Scroll to tech stack"
-          >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
-            <ArrowDown className="h-4 w-4" />
-          </motion.button>
-        </motion.div>
-      </motion.div>
+          <div className="flex items-center justify-between border-b border-border pb-4">
+            <div>
+              <p className="text-sm font-medium text-foreground">{t.hero.profileTitle}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{siteConfig.location}</p>
+            </div>
+            <a
+              href="https://github.com/Pachara2332"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex size-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="GitHub profile"
+            >
+              <GithubIcon className="size-4" />
+            </a>
+          </div>
+
+          <div className="grid gap-3 py-5 min-[420px]:grid-cols-3">
+            {t.hero.stats.map((stat) => (
+              <div key={stat.label} className="rounded-md border border-border bg-secondary/40 p-3">
+                <p className="text-lg font-semibold tracking-tight text-foreground">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-[11px] leading-4 text-muted-foreground">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="space-y-3">
+            {t.hero.strengths.map((strength) => (
+              <div key={strength} className="flex gap-3 rounded-md border border-border bg-background/40 p-3">
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-foreground/70" />
+                <p className="text-sm leading-6 text-muted-foreground">{strength}</p>
+              </div>
+            ))}
+          </div>
+        </motion.aside>
+      </div>
     </section>
   );
 }

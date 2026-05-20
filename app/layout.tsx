@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type React from "react";
+import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site";
+import "./globals.css";
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: "../node_modules/next/dist/next-devtools/server/font/geist-latin.woff2",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "../node_modules/next/dist/next-devtools/server/font/geist-mono-latin.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
   display: "swap",
 });
 
@@ -24,18 +25,19 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    "Full Stack Developer",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "IoT",
-    "ESP32",
-    "Flutter",
-    "Python",
-    "OpenCV",
-    "Portfolio",
-    "Web Developer",
-    "Pachara",
+    "Full-stack developer",
+    "Software developer",
+    "Frontend developer",
+    "Backend developer",
+    "Next.js developer",
+    "React developer",
+    "TypeScript developer",
+    "AI applications",
+    "SaaS dashboards",
+    "Real-time systems",
+    "PostgreSQL",
+    "Prisma",
+    "Pachara Wongsasri",
   ],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
@@ -82,13 +84,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(
-        "dark h-full antialiased",
-        geistSans.variable,
-        geistMono.variable
-      )}
+      className={cn("dark h-full scroll-smooth antialiased", geistSans.variable, geistMono.variable)}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full bg-background font-sans text-foreground">
         {children}
       </body>
     </html>

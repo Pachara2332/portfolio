@@ -1,149 +1,94 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { experiences } from "@/data/experience";
-import { FadeUp } from "@/components/common/motion-wrapper";
+import { BriefcaseBusiness, Check } from "lucide-react";
+import { FadeUp, Stagger, StaggerItem } from "@/components/common/motion-wrapper";
 import { SectionHeading } from "@/components/common/section-heading";
-import { Briefcase, CheckCircle2, Code2, GraduationCap } from "lucide-react";
-
-const typeIcons = {
-  work: Briefcase,
-  freelance: Code2,
-  internship: GraduationCap,
-};
+import { useLanguage } from "@/components/i18n/language-provider";
+import { SectionShell } from "@/components/layout/section-shell";
+import { experiences } from "@/data/experience";
 
 export function ExperienceTimeline() {
+  const { t } = useLanguage();
+
   return (
-    <section id="experience" className="relative py-20 md:py-28">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <FadeUp>
-          <SectionHeading
-            title="Experience"
-            subtitle="My professional journey and career milestones"
-          />
-        </FadeUp>
+    <SectionShell id="experience">
+      <FadeUp>
+        <SectionHeading
+          eyebrow={t.experience.eyebrow}
+          title={t.experience.title}
+          subtitle={t.experience.subtitle}
+        />
+      </FadeUp>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div
-            className="absolute left-4 top-0 bottom-0 w-px md:left-1/2 md:-translate-x-px"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent, oklch(0.65 0.25 285 / 0.3) 10%, oklch(0.78 0.15 195 / 0.3) 90%, transparent)",
-            }}
-          />
+      <div className="grid gap-6 lg:grid-cols-[1fr_0.72fr]">
+        <Stagger className="space-y-4">
+          {experiences.map((experience) => (
+            <StaggerItem key={experience.id}>
+              {(() => {
+                const experienceCopy =
+                  t.experience.items[experience.id as keyof typeof t.experience.items];
 
-          {/* Timeline items */}
-          <div className="space-y-12">
-            {experiences.map((exp, index) => {
-              const Icon = typeIcons[exp.type];
-              const isEven = index % 2 === 0;
-
-              return (
-                <motion.div
-                  key={exp.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.15,
-                    ease: [0.25, 0.4, 0.25, 1] as const,
-                  }}
-                  className={`relative flex items-start gap-6 ${
-                    isEven ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Dot on timeline */}
-                  <div className="absolute left-4 -translate-x-1/2 md:left-1/2">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                        delay: index * 0.15 + 0.2,
-                      }}
-                      className="flex h-8 w-8 items-center justify-center rounded-full border-2 bg-background"
-                      style={{
-                        borderColor: "oklch(0.65 0.25 285 / 0.5)",
-                      }}
-                    >
-                      <Icon
-                        className="h-3.5 w-3.5"
-                        style={{ color: "oklch(0.65 0.25 285)" }}
-                      />
-                    </motion.div>
+                return (
+              <article className="rounded-lg border border-border bg-card p-5">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">{experience.period}</p>
+                    <h3 className="mt-2 text-xl font-semibold tracking-tight text-foreground">
+                      {experienceCopy.role}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{experience.company}</p>
                   </div>
+                  <span className="inline-flex w-fit items-center gap-2 rounded-md border border-border bg-secondary/50 px-3 py-1.5 text-xs font-medium text-muted-foreground">
+                    <BriefcaseBusiness className="size-3.5" />
+                    {t.experience.type}
+                  </span>
+                </div>
 
-                  {/* Content card */}
-                  <div
-                    className={`ml-12 flex-1 md:ml-0 md:w-[calc(50%-2rem)] ${
-                      isEven ? "md:pr-12" : "md:pl-12"
-                    }`}
-                  >
-                    <div className="rounded-xl border border-border/30 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-border/50 hover:bg-card/70">
-                      {/* Period */}
-                      <p
-                        className="mb-1 text-xs font-medium uppercase tracking-wider"
-                        style={{ color: "oklch(0.65 0.25 285)" }}
-                      >
-                        {exp.period}
-                      </p>
+                <p className="mt-5 text-sm leading-7 text-muted-foreground">
+                  {experienceCopy.description}
+                </p>
 
-                      {/* Role & Company */}
-                      <h3 className="text-base font-semibold text-foreground">
-                        {exp.role}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {exp.company}
-                      </p>
-
-                      {/* Description */}
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                        {exp.description}
-                      </p>
-
-                      {exp.highlights && (
-                        <ul className="mt-3 space-y-2">
-                          {exp.highlights.map((item) => (
-                            <li
-                              key={item}
-                              className="flex gap-2 text-xs leading-relaxed text-muted-foreground"
-                            >
-                              <CheckCircle2
-                                className="mt-0.5 h-3.5 w-3.5 shrink-0"
-                                style={{ color: "oklch(0.65 0.25 285)" }}
-                              />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-
-                      {/* Tech badges */}
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        {exp.techStack.map((tech) => (
-                          <Badge
-                            key={tech}
-                            variant="outline"
-                            className="border-border/30 bg-white/[0.03] text-xs text-muted-foreground"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
+                <div className="mt-5 space-y-3">
+                  {experienceCopy.highlights.map((highlight) => (
+                    <div key={highlight} className="flex gap-3">
+                      <span className="mt-1 inline-flex size-5 shrink-0 items-center justify-center rounded-full border border-border bg-secondary text-foreground">
+                        <Check className="size-3" />
+                      </span>
+                      <p className="text-sm leading-6 text-foreground/82">{highlight}</p>
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {experience.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-md border border-border bg-secondary/45 px-2.5 py-1 text-xs text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </article>
+                );
+              })()}
+            </StaggerItem>
+          ))}
+        </Stagger>
+
+        <FadeUp delay={0.1}>
+          <aside className="rounded-lg border border-border bg-card p-5 lg:sticky lg:top-24">
+            <p className="text-sm font-semibold text-foreground">{t.experience.signalTitle}</p>
+            <div className="mt-5 space-y-4">
+              {t.experience.achievements.map((achievement) => (
+                <div key={achievement} className="border-l border-border pl-4">
+                  <p className="text-sm leading-6 text-muted-foreground">{achievement}</p>
+                </div>
+              ))}
+            </div>
+          </aside>
+        </FadeUp>
       </div>
-    </section>
+    </SectionShell>
   );
 }

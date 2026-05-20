@@ -1,18 +1,20 @@
 import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
-  name: "Pachara",
-  title: "Pachara | Full-Stack Developer",
+  name: "Pachara Wongsasri",
+  role: "Full-stack Developer",
+  title: "Pachara Wongsasri | Full-stack Developer",
   description:
-    "Full-Stack Developer with production experience building scalable web and mobile apps — from real-time chat, JWT/RBAC auth, and online payment integrations to IoT dashboards. Proficient in React, Next.js, Node.js, TypeScript, and PostgreSQL.",
+    "Full-stack developer building practical web applications, dashboards, AI interfaces, and real-time systems with React, Next.js, TypeScript, Node.js, and PostgreSQL.",
   url: "https://pachara.dev",
   ogImage: "/og-image.png",
   resumeUrl: "/Pachara_RESUME.pdf",
   navItems: [
     { label: "Home", href: "#home" },
-    { label: "Tech Stack", href: "#tech-stack" },
     { label: "Projects", href: "#projects" },
+    { label: "Stack", href: "#stack" },
     { label: "Experience", href: "#experience" },
+    { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
   socialLinks: [
@@ -27,11 +29,6 @@ export const siteConfig: SiteConfig = {
       icon: "linkedin",
     },
     {
-      name: "Facebook",
-      url: "https://www.facebook.com/ltawannnnnnl",
-      icon: "facebook",
-    },
-    {
       name: "Email",
       url: "mailto:mrpacharawongsasri@gmail.com",
       icon: "mail",
@@ -43,4 +40,6 @@ export const siteConfig: SiteConfig = {
     },
   ],
   email: "mrpacharawongsasri@gmail.com",
+  phone: "+66 99 009 4187",
+  location: "Bangkok, Thailand",
 };

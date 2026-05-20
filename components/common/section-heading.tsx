@@ -1,41 +1,41 @@
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
+  eyebrow?: string;
   title: string;
   subtitle?: string;
-  gradient?: boolean;
   align?: "left" | "center";
   className?: string;
 }
 
 export function SectionHeading({
+  eyebrow,
   title,
   subtitle,
-  gradient = true,
-  align = "center",
+  align = "left",
   className,
 }: SectionHeadingProps) {
   return (
     <div
       className={cn(
-        "mb-12 md:mb-16",
-        align === "center" && "text-center",
+        "mb-10 max-w-2xl",
+        align === "center" && "mx-auto text-center",
         className
       )}
     >
-      <h2
-        className={cn(
-          "text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl",
-          gradient ? "text-gradient" : "text-foreground"
-        )}
-      >
+      {eyebrow ? (
+        <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          {eyebrow}
+        </p>
+      ) : null}
+      <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
         {title}
       </h2>
-      {subtitle && (
-        <p className="mt-4 text-base text-muted-foreground max-w-2xl mx-auto md:text-lg">
+      {subtitle ? (
+        <p className="mt-4 text-pretty text-sm leading-7 text-muted-foreground sm:text-base">
           {subtitle}
         </p>
-      )}
+      ) : null}
     </div>
   );
 }
