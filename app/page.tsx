@@ -2,6 +2,7 @@ import { Navbar } from "@/components/navbar/navbar";
 import { Hero } from "@/components/hero/hero";
 import { TechStack } from "@/components/skills/tech-stack";
 import { ProjectsSection } from "@/components/projects/projects-section";
+import { CertificatesSection } from "@/components/certificates/certificates-section";
 import { ExperienceTimeline } from "@/components/experience/experience-timeline";
 import { AboutSection } from "@/components/about/about-section";
 import { ContactSection } from "@/components/contact/contact-section";
@@ -17,6 +18,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <ProjectsSection />
+        <CertificatesSection />
         <TechStack />
         <ExperienceTimeline />
         <AboutSection />

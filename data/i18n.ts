@@ -10,6 +10,7 @@ export const dictionaries = {
     nav: {
       home: "Home",
       projects: "Projects",
+      certificates: "Certificates",
       stack: "Stack",
       experience: "Experience",
       about: "About",
@@ -19,7 +20,7 @@ export const dictionaries = {
     },
     hero: {
       availability: "Available for full-stack, software, frontend, and backend roles",
-      headline: "I build practical web applications with clean UI and reliable full-stack foundations.",
+      headline: "I build clear web applications with practical full-stack foundations.",
       intro:
         "I am Pachara Wongsasri, a full-stack developer comfortable across frontend and backend work. I build web applications, dashboards, AI interfaces, and real-time features with a focus on clear UI, maintainable code, and reliable system behavior.",
       viewWork: "View selected work",
@@ -28,7 +29,7 @@ export const dictionaries = {
       profileTitle: "Engineering profile",
       profileAria: "Professional summary",
       stats: [
-        { label: "Production apps", value: "10+" },
+        { label: "Project work", value: "10+" },
         { label: "Core stack", value: "Next.js / TS" },
         { label: "Focus", value: "Full-stack apps" },
       ],
@@ -147,41 +148,44 @@ export const dictionaries = {
         },
       },
     },
+    certificates: {
+      eyebrow: "Certificates",
+      title: "Recent learning in AI, cloud, SQL, and developer tools.",
+      subtitle:
+        "A compact record of courses completed alongside project work, with a focus on tools I can apply in web and full-stack development.",
+      view: "View certificate",
+    },
     stack: {
       eyebrow: "Skills and stack",
-      title: "A practical full-stack toolkit for building real applications.",
+      title: "A practical full-stack toolkit for web application work.",
       subtitle:
-        "The stack is intentionally practical: tools for building, integrating, deploying, and maintaining real applications.",
+        "Tools I use for building interfaces, APIs, data flows, integrations, and deployment workflows.",
       groups: {
-        frontend: {
-          title: "Frontend",
-          description: "Interfaces, App Router, responsive systems, and polished product UI.",
+        frontendMobile: {
+          title: "Frontend / Mobile",
+          description: "Web and mobile interfaces with React, Next.js, Angular, Flutter, and typed UI code.",
         },
         backend: {
           title: "Backend",
-          description: "APIs, auth, data flows, integrations, and server-side product behavior.",
+          description: "Server-side APIs, application logic, integrations, and service development.",
         },
         database: {
-          title: "Data",
-          description: "Relational modeling, Firebase streams, Prisma workflows, and persistence.",
+          title: "Database",
+          description: "Relational databases and Firebase-backed data for application workflows.",
         },
-        tools: {
-          title: "Platform",
-          description: "Shipping, collaboration, real-time services, storage, and design handoff.",
+        toolsOrm: {
+          title: "Tools & ORM",
+          description: "Development, API testing, design handoff, containers, and data tooling.",
         },
-        mobile: {
-          title: "Mobile",
-          description: "Flutter applications with practical role-based product flows.",
-        },
-        iot: {
-          title: "IoT",
-          description: "ESP32 sensor systems that turn field signals into dashboard data.",
+        aiTools: {
+          title: "AI Tools",
+          description: "AI coding and assistant tools used to speed up development and exploration.",
         },
       },
     },
     experience: {
       eyebrow: "Experience",
-      title: "Production exposure across operations, data, and user-facing flows.",
+      title: "Experience across operations, data, and user-facing flows.",
       subtitle:
         "The work spans customer access, internal monitoring, backend data modeling, and the unglamorous details that make software dependable.",
       type: "Internship",
@@ -195,7 +199,7 @@ export const dictionaries = {
         "bussing-fullstack": {
           role: "Full-Stack Developer Intern",
           description:
-            "Built production systems for public bus operations across passenger-facing LINE LIFF/web apps and internal dashboards.",
+            "Built features for public bus operations across passenger-facing LINE LIFF/web apps and internal dashboards.",
           highlights: [
             "Delivered digital bus card flows for ticket purchase, online payment, LINE Login, email login, and secure sessions",
             "Built real-time operations screens for camera feeds, live maps, and activity monitoring",
@@ -246,6 +250,7 @@ export const dictionaries = {
     nav: {
       home: "หน้าแรก",
       projects: "โปรเจกต์",
+      certificates: "ใบรับรอง",
       stack: "สแต็ก",
       experience: "ประสบการณ์",
       about: "เกี่ยวกับ",
@@ -255,21 +260,21 @@ export const dictionaries = {
     },
     hero: {
       availability: "เปิดรับโอกาสงาน Full-stack, Software, Frontend และ Backend Developer",
-      headline: "ผมพัฒนาเว็บแอปที่ใช้งานได้จริง หน้าตาชัดเจน และดูแลต่อได้",
+      headline: "ผมพัฒนาเว็บแอปที่หน้าตาชัดเจน ใช้งานง่าย และดูแลต่อได้",
       intro:
-        "ผม พชร วงษาศรี, Full-stack Developer ที่ทำได้ทั้ง frontend และ backend ผมพัฒนาเว็บแอป dashboard ระบบ AI และฟีเจอร์แบบ real-time โดยโฟกัสที่ UI ที่เข้าใจง่าย โค้ดที่ดูแลต่อได้ และระบบที่ทำงานน่าเชื่อถือ",
+        "ผม พชร วงษาศรี, Full-stack Developer ที่ทำได้ทั้ง frontend และ backend ผมพัฒนาเว็บแอป dashboard ฟีเจอร์ AI และงาน real-time โดยโฟกัสที่ UI ที่เข้าใจง่าย โค้ดที่ดูแลต่อได้ และ flow ที่ผู้ใช้ใช้งานได้สะดวก",
       viewWork: "ดูผลงานที่คัดมา",
       downloadResume: "ดาวน์โหลดเรซูเม่",
       emailMe: "ส่งอีเมล",
       profileTitle: "สรุปภาพรวม",
       profileAria: "สรุปประสบการณ์และจุดแข็ง",
       stats: [
-        { label: "แอปที่ทำจริง", value: "10+" },
+        { label: "โปรเจกต์", value: "10+" },
         { label: "สแต็กหลัก", value: "Next.js / TS" },
         { label: "โฟกัส", value: "Full-stack apps" },
       ],
       strengths: [
-        "ทำงานได้ตั้งแต่ data model, API ไปจนถึง flow ที่ผู้ใช้ต้องเจอจริง",
+        "ทำงานได้ตั้งแต่ data model, API ไปจนถึง flow ที่ผู้ใช้ต้องเจอ",
         "ทำ dashboard และ admin tools ให้ข้อมูลอ่านง่ายและใช้งานสะดวก",
         "จัดการ auth, roles, payments, uploads, real-time state และรายละเอียดตอน deploy",
         "สร้าง AI interface ที่แยกงานฝั่ง server ชัดเจน และมี state รองรับเวลาระบบผิดพลาด",
@@ -296,7 +301,7 @@ export const dictionaries = {
           description:
             "เว็บแอปผู้ช่วยเรียนรู้ด้วย AI ให้ trainee ถามคำถามจากบทเรียนและไฟล์ที่อัปโหลดได้ผ่านหน้าจอแชตที่ปลอดภัย",
           challenge:
-            "ย้าย credential ของโมเดลไปไว้ฝั่ง server, คุมขนาด prompt, รองรับการถามตอบจากไฟล์ และวาง fallback provider เพื่อให้ระบบยังใช้งานได้เมื่อ API หลักมีปัญหา",
+            "ย้าย credential ของโมเดลไปไว้ฝั่ง server, คุมขนาด prompt, รองรับการถามตอบจากไฟล์ และวาง fallback provider เผื่อกรณี API หลักมีปัญหา",
           outcome:
             "ทำให้เอกสาร training กลายเป็นช่องทาง self-service ที่ตอบคำถามได้เร็วขึ้น พร้อมสถานะ loading, error และ recovery ที่เข้าใจง่าย",
         },
@@ -361,7 +366,7 @@ export const dictionaries = {
           challenge:
             "เชื่อม RS485 NPK sensors, GPS, firmware บน ESP32, Firebase streaming, role-based access และ logic แนะนำพืช",
           outcome:
-            "เปลี่ยนค่าจาก sensor ให้กลายเป็นข้อมูลที่ใช้เลือกพืชและวางแผนการใช้ปุ๋ยได้จริง",
+            "เปลี่ยนค่าจาก sensor ให้กลายเป็นข้อมูลที่ช่วยเลือกพืชและวางแผนการใช้ปุ๋ยได้ง่ายขึ้น",
         },
         "lotto-app": {
           title: "Lotto App",
@@ -383,55 +388,58 @@ export const dictionaries = {
         },
       },
     },
+    certificates: {
+      eyebrow: "Certificates",
+      title: "ใบรับรองด้าน AI, Cloud, SQL และเครื่องมือสำหรับนักพัฒนา",
+      subtitle:
+        "รวมคอร์สที่เรียนควบคู่กับการทำโปรเจกต์ เน้นหัวข้อที่นำมาใช้กับงานเว็บและ full-stack development ได้",
+      view: "ดูใบรับรอง",
+    },
     stack: {
       eyebrow: "Skills and stack",
-      title: "สแต็กที่ใช้สร้างแอปจริง",
+      title: "สแต็กที่ใช้กับงานเว็บแอปและ full-stack",
       subtitle:
-        "เป็นชุดเครื่องมือที่ใช้สร้าง เชื่อมต่อ deploy และดูแลแอปที่ต้องใช้งาน",
+        "เป็นชุดเครื่องมือที่ใช้ทำ interface, API, data flow, integration และ workflow ตอน deploy",
       groups: {
-        frontend: {
-          title: "Frontend",
-          description: "ทำ interface, App Router, responsive layout และ UI ที่พร้อมใช้งานจริง",
+        frontendMobile: {
+          title: "Frontend / Mobile",
+          description: "ทำเว็บและแอปด้วย React, Next.js, Angular, Flutter และ TypeScript",
         },
         backend: {
           title: "Backend",
-          description: "ดูแล API, auth, data flow, integration และ logic ฝั่ง server",
+          description: "ทำ API, logic ฝั่ง server, integration และ service development",
         },
         database: {
-          title: "Data",
-          description: "ออกแบบข้อมูลแบบ relational, Firebase stream, Prisma workflow และ persistence",
+          title: "Database",
+          description: "ใช้ฐานข้อมูล relational และ Firebase สำหรับ flow ของแอป",
         },
-        tools: {
-          title: "Platform",
-          description: "เครื่องมือสำหรับ ship งาน ทำงานร่วมกัน real-time service, storage และ design handoff",
+        toolsOrm: {
+          title: "Tools & ORM",
+          description: "เครื่องมือสำหรับพัฒนา ทดสอบ API ออกแบบ ทำ container และจัดการข้อมูล",
         },
-        mobile: {
-          title: "Mobile",
-          description: "Flutter application ที่มี flow ตามบทบาทผู้ใช้และใช้งานได้จริง",
-        },
-        iot: {
-          title: "IoT",
-          description: "ระบบ ESP32 และ sensor ที่ส่งข้อมูลภาคสนามขึ้นมาเป็น dashboard",
+        aiTools: {
+          title: "AI Tools",
+          description: "เครื่องมือ AI ที่ใช้ช่วยเขียนโค้ด สำรวจแนวทาง และทำงานได้เร็วขึ้น",
         },
       },
     },
     experience: {
       eyebrow: "Experience",
-      title: "ประสบการณ์ทำระบบ production ทั้งฝั่งผู้ใช้และงาน operation",
+      title: "ประสบการณ์ทำงานฝั่งผู้ใช้และงาน operation",
       subtitle:
-        "งานครอบคลุมระบบสำหรับผู้โดยสาร dashboard ภายใน การออกแบบข้อมูลฝั่ง backend และรายละเอียดเล็ก ๆ ที่ทำให้ software ใช้งานได้จริง",
+        "งานครอบคลุมระบบสำหรับผู้โดยสาร dashboard ภายใน การออกแบบข้อมูลฝั่ง backend และรายละเอียดเล็ก ๆ ที่ทำให้ software ใช้งานสะดวกขึ้น",
       type: "Internship",
       signalTitle: "ประสบการณ์นี้บอกอะไร",
       achievements: [
         "ทำทั้งระบบที่ผู้ใช้ภายนอกเห็น และระบบภายในสำหรับทีม operation ใน domain เดียวกัน",
         "ทำงานกับ auth, payment, map, camera feed, Prisma schema และ Linux script",
-        "แปลง workflow ธุรกิจจริงให้เป็นหน้าจอที่ operator อ่านง่ายและใช้งานเร็ว",
+        "แปลง workflow ธุรกิจให้เป็นหน้าจอที่ operator อ่านง่ายและใช้งานเร็ว",
       ],
       items: {
         "bussing-fullstack": {
           role: "Full-Stack Developer Intern",
           description:
-            "พัฒนาระบบ production สำหรับงานเดินรถโดยสาร ทั้ง LINE LIFF/web app ฝั่งผู้โดยสารและ dashboard ภายในบริษัท",
+            "พัฒนาฟีเจอร์สำหรับงานเดินรถโดยสาร ทั้ง LINE LIFF/web app ฝั่งผู้โดยสารและ dashboard ภายในบริษัท",
           highlights: [
             "ทำ flow digital bus card สำหรับซื้อตั๋ว, online payment, LINE Login, email login และ secure session",
             "สร้างหน้าจอ operation แบบ real-time สำหรับ camera feed, live map และ activity monitoring",
@@ -446,8 +454,8 @@ export const dictionaries = {
       subtitle:
         "ผมชอบสร้าง software ที่ผู้ใช้เข้าใจง่าย และ developer คนอื่นดูแลต่อได้",
       notes: [
-        "ผมให้ความสำคัญกับ interface ที่ช่วยให้คนใช้งานได้เร็ว งานที่ถนัดคือการเอาโจทย์จริงมาจัดให้เป็นระบบ เช่น dashboard, workflow tool, AI assistant และระบบหลังบ้านที่ต้องใช้ทุกวัน",
-        "ผมเคยทำทั้ง web, mobile, IoT และ AI แต่จุดแข็งหลักอยู่ที่ full-stack TypeScript ผมชอบทำงานตั้งแต่ schema design, API behavior ไปจนถึงรายละเอียดบนหน้าจอที่ผู้ใช้จะได้ใช้งานจริง",
+        "ผมให้ความสำคัญกับ interface ที่ช่วยให้คนใช้งานได้เร็ว งานที่ถนัดคือการเอาโจทย์มาจัดให้เป็น flow ที่ชัดเจน เช่น dashboard, workflow tool, AI assistant และงานหลังบ้าน",
+        "ผมเคยทำทั้ง web, mobile, IoT และ AI แต่จุดแข็งหลักอยู่ที่ full-stack TypeScript ผมชอบทำงานตั้งแต่ schema design, API behavior ไปจนถึงรายละเอียดบนหน้าจอที่ผู้ใช้ต้องใช้งาน",
       ],
       principles: [
         "ชัดเจนก่อนสวยซับซ้อน",

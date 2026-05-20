@@ -25,7 +25,16 @@ export interface Experience {
 export interface Skill {
   name: string;
   icon: string;
-  category: "frontend" | "backend" | "mobile" | "iot" | "tools" | "database";
+  category: "frontendMobile" | "backend" | "database" | "toolsOrm" | "aiTools";
+}
+
+export interface Certificate {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  image: string;
+  tags: string[];
 }
 
 export interface NavItem {

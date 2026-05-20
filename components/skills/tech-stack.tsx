@@ -2,10 +2,8 @@
 
 import {
   Atom,
-  Cloud,
   Code,
   Container,
-  Cpu,
   Database,
   FileCode2,
   Flame,
@@ -13,7 +11,6 @@ import {
   Globe,
   Monitor,
   Paintbrush,
-  Radio,
   Server,
   Smartphone,
   Zap,
@@ -29,10 +26,8 @@ import type { Skill } from "@/types";
 
 const iconMap: Record<string, LucideIcon | typeof FigmaIcon> = {
   atom: Atom,
-  cloud: Cloud,
   code: Code,
   container: Container,
-  cpu: Cpu,
   database: Database,
   figma: FigmaIcon,
   "file-code-2": FileCode2,
@@ -41,19 +36,17 @@ const iconMap: Record<string, LucideIcon | typeof FigmaIcon> = {
   globe: Globe,
   monitor: Monitor,
   paintbrush: Paintbrush,
-  radio: Radio,
   server: Server,
   smartphone: Smartphone,
   zap: Zap,
 };
 
 const groups: Skill["category"][] = [
-  "frontend",
+  "frontendMobile",
   "backend",
   "database",
-  "tools",
-  "mobile",
-  "iot",
+  "toolsOrm",
+  "aiTools",
 ];
 
 export function TechStack() {
@@ -69,7 +62,7 @@ export function TechStack() {
         />
       </FadeUp>
 
-      <Stagger className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <Stagger className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         {groups.map((group) => {
           const groupCopy = t.stack.groups[group];
           const groupSkills = skills.filter((skill) => skill.category === group);
