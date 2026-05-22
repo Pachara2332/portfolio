@@ -19,25 +19,25 @@ export const dictionaries = {
       language: "Switch language",
     },
     hero: {
-      availability: "Available for full-stack, software, frontend, and backend roles",
-      headline: "I build clear web applications with practical full-stack foundations.",
+      availability: "Portfolio and selected work",
+      headline: "Pachara Wongsasri",
       intro:
-        "I am Pachara Wongsasri, a full-stack developer comfortable across frontend and backend work. I build web applications, dashboards, AI interfaces, and real-time features with a focus on clear UI, maintainable code, and reliable system behavior.",
+        "I'm a developer. This site collects projects I have built across web apps, dashboards, AI tools, mobile apps, and IoT.",
       viewWork: "View selected work",
       downloadResume: "Download resume",
       emailMe: "Email me",
-      profileTitle: "Engineering profile",
-      profileAria: "Professional summary",
+      profileTitle: "Quick intro",
+      profileAria: "Short introduction",
       stats: [
-        { label: "Project work", value: "10+" },
-        { label: "Core stack", value: "Next.js / TS" },
-        { label: "Focus", value: "Full-stack apps" },
+        { label: "Projects", value: "10+" },
+        { label: "Main tools", value: "Next.js / TS" },
+        { label: "Project types", value: "Web / AI" },
       ],
       strengths: [
-        "Frontend and backend implementation from data model to user workflow",
-        "Dashboards and admin tools that are easy to scan and use",
-        "Auth, roles, payments, uploads, real-time state, and deployment details",
-        "AI-assisted interfaces with server-side routing and practical failure states",
+        "Web apps and dashboards",
+        "Frontend and backend features",
+        "AI, mobile, and IoT projects",
+        "Internship experience in bus operation systems",
       ],
     },
     projects: {
@@ -59,92 +59,92 @@ export const dictionaries = {
         "trainee-knowledge-assistant": {
           title: "Trainee Knowledge Assistant",
           description:
-            "AI study workspace that helps trainees ask questions against lessons and uploaded files through a secure chat interface.",
+            "AI chat workspace for asking questions from lessons and uploaded files. Users can upload study files, ask follow-up questions, and get answers in one simple chat flow.",
           challenge:
-            "Kept model credentials server-side, reduced prompt payload size, handled file-aware Q&A states, and added provider fallbacks so the app stays useful during API issues.",
+            "Built the server-side AI route, kept API keys out of the browser, trimmed chat history, and handled file-aware Q&A states.",
           outcome:
-            "Turned training material into a faster self-service support channel with clear loading, error, and recovery states.",
+            "Added loading, error, and fallback states so the app remains usable when the AI provider has issues.",
         },
         "movie-management": {
           title: "Movie Operations Dashboard",
           description:
-            "Authenticated movie catalog dashboard for teams managing titles, posters, roles, and review-ready content workflows.",
+            "Movie catalog dashboard for managing titles, posters, users, and staff roles. The app separates frontend and backend work, with protected pages for content operations.",
           challenge:
-            "Designed protected dashboard flows, cookie-based auth, role-aware destructive actions, poster uploads, search, sorting, and API integration against a separate backend.",
+            "Implemented login, cookie-based auth, role checks, poster upload, search, sorting, and API integration.",
           outcome:
-            "Created an internal tool pattern that makes content operations safer and faster without exposing manager-only actions to staff roles.",
+            "Manager-only actions stay protected while staff can still manage daily movie content.",
         },
         "thai-ai-chatbot": {
           title: "Thai AI Chat Assistant",
           description:
-            "Thai-language AI assistant for everyday Q&A and recommendations, optimized for a simple browser-based chat experience.",
+            "Thai AI chatbot for everyday questions, ideas, and simple recommendations. The interface is kept close to a normal chat app so users can start quickly.",
           challenge:
-            "Built the full chat loop with server-side AI routing, guarded API keys, recent-history trimming, error states, and provider fallback behavior.",
+            "Built the chat loop, server-side AI routing, API key protection, recent-history trimming, and error states.",
           outcome:
-            "Delivered a responsive AI product that feels approachable for Thai users while keeping operational concerns out of the client.",
+            "Kept sensitive logic on the server while giving Thai users a clean browser-based chat experience.",
         },
         "eleven-lineup": {
           title: "Eleven Lineup",
           description:
-            "Football lineup builder with drag-and-drop squad creation, social profiles, RBAC, and prediction game mechanics.",
+            "Football lineup builder with drag-and-drop team setup, user profiles, permissions, and prediction games. It combines an interactive pitch UI with full-stack account features.",
           challenge:
-            "Combined interactive pitch state, custom JWT auth in HTTP-only cookies, middleware-based permissions, Prisma models, and streak-based game flows.",
+            "Handled pitch state, JWT auth in HTTP-only cookies, middleware permissions, Prisma models, and streak logic.",
           outcome:
-            "Shipped a full-stack SaaS-style product with clear user identity, community behavior, and replayable engagement loops.",
+            "Users can create lineups, manage profiles, and return for prediction-game activity.",
         },
         "patient-operations-system": {
           title: "Patient Operations System",
           description:
-            "Healthcare operations app for managing patient records, appointment scheduling, and facility-level workflows.",
+            "Healthcare app for patient records, appointments, and staff workflows. The screens focus on clear status, structured data, and quick access to patient information.",
           challenge:
-            "Modeled clinical data carefully, designed role-aware workflows, and built operational screens that prioritize accuracy over decoration.",
+            "Modeled patient and appointment data, designed role-aware flows, and built operational pages for daily use.",
           outcome:
-            "Improved visibility into patient and appointment status for teams that need dependable, scan-friendly interfaces.",
+            "Staff can check patient and appointment status without searching through scattered information.",
         },
         "childcare-dashboard": {
           title: "Childcare Dashboard",
           description:
-            "Management dashboard for childcare teams tracking development, activities, savings, payments, and reports.",
+            "Childcare dashboard for development records, activities, payments, savings, and reports. It brings several admin tasks into one place for teachers or staff.",
           challenge:
-            "Organized multiple operational domains into a dashboard with data visualization, export flows, and responsive information density.",
+            "Organized many data sections into one dashboard with charts, report export, and responsive layouts.",
           outcome:
-            "Helped non-technical users understand child progress and payment status quickly, then export reports for offline sharing.",
+            "Users can review child progress and payment status quickly, then export reports when needed.",
         },
         "roommate-finder": {
           title: "Roommate Finder Platform",
           description:
-            "Matching platform with real-time chat, profile reviews, preference filters, and AWS S3 image handling.",
+            "Roommate matching platform with profiles, preference filters, real-time chat, reviews, and image uploads. It is built around helping users compare compatibility before contacting each other.",
           challenge:
-            "Built persisted Socket.io conversations, typing indicators, image upload automation, matching preferences, and peer review flows.",
+            "Built Socket.io conversations, typing indicators, image handling with AWS S3, matching preferences, and review flows.",
           outcome:
-            "Created a trust-focused marketplace experience where users can compare compatibility before committing to a shared living decision.",
+            "Users can filter, chat, and review profiles before making a shared-living decision.",
         },
         "soil-iot-dashboard": {
           title: "Soil Intelligence IoT Dashboard",
           description:
-            "Field data system that streams soil minerals, moisture, and GPS readings from ESP32 devices into an Angular dashboard.",
+            "IoT dashboard for soil readings, moisture, GPS data, and crop suggestions. Sensor data from ESP32 devices is sent into a dashboard for easier field monitoring.",
           challenge:
-            "Integrated RS485 NPK sensors, GPS, ESP32 firmware, Firebase streaming, role-based access, and crop recommendation logic.",
+            "Connected RS485 NPK sensors, GPS, ESP32 firmware, Firebase streaming, role access, and crop recommendation logic.",
           outcome:
-            "Converted raw sensor readings into practical farming insight for crop selection and fertilizer planning.",
+            "Raw field readings become easier to understand for crop selection and fertilizer planning.",
         },
         "lotto-app": {
           title: "Lotto App",
           description:
-            "Flutter lottery platform for customers and vendors with ticket stock visibility, bundle purchasing, and inventory controls.",
+            "Flutter lottery app for buying tickets and managing vendor stock. Customers can browse available tickets while vendors update inventory from their side.",
           challenge:
-            "Designed mobile purchase flows around real-time stock state, bundle selection, vendor-side inventory management, and Firebase-backed data updates.",
+            "Designed purchase flows, real-time stock state, bundle selection, vendor inventory screens, and Firebase updates.",
           outcome:
-            "Created a clearer buying and stock management experience so vendors can control availability while customers avoid unavailable tickets.",
+            "The app reduces cases where customers choose tickets that are already unavailable.",
         },
         "rider-delivery-app": {
           title: "Rider Delivery App",
           description:
-            "Flutter delivery app with customer and rider roles, order status handling, and Firebase-backed live map tracking.",
+            "Flutter delivery app with separate customer and rider flows, order status, and live maps. Both sides can follow the delivery state from pickup to completion.",
           challenge:
-            "Built role-specific mobile flows, delivery status transitions, map-based tracking, and Firebase synchronization for real-time visibility.",
+            "Built role-specific mobile screens, delivery status transitions, map tracking, and Firebase synchronization.",
           outcome:
-            "Gave customers and riders a shared delivery state, reducing uncertainty around pickup, transit, and arrival progress.",
+            "Customers and riders see the same delivery progress, which makes the flow easier to follow.",
         },
       },
     },
@@ -157,9 +157,9 @@ export const dictionaries = {
     },
     stack: {
       eyebrow: "Skills and stack",
-      title: "A practical full-stack toolkit for web application work.",
+      title: "Tools I use",
       subtitle:
-        "Tools I use for building interfaces, APIs, data flows, integrations, and deployment workflows.",
+        "A short view of the stack behind my web, mobile, and backend projects.",
       groups: {
         frontendMobile: {
           title: "Frontend / Mobile",
@@ -185,37 +185,37 @@ export const dictionaries = {
     },
     experience: {
       eyebrow: "Experience",
-      title: "Experience across operations, data, and user-facing flows.",
+      title: "Internship experience",
       subtitle:
-        "The work spans customer access, internal monitoring, backend data modeling, and the unglamorous details that make software dependable.",
+        "I worked on public bus operation systems, including passenger-facing apps, internal dashboards, backend data, and automation scripts.",
       type: "Internship",
       signalTitle: "What this signals",
       achievements: [
-        "Built passenger-facing and internal systems in the same operational domain",
-        "Worked across auth, payments, maps, camera feeds, Prisma schemas, and Linux scripts",
-        "Translated real business workflows into screens that operators can scan quickly",
+        "Built features for both passengers and internal operation staff",
+        "Worked with login, payments, maps, camera feeds, Prisma schemas, and Linux scripts",
+        "Turned real operation workflows into screens and small backend tools",
       ],
       items: {
         "bussing-fullstack": {
           role: "Full-Stack Developer Intern",
           description:
-            "Built features for public bus operations across passenger-facing LINE LIFF/web apps and internal dashboards.",
+            "Built features for public bus operations across passenger-facing LINE LIFF/web apps and internal dashboards. The work included ticket purchase flows, account login, payment handling, operation monitoring, and backend data structure.",
           highlights: [
             "Delivered digital bus card flows for ticket purchase, online payment, LINE Login, email login, and secure sessions",
-            "Built real-time operations screens for camera feeds, live maps, and activity monitoring",
-            "Designed Prisma-backed schemas and Linux automation scripts for video recording pipelines",
+            "Built internal monitoring screens for camera feeds, live maps, passenger activity, and operation status",
+            "Designed Prisma-backed schemas and wrote Linux automation scripts for video recording pipelines",
           ],
         },
       },
     },
     about: {
       eyebrow: "About",
-      title: "Detail-oriented, adaptable, and comfortable across the stack.",
+      title: "About me",
       subtitle:
-        "I like building software that is clear for users and maintainable for developers.",
+        "I like building software that is simple, useful, and maintainable.",
       notes: [
-        "I care about interfaces that help people make decisions quickly. My best work is practical developer work: dashboards, workflow tools, AI assistants, and systems that turn messy real-world processes into clear screens.",
-        "I have built across web, mobile, IoT, and AI projects, but my center of gravity is full-stack TypeScript. I enjoy working from schema design and API behavior through to the UI details that users actually touch.",
+        "I mostly work with full-stack TypeScript, from API and database structure to the screens people use.",
+        "My projects include dashboards, AI tools, mobile apps, and IoT systems.",
       ],
       principles: [
         "Clarity before cleverness",
@@ -226,9 +226,9 @@ export const dictionaries = {
     },
     contact: {
       eyebrow: "Contact",
-      title: "Have a developer role or system that needs a careful builder?",
+      title: "Want to talk?",
       subtitle:
-        "Send the context, constraints, and timeline. I respond best when the problem is concrete.",
+        "Send a role, project, or question and I will get back to you.",
       directChannels: "Direct channels",
       linkedinProfile: "LinkedIn profile",
       name: "Name",
@@ -259,25 +259,25 @@ export const dictionaries = {
       language: "เปลี่ยนภาษา",
     },
     hero: {
-      availability: "เปิดรับโอกาสงาน Full-stack, Software, Frontend และ Backend Developer",
-      headline: "ผมพัฒนาเว็บแอปที่หน้าตาชัดเจน ใช้งานง่าย และดูแลต่อได้",
+      availability: "Portfolio and selected work",
+      headline: "พชร วงษาศรี",
       intro:
-        "ผม พชร วงษาศรี, Full-stack Developer ที่ทำได้ทั้ง frontend และ backend ผมพัฒนาเว็บแอป dashboard ฟีเจอร์ AI และงาน real-time โดยโฟกัสที่ UI ที่เข้าใจง่าย โค้ดที่ดูแลต่อได้ และ flow ที่ผู้ใช้ใช้งานได้สะดวก",
+        "ผมเป็น developer เว็บนี้รวมโปรเจกต์ที่เคยทำ ทั้งเว็บแอป dashboard, AI tools, mobile app และ IoT",
       viewWork: "ดูผลงานที่คัดมา",
       downloadResume: "ดาวน์โหลดเรซูเม่",
       emailMe: "ส่งอีเมล",
-      profileTitle: "สรุปภาพรวม",
-      profileAria: "สรุปประสบการณ์และจุดแข็ง",
+      profileTitle: "แนะนำตัวสั้น ๆ",
+      profileAria: "แนะนำตัวแบบสั้น",
       stats: [
         { label: "โปรเจกต์", value: "10+" },
-        { label: "สแต็กหลัก", value: "Next.js / TS" },
-        { label: "โฟกัส", value: "Full-stack apps" },
+        { label: "เครื่องมือหลัก", value: "Next.js / TS" },
+        { label: "ประเภทงาน", value: "Web / AI" },
       ],
       strengths: [
-        "ทำงานได้ตั้งแต่ data model, API ไปจนถึง flow ที่ผู้ใช้ต้องเจอ",
-        "ทำ dashboard และ admin tools ให้ข้อมูลอ่านง่ายและใช้งานสะดวก",
-        "จัดการ auth, roles, payments, uploads, real-time state และรายละเอียดตอน deploy",
-        "สร้าง AI interface ที่แยกงานฝั่ง server ชัดเจน และมี state รองรับเวลาระบบผิดพลาด",
+        "เว็บแอปและ dashboard",
+        "ฟีเจอร์ฝั่ง frontend และ backend",
+        "โปรเจกต์ AI, mobile และ IoT",
+        "ประสบการณ์ฝึกงานระบบเดินรถโดยสาร",
       ],
     },
     projects: {
@@ -299,92 +299,92 @@ export const dictionaries = {
         "trainee-knowledge-assistant": {
           title: "Trainee Knowledge Assistant",
           description:
-            "เว็บแอปผู้ช่วยเรียนรู้ด้วย AI ให้ trainee ถามคำถามจากบทเรียนและไฟล์ที่อัปโหลดได้ผ่านหน้าจอแชตที่ปลอดภัย",
+            "เว็บแชต AI สำหรับถามคำถามจากบทเรียนและไฟล์ที่อัปโหลด ผู้ใช้สามารถอัปโหลดไฟล์ ถามต่อเนื่อง และอ่านคำตอบได้ใน flow เดียว",
           challenge:
-            "ย้าย credential ของโมเดลไปไว้ฝั่ง server, คุมขนาด prompt, รองรับการถามตอบจากไฟล์ และวาง fallback provider เผื่อกรณี API หลักมีปัญหา",
+            "ทำ AI route ฝั่ง server, ซ่อน API key จาก browser, จำกัดประวัติแชต และรองรับการถามตอบจากไฟล์",
           outcome:
-            "ทำให้เอกสาร training กลายเป็นช่องทาง self-service ที่ตอบคำถามได้เร็วขึ้น พร้อมสถานะ loading, error และ recovery ที่เข้าใจง่าย",
+            "เพิ่มสถานะ loading, error และ fallback เพื่อให้แอปยังใช้งานได้เมื่อ provider หลักมีปัญหา",
         },
         "movie-management": {
           title: "Movie Operations Dashboard",
           description:
-            "Dashboard สำหรับทีม content ในการจัดการ movie catalog, poster, role และ workflow หลังบ้าน",
+            "Dashboard จัดการหนังสำหรับดูแล title, poster, user และ role ของทีมงาน แยก frontend/backend และมีหน้าที่ต้อง login ก่อนใช้งาน",
           challenge:
-            "ออกแบบ dashboard ที่ต้อง login, ใช้ cookie-based auth, จำกัด action ตาม role, ทำ poster upload, search, sorting และเชื่อมต่อ backend ที่แยกออกมา",
+            "ทำ login, cookie-based auth, role check, อัปโหลดโปสเตอร์, ค้นหา, sort และเชื่อม API",
           outcome:
-            "ช่วยให้ทีมจัดการ content ได้ปลอดภัยขึ้น และลดความเสี่ยงจากการเปิด action สำคัญให้คนที่ไม่มีสิทธิ์",
+            "action สำคัญถูกจำกัดตามสิทธิ์ แต่ staff ยังจัดการข้อมูลประจำวันได้สะดวก",
         },
         "thai-ai-chatbot": {
           title: "Thai AI Chat Assistant",
           description:
-            "AI assistant ภาษาไทยสำหรับถามตอบและขอคำแนะนำ ผ่านหน้าจอแชตที่ใช้งานง่ายบน browser",
+            "แชตบอต AI ภาษาไทยสำหรับถามตอบ ขอไอเดีย และขอคำแนะนำแบบง่าย ๆ หน้าจอออกแบบให้เหมือนแชตทั่วไปเพื่อให้เริ่มใช้งานได้เร็ว",
           challenge:
-            "สร้าง chat flow ครบชุด ตั้งแต่ routing ฝั่ง server, การซ่อน API key, การจำกัดประวัติข้อความ, error state และ fallback provider",
+            "ทำ chat loop, AI routing ฝั่ง server, ซ่อน API key, จำกัดประวัติข้อความ และจัดการ error state",
           outcome:
-            "ได้ AI product ที่ผู้ใช้ไทยเข้าถึงง่าย โดยแยกงานที่อ่อนไหวและงาน operation ออกจาก client",
+            "เก็บ logic ที่อ่อนไหวไว้ฝั่ง server และให้ผู้ใช้ไทยคุยกับ AI ผ่าน browser ได้ง่าย",
         },
         "eleven-lineup": {
           title: "Eleven Lineup",
           description:
-            "เว็บแอปจัดทีมฟุตบอลแบบ drag-and-drop พร้อม profile, RBAC และระบบเกมทายผล",
+            "เว็บจัดทีมฟุตบอลแบบ drag-and-drop พร้อม profile, permission และเกมทายผล รวมหน้าจอสนามที่ interactive กับระบบ account แบบ full-stack",
           challenge:
-            "รวม state ของสนามแบบ interactive, JWT auth ผ่าน HTTP-only cookies, permission ใน middleware, Prisma models และ flow เกมแบบนับ streak",
+            "จัดการ state ของสนาม, JWT auth ผ่าน HTTP-only cookies, middleware permission, Prisma models และระบบ streak",
           outcome:
-            "กลายเป็น full-stack product ที่มีระบบตัวตนผู้ใช้ พฤติกรรมแบบ community และเหตุผลให้กลับมาใช้งานซ้ำ",
+            "ผู้ใช้สร้าง lineup, จัดการ profile และกลับมาเล่นกิจกรรมทายผลได้",
         },
         "patient-operations-system": {
           title: "Patient Operations System",
           description:
-            "ระบบสำหรับจัดการข้อมูลผู้ป่วย ตารางนัดหมาย และงานหลังบ้านของสถานพยาบาล",
+            "ระบบจัดการข้อมูลผู้ป่วย ตารางนัดหมาย และงานของสถานพยาบาล หน้าจอเน้นสถานะที่อ่านง่าย ข้อมูลเป็นระเบียบ และเข้าถึงข้อมูลผู้ป่วยได้เร็ว",
           challenge:
-            "ออกแบบ data model สำหรับข้อมูลทางคลินิก, workflow ตามบทบาทผู้ใช้ และหน้าจอที่เน้นความถูกต้องมากกว่าความหวือหวา",
+            "ออกแบบข้อมูลผู้ป่วยและนัดหมาย, flow ตามบทบาทผู้ใช้ และหน้าจอสำหรับงานประจำวัน",
           outcome:
-            "ช่วยให้ทีมเห็นสถานะผู้ป่วยและนัดหมายได้ชัดขึ้น ผ่าน interface ที่อ่านง่ายและไว้ใจได้",
+            "staff ตรวจสถานะผู้ป่วยและนัดหมายได้โดยไม่ต้องไล่หาข้อมูลหลายที่",
         },
         "childcare-dashboard": {
           title: "Childcare Dashboard",
           description:
-            "Dashboard สำหรับติดตามพัฒนาการเด็ก กิจกรรม เงินออม การชำระเงิน และรายงานต่าง ๆ",
+            "Dashboard ติดตามพัฒนาการเด็ก กิจกรรม การชำระเงิน เงินออม และรายงาน รวมงาน admin หลายส่วนไว้ในหน้าจอเดียว",
           challenge:
-            "จัดข้อมูลหลายส่วนให้อยู่ใน dashboard เดียว พร้อม visualization, export flow และ layout ที่ดูได้ดีทุกขนาดหน้าจอ",
+            "จัดข้อมูลหลายหมวดให้เป็น dashboard เดียว พร้อมกราฟ, export รายงาน และ layout ที่ responsive",
           outcome:
-            "ช่วยให้ผู้ใช้ที่ไม่ใช่สายเทคนิคเข้าใจพัฒนาการและสถานะการชำระเงินได้เร็ว พร้อม export รายงานไปใช้งานต่อ",
+            "ผู้ใช้ดูพัฒนาการและสถานะการชำระเงินได้เร็ว แล้ว export รายงานไปใช้งานต่อได้",
         },
         "roommate-finder": {
           title: "Roommate Finder Platform",
           description:
-            "แพลตฟอร์มหา roommate พร้อมแชตแบบ real-time, review profile, preference filter และระบบจัดการรูปผ่าน AWS S3",
+            "แพลตฟอร์มหา roommate มี profile, preference filter, real-time chat, review และอัปโหลดรูป ช่วยให้ผู้ใช้เทียบความเข้ากันได้ก่อนเริ่มคุย",
           challenge:
-            "สร้างแชต Socket.io ที่เก็บประวัติได้, typing indicator, ระบบอัปโหลดรูป, preference matching และ peer review flow",
+            "ทำ Socket.io chat, typing indicator, จัดการรูปผ่าน AWS S3, matching preference และ review flow",
           outcome:
-            "สร้าง marketplace ที่เน้นความน่าเชื่อถือ ให้ผู้ใช้เปรียบเทียบความเข้ากันได้ก่อนตัดสินใจอยู่ร่วมกัน",
+            "ผู้ใช้กรองข้อมูล แชต และดูรีวิวก่อนตัดสินใจเรื่องการอยู่ร่วมกันได้",
         },
         "soil-iot-dashboard": {
           title: "Soil Intelligence IoT Dashboard",
           description:
-            "ระบบ IoT ที่ส่งค่าดิน ความชื้น และพิกัด GPS จาก ESP32 เข้าสู่ Angular dashboard",
+            "IoT dashboard สำหรับค่าดิน ความชื้น GPS และคำแนะนำเรื่องพืช ข้อมูลจาก ESP32 ถูกส่งเข้า dashboard เพื่อดูสถานะพื้นที่ได้ง่ายขึ้น",
           challenge:
-            "เชื่อม RS485 NPK sensors, GPS, firmware บน ESP32, Firebase streaming, role-based access และ logic แนะนำพืช",
+            "เชื่อม RS485 NPK sensors, GPS, firmware บน ESP32, Firebase streaming, role access และ logic แนะนำพืช",
           outcome:
-            "เปลี่ยนค่าจาก sensor ให้กลายเป็นข้อมูลที่ช่วยเลือกพืชและวางแผนการใช้ปุ๋ยได้ง่ายขึ้น",
+            "ค่าจาก sensor ถูกแปลงเป็นข้อมูลที่อ่านง่าย สำหรับเลือกพืชและวางแผนการใช้ปุ๋ย",
         },
         "lotto-app": {
           title: "Lotto App",
           description:
-            "แอป Flutter สำหรับซื้อหวยและจัดการสต็อก ระหว่างลูกค้าและ vendor",
+            "แอป Flutter สำหรับซื้อหวยและจัดการสต็อกของ vendor ลูกค้าดูเลขที่เปิดขายได้ ส่วน vendor จัดการ inventory จากฝั่งของตัวเอง",
           challenge:
-            "ออกแบบ flow การซื้อบนมือถือให้สัมพันธ์กับ stock แบบ real-time, การเลือกซื้อเป็นชุด, หน้าจอจัดการ inventory ของ vendor และข้อมูลจาก Firebase",
+            "ทำ flow การซื้อ, stock แบบ real-time, การเลือกซื้อเป็นชุด, หน้าจอ inventory และ sync ข้อมูลด้วย Firebase",
           outcome:
-            "ทำให้การซื้อและการจัดการ stock ชัดเจนขึ้น vendor คุมของที่เปิดขายได้ และลูกค้าลดโอกาสเลือกใบที่หมดแล้ว",
+            "ช่วยลดกรณีลูกค้าเลือกใบที่หมดแล้ว และทำให้ vendor คุมเลขที่เปิดขายได้ชัดขึ้น",
         },
         "rider-delivery-app": {
           title: "Rider Delivery App",
           description:
-            "แอปส่งของด้วย Flutter แยก flow ลูกค้าและไรเดอร์ พร้อมสถานะออเดอร์และ live map tracking",
+            "แอปส่งของด้วย Flutter มี flow แยกสำหรับลูกค้าและไรเดอร์ พร้อมสถานะออเดอร์และแผนที่ ทั้งสองฝั่งดูสถานะการส่งได้ตั้งแต่รับงานจนเสร็จ",
           challenge:
-            "สร้าง mobile flow แยกตาม role, จัดการสถานะการส่ง, map tracking และ sync ข้อมูลผ่าน Firebase เพื่อให้เห็นสถานะใกล้ real-time",
+            "ทำหน้าจอตาม role, จัดการสถานะการส่ง, map tracking และ sync ข้อมูลผ่าน Firebase",
           outcome:
-            "ทำให้ลูกค้าและไรเดอร์เห็นสถานะเดียวกัน ลดความไม่แน่นอนตั้งแต่รับงาน ระหว่างทาง จนถึงส่งสำเร็จ",
+            "ลูกค้าและไรเดอร์เห็น progress เดียวกัน ทำให้ตามงานส่งของได้ง่ายขึ้น",
         },
       },
     },
@@ -397,9 +397,9 @@ export const dictionaries = {
     },
     stack: {
       eyebrow: "Skills and stack",
-      title: "สแต็กที่ใช้กับงานเว็บแอปและ full-stack",
+      title: "เครื่องมือที่ใช้",
       subtitle:
-        "เป็นชุดเครื่องมือที่ใช้ทำ interface, API, data flow, integration และ workflow ตอน deploy",
+        "สรุป stack ที่ใช้ในงานเว็บ มือถือ และ backend",
       groups: {
         frontendMobile: {
           title: "Frontend / Mobile",
@@ -425,24 +425,24 @@ export const dictionaries = {
     },
     experience: {
       eyebrow: "Experience",
-      title: "ประสบการณ์ทำงานฝั่งผู้ใช้และงาน operation",
+      title: "ประสบการณ์ฝึกงาน",
       subtitle:
-        "งานครอบคลุมระบบสำหรับผู้โดยสาร dashboard ภายใน การออกแบบข้อมูลฝั่ง backend และรายละเอียดเล็ก ๆ ที่ทำให้ software ใช้งานสะดวกขึ้น",
+        "ได้ทำระบบงานเดินรถโดยสาร ทั้งแอปฝั่งผู้โดยสาร dashboard ภายใน ข้อมูลฝั่ง backend และ script สำหรับงาน automation",
       type: "Internship",
       signalTitle: "ประสบการณ์นี้บอกอะไร",
       achievements: [
-        "ทำทั้งระบบที่ผู้ใช้ภายนอกเห็น และระบบภายในสำหรับทีม operation ใน domain เดียวกัน",
-        "ทำงานกับ auth, payment, map, camera feed, Prisma schema และ Linux script",
-        "แปลง workflow ธุรกิจให้เป็นหน้าจอที่ operator อ่านง่ายและใช้งานเร็ว",
+        "ทำฟีเจอร์ทั้งฝั่งผู้โดยสารและทีม operation ภายใน",
+        "ทำงานกับ login, payment, map, camera feed, Prisma schema และ Linux script",
+        "แปลง workflow งานจริงให้เป็นหน้าจอและเครื่องมือฝั่ง backend",
       ],
       items: {
         "bussing-fullstack": {
           role: "Full-Stack Developer Intern",
           description:
-            "พัฒนาฟีเจอร์สำหรับงานเดินรถโดยสาร ทั้ง LINE LIFF/web app ฝั่งผู้โดยสารและ dashboard ภายในบริษัท",
+            "พัฒนาฟีเจอร์สำหรับงานเดินรถโดยสาร ทั้ง LINE LIFF/web app ฝั่งผู้โดยสารและ dashboard ภายในบริษัท งานที่ทำมี flow ซื้อตั๋ว login ชำระเงิน หน้าจอติดตาม operation และโครงสร้างข้อมูลฝั่ง backend",
           highlights: [
             "ทำ flow digital bus card สำหรับซื้อตั๋ว, online payment, LINE Login, email login และ secure session",
-            "สร้างหน้าจอ operation แบบ real-time สำหรับ camera feed, live map และ activity monitoring",
+            "สร้างหน้าจอ monitoring ภายในสำหรับ camera feed, live map, passenger activity และสถานะงานเดินรถ",
             "ออกแบบ schema ด้วย Prisma และเขียน Linux automation script สำหรับ video recording pipeline",
           ],
         },
@@ -450,12 +450,12 @@ export const dictionaries = {
     },
     about: {
       eyebrow: "About",
-      title: "ใส่ใจรายละเอียด ปรับตัวไว และทำงานได้ทั้งหน้าบ้านหลังบ้าน",
+      title: "เกี่ยวกับผม",
       subtitle:
-        "ผมชอบสร้าง software ที่ผู้ใช้เข้าใจง่าย และ developer คนอื่นดูแลต่อได้",
+        "ผมชอบทำ software ที่เรียบง่าย ใช้งานได้จริง และดูแลต่อได้",
       notes: [
-        "ผมให้ความสำคัญกับ interface ที่ช่วยให้คนใช้งานได้เร็ว งานที่ถนัดคือการเอาโจทย์มาจัดให้เป็น flow ที่ชัดเจน เช่น dashboard, workflow tool, AI assistant และงานหลังบ้าน",
-        "ผมเคยทำทั้ง web, mobile, IoT และ AI แต่จุดแข็งหลักอยู่ที่ full-stack TypeScript ผมชอบทำงานตั้งแต่ schema design, API behavior ไปจนถึงรายละเอียดบนหน้าจอที่ผู้ใช้ต้องใช้งาน",
+        "งานหลักของผมอยู่ที่ full-stack TypeScript ตั้งแต่ API และฐานข้อมูล ไปจนถึงหน้าจอที่ผู้ใช้เห็น",
+        "โปรเจกต์ที่เคยทำมีทั้ง dashboard, AI tools, mobile app และ IoT",
       ],
       principles: [
         "ชัดเจนก่อนสวยซับซ้อน",
@@ -466,9 +466,9 @@ export const dictionaries = {
     },
     contact: {
       eyebrow: "Contact",
-      title: "มีตำแหน่งงานหรือระบบที่อยากให้ช่วยพัฒนาไหม",
+      title: "คุยกันได้ครับ",
       subtitle:
-        "ส่ง context, ข้อจำกัด และ timeline มาได้เลยครับ ถ้าเห็นโจทย์ชัด ผมจะคุยต่อได้ตรงจุดมากขึ้น",
+        "ส่งตำแหน่งงาน โปรเจกต์ หรือคำถามมาได้เลยครับ",
       directChannels: "ช่องทางติดต่อ",
       linkedinProfile: "LinkedIn profile",
       name: "ชื่อ",

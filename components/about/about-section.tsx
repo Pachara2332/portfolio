@@ -1,11 +1,9 @@
 "use client";
 
-import { MapPin } from "lucide-react";
 import { FadeUp } from "@/components/common/motion-wrapper";
 import { SectionHeading } from "@/components/common/section-heading";
 import { useLanguage } from "@/components/i18n/language-provider";
 import { SectionShell } from "@/components/layout/section-shell";
-import { siteConfig } from "@/data/site";
 
 export function AboutSection() {
   const { t } = useLanguage();
@@ -24,11 +22,7 @@ export function AboutSection() {
 
         <FadeUp delay={0.1}>
           <div className="rounded-lg border border-border bg-card p-5">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <MapPin className="size-4" />
-              {siteConfig.location}
-            </div>
-            <div className="mt-6 space-y-5">
+            <div className="space-y-5">
               {t.about.notes.map((note) => (
                 <p key={note} className="text-sm leading-7 text-foreground/82">
                   {note}

@@ -41,23 +41,13 @@ export function ProjectCard({ project }: { project: Project }) {
           {projectCopy.description}
         </p>
 
-        <div className="mt-5 grid gap-3">
-          <div className="rounded-md border border-border bg-background/40 p-3">
-            <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              {t.projects.challenge}
-            </p>
-            <p className="mt-2 text-sm leading-6 text-foreground/82">
-              {projectCopy.challenge}
-            </p>
-          </div>
-          <div className="rounded-md border border-border bg-background/40 p-3">
-            <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              {t.projects.outcome}
-            </p>
-            <p className="mt-2 text-sm leading-6 text-foreground/82">
-              {projectCopy.outcome}
-            </p>
-          </div>
+        <div className="mt-4 space-y-2 border-l border-border pl-4">
+          <p className="text-sm leading-6 text-foreground/82">
+            {projectCopy.challenge}
+          </p>
+          <p className="text-sm leading-6 text-muted-foreground">
+            {projectCopy.outcome}
+          </p>
         </div>
 
         <div className="mt-5 flex flex-wrap gap-2">

@@ -99,7 +99,6 @@ export function Hero() {
           <div className="flex items-center justify-between border-b border-border pb-4">
             <div>
               <p className="text-sm font-medium text-foreground">{t.hero.profileTitle}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{siteConfig.location}</p>
             </div>
             <a
               href="https://github.com/Pachara2332"
