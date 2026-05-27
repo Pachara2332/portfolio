@@ -25,7 +25,7 @@ export function Hero() {
       <div className="absolute inset-x-6 top-20 -z-10 mx-auto h-72 max-w-5xl rounded-full bg-foreground/[0.035] blur-3xl" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-background to-transparent" />
 
-      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:px-8">
+      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-4 pb-10 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:px-8">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -80,6 +80,14 @@ export function Hero() {
             >
               <Mail className="size-4" />
               {t.hero.emailMe}
+            </a>
+            <a
+              href="https://www.linkedin.com/in/pachara-wongsasri-9256103bb/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-border/80 bg-card/70 px-5 py-2.5 text-center text-sm font-medium text-foreground transition duration-200 hover:-translate-y-0.5 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-foreground/20"
+            >
+              {t.hero.bookCall}
             </a>
           </motion.div>
 

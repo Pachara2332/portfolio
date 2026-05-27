@@ -66,12 +66,13 @@
   body {
     @apply bg-background text-foreground;
     background-image:
-      linear-gradient(to bottom, oklch(1 0 0 / 0.045), transparent 320px),
-      radial-gradient(circle at 50% -8rem, oklch(0.82 0.025 255 / 0.12), transparent 36rem),
-      linear-gradient(to right, oklch(1 0 0 / 0.025) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(1 0 0 / 0.018) 1px, transparent 1px);
-    background-size: auto, auto, 72px 72px, 72px 72px;
+      radial-gradient(circle at 50% -12rem, oklch(0.84 0.02 255 / 0.09), transparent 42rem),
+      linear-gradient(to right, oklch(1 0 0 / 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 0.022) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0 0 0 / 0.12), transparent 28rem);
+    background-size: auto, 64px 64px, 64px 64px, auto;
     background-position: center top, center top, center top, center top;
+    background-attachment: scroll, fixed, fixed, scroll;
   }
 
   ::selection {

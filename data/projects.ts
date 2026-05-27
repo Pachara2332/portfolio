@@ -11,6 +11,7 @@ export const projects: Project[] = [
     outcome:
       "Turned training material into a faster self-service support channel with clear loading, error, and recovery states.",
     techStack: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Google Gen AI SDK"],
+    coverImage: "/assets/projects/knowledge-assistant.png",
     github: "https://github.com/Pachara2332/trainee-knowledge-assistant",
     category: "ai",
   },
@@ -24,6 +25,7 @@ export const projects: Project[] = [
     outcome:
       "Created an internal tool pattern that makes content operations safer and faster without exposing manager-only actions to staff roles.",
     techStack: ["React 19", "TypeScript", "Vite", "React Router", "Axios", "Tailwind CSS"],
+    coverImage: "/assets/projects/movie-management.svg",
     github: "https://github.com/Pachara2332/movie-frontend-management",
     githubBackend: "https://github.com/Pachara2332/movie-backend-management",
     demo: "https://movie-frontend-management.vercel.app",
@@ -39,6 +41,7 @@ export const projects: Project[] = [
     outcome:
       "Delivered a responsive AI product that feels approachable for Thai users while keeping operational concerns out of the client.",
     techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Google Gen AI SDK"],
+    coverImage: "/assets/projects/tawan-chatbot.svg",
     github: "https://github.com/Pachara2332/tawan-chatbot",
     demo: "https://tawan-chatbot.vercel.app/",
     category: "ai",
@@ -81,60 +84,13 @@ export const projects: Project[] = [
     outcome:
       "Helped non-technical users understand child progress and payment status quickly, then export reports for offline sharing.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    coverImage: "/assets/projects/childcare-dashboard.svg",
     github: "https://github.com/Pachara2332/childrencare",
     demo: "https://childcare-dashboard-ten.vercel.app/",
     category: "web",
   },
-  {
-    id: "roommate-finder",
-    title: "Roommate Finder Platform",
-    description:
-      "Matching platform with real-time chat, profile reviews, preference filters, and AWS S3 image handling.",
-    challenge:
-      "Built persisted Socket.io conversations, typing indicators, image upload automation, matching preferences, and peer review flows.",
-    outcome:
-      "Created a trust-focused marketplace experience where users can compare compatibility before committing to a shared living decision.",
-    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Socket.io", "JWT", "AWS S3"],
-    github: "https://github.com/Pachara2332/roommate-finder",
-    category: "web",
-  },
-  {
-    id: "soil-iot-dashboard",
-    title: "Soil Intelligence IoT Dashboard",
-    description:
-      "Field data system that streams soil minerals, moisture, and GPS readings from ESP32 devices into an Angular dashboard.",
-    challenge:
-      "Integrated RS485 NPK sensors, GPS, ESP32 firmware, Firebase streaming, role-based access, and crop recommendation logic.",
-    outcome:
-      "Converted raw sensor readings into practical farming insight for crop selection and fertilizer planning.",
-    techStack: ["Angular", "Firebase", "ESP32", "C++", "RS485 NPK", "GPS"],
-    github: "https://github.com/Pachara004/soil-sensor-frontend",
-    category: "iot",
-  },
-  {
-    id: "lotto-app",
-    title: "Lotto App",
-    description:
-      "Flutter lottery platform for customers and vendors with ticket stock visibility, bundle purchasing, and inventory controls.",
-    challenge:
-      "Designed mobile purchase flows around real-time stock state, bundle selection, vendor-side inventory management, and Firebase-backed data updates.",
-    outcome:
-      "Created a clearer buying and stock management experience so vendors can control availability while customers avoid unavailable tickets.",
-    techStack: ["Flutter", "Dart", "Node.js", "Firebase"],
-    github: "https://github.com/Pachara004/LottoApp",
-    category: "mobile",
-  },
-  {
-    id: "rider-delivery-app",
-    title: "Rider Delivery App",
-    description:
-      "Flutter delivery app with customer and rider roles, order status handling, and Firebase-backed live map tracking.",
-    challenge:
-      "Built role-specific mobile flows, delivery status transitions, map-based tracking, and Firebase synchronization for real-time visibility.",
-    outcome:
-      "Gave customers and riders a shared delivery state, reducing uncertainty around pickup, transit, and arrival progress.",
-    techStack: ["Flutter", "Dart", "Android", "Firebase", "Maps"],
-    github: "https://github.com/Pachara004/IshowSpeed",
-    category: "mobile",
-  },
 ];
+
+export function getProjectById(id: string) {
+  return projects.find((project) => project.id === id);
+}

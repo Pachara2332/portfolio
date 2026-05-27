@@ -5,6 +5,7 @@ export interface Project {
   challenge: string;
   outcome: string;
   techStack: string[];
+  coverImage?: string;
   github?: string;
   githubBackend?: string;
   demo?: string;

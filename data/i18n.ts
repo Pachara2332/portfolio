@@ -24,6 +24,7 @@ export const dictionaries = {
       intro:
         "I'm a developer. This site collects projects I have built across web apps, dashboards, AI tools, mobile apps, and IoT.",
       viewWork: "View selected work",
+      bookCall: "Book a quick call",
       downloadResume: "Download resume",
       emailMe: "Email me",
       profileTitle: "Quick intro",
@@ -45,6 +46,8 @@ export const dictionaries = {
       title: "Projects",
       challenge: "Challenge",
       outcome: "Outcome",
+      viewDetails: "View details",
+      backToProjects: "Back to projects",
       github: "GitHub",
       backend: "Backend",
       liveDemo: "Live demo",
@@ -264,6 +267,7 @@ export const dictionaries = {
       intro:
         "ผมเป็น developer เว็บนี้รวมโปรเจกต์ที่เคยทำ ทั้งเว็บแอป dashboard, AI tools, mobile app และ IoT",
       viewWork: "ดูผลงานที่คัดมา",
+      bookCall: "นัดคุยเบื้องต้น",
       downloadResume: "ดาวน์โหลดเรซูเม่",
       emailMe: "ส่งอีเมล",
       profileTitle: "แนะนำตัวสั้น ๆ",
@@ -285,6 +289,8 @@ export const dictionaries = {
       title: "โปรเจกต์",
       challenge: "โจทย์",
       outcome: "ผลลัพธ์",
+      viewDetails: "ดูรายละเอียด",
+      backToProjects: "กลับไปส่วนโปรเจกต์",
       github: "GitHub",
       backend: "Backend",
       liveDemo: "Live demo",

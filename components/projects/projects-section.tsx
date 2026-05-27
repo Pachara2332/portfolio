@@ -11,7 +11,7 @@ export function ProjectsSection() {
   const { t } = useLanguage();
 
   return (
-    <SectionShell id="projects">
+    <SectionShell id="projects" className="pt-8 sm:pt-10 lg:pt-14">
       <FadeUp>
         <SectionHeading
           eyebrow={t.projects.eyebrow}
