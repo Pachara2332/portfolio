@@ -18,21 +18,29 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "mb-10 max-w-2xl",
+        "mb-12 max-w-3xl lg:mb-14",
         align === "center" && "mx-auto text-center",
         className
       )}
     >
       {eyebrow ? (
-        <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-          {eyebrow}
-        </p>
+        <div
+          className={cn(
+            "mb-4 flex items-center gap-3",
+            align === "center" && "justify-center"
+          )}
+        >
+          <span className="h-px w-8 bg-foreground/24" />
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            {eyebrow}
+          </p>
+        </div>
       ) : null}
-      <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+      <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
         {title}
       </h2>
       {subtitle ? (
-        <p className="mt-4 text-pretty text-sm leading-7 text-muted-foreground sm:text-base">
+        <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-muted-foreground sm:text-lg">
           {subtitle}
         </p>
       ) : null}

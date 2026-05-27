@@ -11,9 +11,9 @@ export function SectionShell({ id, children, className }: SectionShellProps) {
   return (
     <section
       id={id}
-      className={cn("scroll-mt-24 py-16 sm:py-20 lg:py-24", className)}
+      className={cn("relative scroll-mt-28 py-20 sm:py-24 lg:py-32", className)}
     >
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {children}
       </div>
     </section>

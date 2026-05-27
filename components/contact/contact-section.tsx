@@ -49,21 +49,21 @@ export function ContactSection() {
         />
       </FadeUp>
 
-      <div className="grid gap-6 lg:grid-cols-[0.78fr_1fr]">
+      <div className="grid gap-6 lg:grid-cols-[0.72fr_1fr]">
         <FadeUp delay={0.05}>
-          <div className="rounded-lg border border-border bg-card p-5">
-            <p className="text-sm font-semibold text-foreground">{t.contact.directChannels}</p>
+          <div className="surface-card rounded-xl p-5">
+            <p className="text-sm font-semibold tracking-tight text-foreground">{t.contact.directChannels}</p>
             <div className="mt-5 space-y-3">
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/35 p-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="flex min-w-0 items-center gap-3 rounded-lg border border-border/70 bg-background/36 p-3.5 text-sm text-muted-foreground transition duration-200 hover:-translate-y-0.5 hover:border-foreground/18 hover:bg-secondary/38 hover:text-foreground"
               >
                 <Mail className="size-4 shrink-0" />
                 <span className="min-w-0 break-all">{siteConfig.email}</span>
               </a>
               <a
                 href="tel:+66990094187"
-                className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/35 p-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="flex min-w-0 items-center gap-3 rounded-lg border border-border/70 bg-background/36 p-3.5 text-sm text-muted-foreground transition duration-200 hover:-translate-y-0.5 hover:border-foreground/18 hover:bg-secondary/38 hover:text-foreground"
               >
                 <Phone className="size-4 shrink-0" />
                 <span className="min-w-0 break-all">{siteConfig.phone}</span>
@@ -72,7 +72,7 @@ export function ContactSection() {
                 href="https://github.com/Pachara2332"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/35 p-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="flex min-w-0 items-center gap-3 rounded-lg border border-border/70 bg-background/36 p-3.5 text-sm text-muted-foreground transition duration-200 hover:-translate-y-0.5 hover:border-foreground/18 hover:bg-secondary/38 hover:text-foreground"
               >
                 <GithubIcon className="size-4 shrink-0" />
                 <span className="min-w-0 break-all">github.com/Pachara2332</span>
@@ -81,7 +81,7 @@ export function ContactSection() {
                 href="https://www.linkedin.com/in/pachara-wongsasri-9256103bb/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-w-0 items-center gap-3 rounded-md border border-border bg-secondary/35 p-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="flex min-w-0 items-center gap-3 rounded-lg border border-border/70 bg-background/36 p-3.5 text-sm text-muted-foreground transition duration-200 hover:-translate-y-0.5 hover:border-foreground/18 hover:bg-secondary/38 hover:text-foreground"
               >
                 <LinkedinIcon className="size-4 shrink-0" />
                 <span className="min-w-0 break-words">{t.contact.linkedinProfile}</span>
@@ -91,7 +91,8 @@ export function ContactSection() {
         </FadeUp>
 
         <FadeUp delay={0.1}>
-          <form onSubmit={handleSubmit} className="rounded-lg border border-border bg-card p-5">
+          <form onSubmit={handleSubmit} className="surface-card relative overflow-hidden rounded-xl p-5">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/22 to-transparent" />
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="contact-name" className="text-sm font-medium text-foreground">
@@ -103,7 +104,7 @@ export function ContactSection() {
                   onChange={(event) => setFormData({ ...formData, name: event.target.value })}
                   required
                   autoComplete="name"
-                  className="mt-2 h-10 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none transition focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
+                  className="mt-2 h-11 w-full rounded-md border border-border/80 bg-background/65 px-3 text-sm text-foreground outline-none transition placeholder:text-muted-foreground/65 focus:border-foreground/45 focus:bg-background focus:ring-2 focus:ring-foreground/10"
                   placeholder={t.contact.namePlaceholder}
                 />
               </div>
@@ -118,7 +119,7 @@ export function ContactSection() {
                   onChange={(event) => setFormData({ ...formData, email: event.target.value })}
                   required
                   autoComplete="email"
-                  className="mt-2 h-10 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none transition focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
+                  className="mt-2 h-11 w-full rounded-md border border-border/80 bg-background/65 px-3 text-sm text-foreground outline-none transition placeholder:text-muted-foreground/65 focus:border-foreground/45 focus:bg-background focus:ring-2 focus:ring-foreground/10"
                   placeholder={t.contact.emailPlaceholder}
                 />
               </div>
@@ -134,7 +135,7 @@ export function ContactSection() {
                 onChange={(event) => setFormData({ ...formData, message: event.target.value })}
                 required
                 rows={6}
-                className="mt-2 w-full resize-none rounded-md border border-border bg-background px-3 py-3 text-sm text-foreground outline-none transition focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
+                className="mt-2 w-full resize-none rounded-md border border-border/80 bg-background/65 px-3 py-3 text-sm leading-6 text-foreground outline-none transition placeholder:text-muted-foreground/65 focus:border-foreground/45 focus:bg-background focus:ring-2 focus:ring-foreground/10"
                 placeholder={t.contact.messagePlaceholder}
               />
             </div>
@@ -142,7 +143,7 @@ export function ContactSection() {
             <button
               type="submit"
               disabled={formState === "loading" || formState === "success"}
-              className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-foreground px-5 py-2 text-center text-sm font-medium text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:opacity-70"
+              className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-foreground px-5 py-2.5 text-center text-sm font-semibold text-background shadow-[0_12px_36px_oklch(0_0_0_/_0.24)] transition duration-200 hover:-translate-y-0.5 hover:bg-foreground/90 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-70"
             >
               {formState === "loading" ? (
                 <>

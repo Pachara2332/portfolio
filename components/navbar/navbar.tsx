@@ -38,27 +38,27 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300",
+        "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
-          ? "border-border/70 bg-background/86 shadow-sm shadow-black/20 backdrop-blur-xl"
-          : "border-transparent bg-background/35 backdrop-blur-sm"
+          ? "border-border/75 bg-background/82 shadow-[0_16px_48px_oklch(0_0_0_/_0.2)] backdrop-blur-xl"
+          : "border-transparent bg-background/30 backdrop-blur-md"
       )}
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <button
           onClick={() => navigate("#home")}
-          className="group inline-flex items-center gap-2 text-left"
+          className="group inline-flex items-center gap-2.5 text-left"
           aria-label="Go to home"
         >
-          <span className="flex size-7 items-center justify-center rounded-md border border-border bg-secondary text-xs font-semibold text-foreground transition-colors group-hover:border-foreground/30">
+          <span className="flex size-8 items-center justify-center rounded-md border border-border/80 bg-secondary/65 text-xs font-semibold text-foreground shadow-[0_1px_0_oklch(1_0_0_/_0.045)_inset] transition-colors group-hover:border-foreground/30">
             PW
           </span>
-          <span className="hidden text-sm font-medium tracking-tight text-foreground sm:block">
+          <span className="hidden text-sm font-semibold tracking-tight text-foreground sm:block">
             Pachara
           </span>
         </button>
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden items-center gap-1 rounded-full border border-border/55 bg-secondary/28 p-1 shadow-[0_1px_0_oklch(1_0_0_/_0.03)_inset] lg:flex">
           {siteConfig.navItems.map((item) => {
             const id = item.href.replace("#", "");
             const active = activeSection === id;
@@ -68,14 +68,14 @@ export function Navbar() {
                 key={item.href}
                 onClick={() => navigate(item.href)}
                 className={cn(
-                  "relative rounded-md px-3 py-2 text-sm transition-colors",
+                  "relative rounded-full px-3.5 py-2 text-sm transition-colors",
                   active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {active ? (
                   <motion.span
                     layoutId="active-nav"
-                    className="absolute inset-0 rounded-md bg-secondary"
+                    className="absolute inset-0 rounded-full border border-border/75 bg-background/88 shadow-[0_1px_0_oklch(1_0_0_/_0.04)_inset]"
                     transition={{ type: "spring", stiffness: 420, damping: 34 }}
                   />
                 ) : null}
@@ -92,14 +92,14 @@ export function Navbar() {
             href={siteConfig.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-9 items-center gap-2 rounded-md border border-border bg-secondary/60 px-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+            className="inline-flex h-9 items-center gap-2 rounded-md border border-border/80 bg-secondary/55 px-3 text-sm font-medium text-foreground shadow-[0_1px_0_oklch(1_0_0_/_0.035)_inset] transition duration-200 hover:-translate-y-0.5 hover:bg-secondary"
           >
             <FileText className="size-4" />
             {t.nav.resume}
           </a>
           <div
             role="group"
-            className="inline-flex h-9 items-center gap-1 rounded-md border border-border bg-secondary/60 px-1 text-sm font-medium text-foreground"
+            className="inline-flex h-9 items-center gap-1 rounded-md border border-border/80 bg-secondary/55 px-1 text-sm font-medium text-foreground shadow-[0_1px_0_oklch(1_0_0_/_0.035)_inset]"
             aria-label={t.nav.language}
           >
             <Languages className="size-4" />
@@ -122,7 +122,7 @@ export function Navbar() {
           </div>
           <button
             onClick={() => navigate("#contact")}
-            className="inline-flex h-9 items-center rounded-md bg-foreground px-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+            className="inline-flex h-9 items-center rounded-md bg-foreground px-3.5 text-sm font-semibold text-background transition duration-200 hover:-translate-y-0.5 hover:bg-foreground/90"
           >
             {t.nav.contact}
           </button>
@@ -130,7 +130,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex size-9 items-center justify-center rounded-md border border-border bg-secondary/60 text-foreground lg:hidden"
+          className="inline-flex size-9 items-center justify-center rounded-md border border-border/80 bg-secondary/60 text-foreground shadow-[0_1px_0_oklch(1_0_0_/_0.035)_inset] lg:hidden"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((open) => !open)}
@@ -146,15 +146,15 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
-            className="border-t border-border bg-background/96 p-4 shadow-xl shadow-black/30 backdrop-blur-xl lg:hidden"
+            className="border-t border-border/70 bg-background/96 p-4 shadow-2xl shadow-black/35 backdrop-blur-xl lg:hidden"
           >
-            <div className="mx-auto flex max-w-6xl flex-col gap-1">
+            <div className="mx-auto flex max-w-7xl flex-col gap-1">
               {siteConfig.navItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => navigate(item.href)}
                   className={cn(
-                    "rounded-md px-3 py-3 text-left text-sm font-medium",
+                    "rounded-md px-3 py-3 text-left text-sm font-medium transition-colors",
                     activeSection === item.href.replace("#", "")
                       ? "bg-secondary text-foreground"
                       : "text-muted-foreground"
@@ -165,7 +165,7 @@ export function Navbar() {
               ))}
               <div
                 role="group"
-                className="mt-2 flex items-center justify-between rounded-md border border-border bg-secondary/45 px-3 py-2 text-sm font-medium text-muted-foreground"
+                className="mt-2 flex items-center justify-between rounded-md border border-border/80 bg-secondary/45 px-3 py-2 text-sm font-medium text-muted-foreground"
                 aria-label={t.nav.language}
               >
                 <span className="inline-flex items-center gap-2">
@@ -195,7 +195,7 @@ export function Navbar() {
                 href={siteConfig.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border bg-secondary text-sm font-medium text-foreground"
+                className="mt-3 inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border/80 bg-secondary text-sm font-medium text-foreground"
               >
                 <FileText className="size-4" />
                 {t.nav.resume}

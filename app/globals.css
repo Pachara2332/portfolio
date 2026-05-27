@@ -32,22 +32,22 @@
 }
 
 :root {
-  --background: oklch(0.12 0.004 255);
-  --foreground: oklch(0.96 0.003 255);
-  --card: oklch(0.155 0.005 255);
+  --background: oklch(0.105 0.004 255);
+  --foreground: oklch(0.965 0.003 255);
+  --card: oklch(0.15 0.005 255);
   --card-foreground: oklch(0.96 0.003 255);
-  --popover: oklch(0.155 0.005 255);
+  --popover: oklch(0.15 0.005 255);
   --popover-foreground: oklch(0.96 0.003 255);
   --primary: oklch(0.96 0.003 255);
   --primary-foreground: oklch(0.12 0.004 255);
-  --secondary: oklch(0.205 0.006 255);
+  --secondary: oklch(0.19 0.006 255);
   --secondary-foreground: oklch(0.94 0.003 255);
-  --muted: oklch(0.22 0.006 255);
-  --muted-foreground: oklch(0.67 0.012 255);
-  --accent: oklch(0.25 0.01 255);
+  --muted: oklch(0.21 0.006 255);
+  --muted-foreground: oklch(0.7 0.012 255);
+  --accent: oklch(0.245 0.011 255);
   --accent-foreground: oklch(0.96 0.003 255);
   --destructive: oklch(0.67 0.17 24);
-  --border: oklch(0.27 0.007 255);
+  --border: oklch(0.255 0.007 255);
   --input: oklch(0.24 0.007 255);
   --ring: oklch(0.74 0.02 255);
   --radius: 0.5rem;
@@ -66,8 +66,12 @@
   body {
     @apply bg-background text-foreground;
     background-image:
-      linear-gradient(to bottom, oklch(1 0 0 / 0.035), transparent 240px),
-      radial-gradient(circle at 50% 0%, oklch(1 0 0 / 0.055), transparent 34rem);
+      linear-gradient(to bottom, oklch(1 0 0 / 0.045), transparent 320px),
+      radial-gradient(circle at 50% -8rem, oklch(0.82 0.025 255 / 0.12), transparent 36rem),
+      linear-gradient(to right, oklch(1 0 0 / 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 0.018) 1px, transparent 1px);
+    background-size: auto, auto, 72px 72px, 72px 72px;
+    background-position: center top, center top, center top, center top;
   }
 
   ::selection {
@@ -95,6 +99,18 @@
 }
 
 @layer utilities {
+  .surface-card {
+    @apply border border-border/80 bg-card/88 shadow-[0_1px_0_oklch(1_0_0_/_0.035)_inset,0_18px_60px_oklch(0_0_0_/_0.22)];
+  }
+
+  .surface-muted {
+    @apply border border-border/70 bg-secondary/35 shadow-[0_1px_0_oklch(1_0_0_/_0.03)_inset];
+  }
+
+  .hairline {
+    @apply bg-gradient-to-r from-transparent via-foreground/14 to-transparent;
+  }
+
   .text-balance {
     text-wrap: balance;
   }

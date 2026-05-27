@@ -19,7 +19,7 @@ export function ProjectsSection() {
         />
       </FadeUp>
 
-      <Stagger className="grid gap-4 md:grid-cols-2">
+      <Stagger className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}

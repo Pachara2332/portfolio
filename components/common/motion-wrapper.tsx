@@ -17,10 +17,10 @@ export function FadeUp({
 
   return (
     <motion.div
-      initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 18 }}
+      initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] as const }}
+      viewport={{ once: true, margin: "-96px" }}
+      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const }}
       className={className}
       {...props}
     >
@@ -43,7 +43,7 @@ export function Stagger({
       viewport={{ once: true, margin: "-80px" }}
       variants={{
         hidden: {},
-        visible: { transition: { staggerChildren: 0.08 } },
+        visible: { transition: { staggerChildren: 0.07 } },
       }}
       className={className}
     >
@@ -66,7 +66,7 @@ export function StaggerItem({
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
+          transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1] as const },
         },
       }}
       className={className}

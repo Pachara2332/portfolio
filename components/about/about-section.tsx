@@ -9,8 +9,8 @@ export function AboutSection() {
   const { t } = useLanguage();
 
   return (
-    <SectionShell id="about" className="border-y border-border/60 bg-secondary/20">
-      <div className="grid gap-10 lg:grid-cols-[0.75fr_1fr] lg:items-start">
+    <SectionShell id="about" className="border-y border-border/60 bg-secondary/16">
+      <div className="grid gap-10 lg:grid-cols-[0.72fr_1fr] lg:items-start">
         <FadeUp>
           <SectionHeading
             eyebrow={t.about.eyebrow}
@@ -21,21 +21,26 @@ export function AboutSection() {
         </FadeUp>
 
         <FadeUp delay={0.1}>
-          <div className="rounded-lg border border-border bg-card p-5">
-            <div className="space-y-5">
+          <div className="surface-card rounded-xl p-6">
+            <div className="space-y-6">
               {t.about.notes.map((note) => (
-                <p key={note} className="text-sm leading-7 text-foreground/82">
+                <p key={note} className="text-base leading-8 text-foreground/84">
                   {note}
                 </p>
               ))}
             </div>
-            <div className="mt-6 grid gap-2 sm:grid-cols-2">
-              {t.about.principles.map((principle) => (
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {t.about.principles.map((principle, index) => (
                 <div
                   key={principle}
-                  className="rounded-md border border-border bg-background/40 px-3 py-2 text-sm text-muted-foreground"
+                  className="group rounded-lg border border-border/70 bg-background/38 p-4 transition-colors hover:border-foreground/18 hover:bg-secondary/34"
                 >
-                  {principle}
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    0{index + 1}
+                  </p>
+                  <p className="mt-2 text-sm font-medium leading-6 text-foreground/84">
+                    {principle}
+                  </p>
                 </div>
               ))}
             </div>
