@@ -3,14 +3,14 @@ import { Project } from "@/types";
 export const projects: Project[] = [
   {
     id: "trainee-knowledge-assistant",
-    title: "Trainee Knowledge Assistant",
+    title: "Enterprise Knowledge Platform",
     description:
-      "AI study workspace that helps trainees ask questions against lessons and uploaded files through a secure chat interface.",
+      "Enterprise-ready AI Knowledge Platform with multi-tenant workspaces, federated OAuth authentication (Google, GitHub, LINE), real-time streaming chat, RAG document search via ChromaDB, and a resilient multi-provider AI failover chain.",
     challenge:
-      "Kept model credentials server-side, reduced prompt payload size, handled file-aware Q&A states, and added provider fallbacks so the app stays useful during API issues.",
+      "Architected federated authentication across four OAuth providers, built a zero-downtime AI failover chain (Gemini → Together → Cerebras → Groq → OpenAI), implemented RAG pipelines with ChromaDB vector storage, and designed an HSL token-based dynamic theme engine with instant root-level syncing.",
     outcome:
-      "Turned training material into a faster self-service support channel with clear loading, error, and recovery states.",
-    techStack: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Google Gen AI SDK"],
+      "Delivered a production-style SaaS platform with enterprise authentication, multi-provider AI resilience, document-aware Q&A through vector search, and a premium dynamic UI — all containerized with Docker Compose for single-command deployment.",
+    techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "PostgreSQL", "ChromaDB", "NextAuth.js v5", "Docker"],
     coverImage: "/assets/projects/knowledge-assistant.png",
     github: "https://github.com/Pachara2332/trainee-knowledge-assistant",
     category: "ai",

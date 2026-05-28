@@ -60,13 +60,13 @@ export const dictionaries = {
       },
       items: {
         "trainee-knowledge-assistant": {
-          title: "Trainee Knowledge Assistant",
+          title: "Enterprise Knowledge Platform",
           description:
-            "AI chat workspace for asking questions from lessons and uploaded files. Users can upload study files, ask follow-up questions, and get answers in one simple chat flow.",
+            "Enterprise AI SaaS built on Next.js 16, Postgres, and ChromaDB. Supports multi-tenant federated OAuth (Credentials, Google, GitHub, LINE), streaming chat, and a resilient multi-provider AI failover chain.",
           challenge:
-            "Built the server-side AI route, kept API keys out of the browser, trimmed chat history, and handled file-aware Q&A states.",
+            "Architected federated OAuth pathways, engineered a token-bucket rate limiter, built a dynamic HSL CSS variables theme system, and created a zero-downtime AI failover sequence (Gemini primary with Together, Cerebras, Groq, OpenAI fallbacks).",
           outcome:
-            "Added loading, error, and fallback states so the app remains usable when the AI provider has issues.",
+            "Shipped a highly responsive and stunning production-style AI platform with robust vector RAG retrieval, real-time telemetry, and containerized Docker Compose architecture.",
         },
         "movie-management": {
           title: "Movie Operations Dashboard",
@@ -303,13 +303,13 @@ export const dictionaries = {
       },
       items: {
         "trainee-knowledge-assistant": {
-          title: "Trainee Knowledge Assistant",
+          title: "Enterprise Knowledge Platform",
           description:
-            "เว็บแชต AI สำหรับถามคำถามจากบทเรียนและไฟล์ที่อัปโหลด ผู้ใช้สามารถอัปโหลดไฟล์ ถามต่อเนื่อง และอ่านคำตอบได้ใน flow เดียว",
+            "แพลตฟอร์ม AI SaaS ระดับองค์กรที่พัฒนาด้วย Next.js 16, PostgreSQL และ ChromaDB รองรับระบบสิทธิ์การเข้าถึงแบบ multi-tenant, การล็อกอินผ่าน OAuth (Google, GitHub, LINE), การแชตแบบสตรีมมิ่งเรียลไทม์ และระบบสลับผู้ให้บริการ AI อัตโนมัติ (Failover)",
           challenge:
-            "ทำ AI route ฝั่ง server, ซ่อน API key จาก browser, จำกัดประวัติแชต และรองรับการถามตอบจากไฟล์",
+            "ออกแบบระบบยืนยันตัวตนกับผู้ให้บริการภายนอก 4 ราย, ทำระบบจำกัดคำขอ (Rate Limiter), พัฒนาระบบธีม HSL พร้อมการซิงก์ระดับ root ทันที และสร้างวงจร failover สำหรับ AI ที่ทนทานเพื่อป้องกันระบบล่ม",
           outcome:
-            "เพิ่มสถานะ loading, error และ fallback เพื่อให้แอปยังใช้งานได้เมื่อ provider หลักมีปัญหา",
+            "ส่งมอบแพลตฟอร์มระดับโปรดักชันจำลองที่มีระบบความปลอดภัยสูง ค้นหาข้อมูลแบบ RAG ผ่าน ChromaDB และ UI ที่สวยงามลื่นไหล พร้อมระบบจำลอง Telemetry และสามารถดีพลอยได้ทันทีผ่าน Docker Compose",
         },
         "movie-management": {
           title: "Movie Operations Dashboard",
