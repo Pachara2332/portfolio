@@ -5,15 +5,60 @@ export const projects: Project[] = [
     id: "trainee-knowledge-assistant",
     title: "Enterprise Knowledge Platform",
     description:
-      "Enterprise-ready AI Knowledge Platform with multi-tenant workspaces, federated OAuth authentication (Google, GitHub, LINE), real-time streaming chat, RAG document search via ChromaDB, and a resilient multi-provider AI failover chain.",
+      "Enterprise AI SaaS platform with multi-tenant workspaces, federated OAuth, ChromaDB RAG search, and a resilient multi-provider AI failover chain.",
     challenge:
-      "Architected federated authentication across four OAuth providers, built a zero-downtime AI failover chain (Gemini → Together → Cerebras → Groq → OpenAI), implemented RAG pipelines with ChromaDB vector storage, and designed an HSL token-based dynamic theme engine with instant root-level syncing.",
+      "Architected federated OAuth across Google/GitHub/LINE, built a zero-downtime AI failover chain, and implemented ChromaDB vector search.",
     outcome:
-      "Delivered a production-style SaaS platform with enterprise authentication, multi-provider AI resilience, document-aware Q&A through vector search, and a premium dynamic UI — all containerized with Docker Compose for single-command deployment.",
-    techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "PostgreSQL", "ChromaDB", "NextAuth.js v5", "Docker"],
-    coverImage: "/assets/projects/knowledge-assistant.png",
+      "Delivered a containerized, highly resilient production-style SaaS platform with secure user access and real-time streaming chat.",
+    techStack: ["Next.js 16", "PostgreSQL", "ChromaDB", "NextAuth.js v5", "Docker"],
+    coverImage: "/assets/projects/knowledge-platform.png",
     github: "https://github.com/Pachara2332/trainee-knowledge-assistant",
     category: "ai",
+    isFeatured: true,
+  },
+  {
+    id: "eleven-lineup",
+    title: "Eleven Lineup",
+    description:
+      "Football lineup builder with drag-and-drop squad creation, social profiles, RBAC, and prediction game mechanics.",
+    challenge:
+      "Combined interactive pitch state, custom JWT auth in HTTP-only cookies, middleware-based permissions, Prisma models, and streak-based game flows.",
+    outcome:
+      "Shipped a full-stack SaaS-style product with clear user identity, community behavior, and replayable engagement loops.",
+    techStack: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "JWT"],
+    github: "https://github.com/Pachara2332/ElevenLineUp",
+    demo: "https://elevenlineup-production.up.railway.app/",
+    category: "web",
+    isFeatured: true,
+  },
+  {
+    id: "patient-operations-system",
+    title: "Patient Operations System",
+    description:
+      "Healthcare operations app for managing patient records, appointment scheduling, and facility-level workflows.",
+    challenge:
+      "Modeled clinical data carefully, designed role-aware workflows, and built operational screens that prioritize accuracy over decoration.",
+    outcome:
+      "Improved visibility into patient and appointment status for teams that need dependable, scan-friendly interfaces.",
+    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
+    github: "https://github.com/Pachara2332/patient-system",
+    demo: "https://patient-system-production-8241.up.railway.app/",
+    category: "web",
+    isFeatured: true,
+  },
+  {
+    id: "rider-delivery-app",
+    title: "Delivery Operations Platform",
+    description:
+      "Real-time logistics and dispatch platform featuring specialized courier apps, live routing telemetry, and an automated dispatch dashboard.",
+    challenge:
+      "Engineered live location synchronization, decoupled client/rider web services, handled transition states, and integrated map telemetry.",
+    outcome:
+      "Ensured consistent operational state sync, reducing delivery coordinate updates to sub-second latency.",
+    techStack: ["Flutter", "TypeScript", "Node.js", "PostgreSQL", "Firebase"],
+    github: "https://github.com/Pachara2332/rider-delivery-app",
+    category: "mobile",
+    isFeatured: true,
   },
   {
     id: "movie-management",
@@ -30,6 +75,7 @@ export const projects: Project[] = [
     githubBackend: "https://github.com/Pachara2332/movie-backend-management",
     demo: "https://movie-frontend-management.vercel.app",
     category: "web",
+    isFeatured: false,
   },
   {
     id: "thai-ai-chatbot",
@@ -45,34 +91,7 @@ export const projects: Project[] = [
     github: "https://github.com/Pachara2332/tawan-chatbot",
     demo: "https://tawan-chatbot.vercel.app/",
     category: "ai",
-  },
-  {
-    id: "eleven-lineup",
-    title: "Eleven Lineup",
-    description:
-      "Football lineup builder with drag-and-drop squad creation, social profiles, RBAC, and prediction game mechanics.",
-    challenge:
-      "Combined interactive pitch state, custom JWT auth in HTTP-only cookies, middleware-based permissions, Prisma models, and streak-based game flows.",
-    outcome:
-      "Shipped a full-stack SaaS-style product with clear user identity, community behavior, and replayable engagement loops.",
-    techStack: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "JWT"],
-    github: "https://github.com/Pachara2332/ElevenLineUp",
-    demo: "https://elevenlineup-production.up.railway.app/",
-    category: "web",
-  },
-  {
-    id: "patient-operations-system",
-    title: "Patient Operations System",
-    description:
-      "Healthcare operations app for managing patient records, appointment scheduling, and facility-level workflows.",
-    challenge:
-      "Modeled clinical data carefully, designed role-aware workflows, and built operational screens that prioritize accuracy over decoration.",
-    outcome:
-      "Improved visibility into patient and appointment status for teams that need dependable, scan-friendly interfaces.",
-    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
-    github: "https://github.com/Pachara2332/patient-system",
-    demo: "https://patient-system-production-8241.up.railway.app/",
-    category: "web",
+    isFeatured: false,
   },
   {
     id: "childcare-dashboard",
@@ -88,6 +107,7 @@ export const projects: Project[] = [
     github: "https://github.com/Pachara2332/childrencare",
     demo: "https://childcare-dashboard-ten.vercel.app/",
     category: "web",
+    isFeatured: false,
   },
 ];
 

@@ -2,10 +2,10 @@ import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
   name: "Pachara Wongsasri",
-  role: "Full-stack Developer",
-  title: "Pachara Wongsasri | Full-stack Developer",
+  role: "Full-Stack Developer",
+  title: "Pachara Wongsasri | Full-Stack Systems Engineer",
   description:
-    "Full-stack developer building practical web applications, dashboards, AI interfaces, and real-time systems with React, Next.js, TypeScript, Node.js, and PostgreSQL.",
+    "Full-Stack Developer focused on AI-powered business systems, modern SaaS architecture, and operational platforms.",
   url: "https://pachara.dev",
   ogImage: "/og-image.png",
   resumeUrl: "/Pachara_RESUME.pdf",

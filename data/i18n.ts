@@ -19,10 +19,10 @@ export const dictionaries = {
       language: "Switch language",
     },
     hero: {
-      availability: "Portfolio and selected work",
+      availability: "Available for high-impact roles",
       headline: "Pachara Wongsasri",
       intro:
-        "I'm a developer. This site collects projects I have built across web apps, dashboards, AI tools, mobile apps, and IoT.",
+        "Full-Stack Developer focused on AI-powered business systems, modern SaaS architecture, and operational platforms.",
       viewWork: "View selected work",
       bookCall: "Book a quick call",
       downloadResume: "Download resume",
@@ -62,11 +62,166 @@ export const dictionaries = {
         "trainee-knowledge-assistant": {
           title: "Enterprise Knowledge Platform",
           description:
-            "Enterprise AI SaaS built on Next.js 16, Postgres, and ChromaDB. Supports multi-tenant federated OAuth (Credentials, Google, GitHub, LINE), streaming chat, and a resilient multi-provider AI failover chain.",
+            "Enterprise AI SaaS platform with multi-tenant workspaces, federated OAuth, ChromaDB RAG search, and a resilient multi-provider AI failover chain.",
           challenge:
-            "Architected federated OAuth pathways, engineered a token-bucket rate limiter, built a dynamic HSL CSS variables theme system, and created a zero-downtime AI failover sequence (Gemini primary with Together, Cerebras, Groq, OpenAI fallbacks).",
+            "Architected federated OAuth across Google/GitHub/LINE, built a zero-downtime AI failover chain, and implemented ChromaDB vector search.",
           outcome:
-            "Shipped a highly responsive and stunning production-style AI platform with robust vector RAG retrieval, real-time telemetry, and containerized Docker Compose architecture.",
+            "Delivered a containerized, highly resilient production-style SaaS platform with secure user access and real-time streaming chat.",
+          systemArchitecture: {
+            description: "Multi-tenant workspaces are partitioned by routing streaming requests through an abstract failover gateway. Each incoming chat request is validated by a Redis Token Bucket rate limiter, enriched with vectorized contextual chunks retrieved from ChromaDB, and dispatched to the active provider in the failover chain.",
+            diagram: `  [Client] ──(SSE Stream)──► [Next.js Router]
+                                 │ (Rate Limiter Check)
+                                 ▼
+                          [Failover Engine]
+                                 │
+        ┌─────────────┬──────────┼──────────┬────────────┐
+        ▼             ▼          ▼          ▼            ▼
+    [Gemini]     [Together]  [Cerebras]   [Groq]     [OpenAI]
+    (Primary)    (Fallback)  (Fallback) (Fallback)  (Fallback)`
+          },
+          databaseSchema: {
+            description: "The normalized PostgreSQL relational layout enforces tenant partitions, user membership roles, and full conversation auditing.",
+            sql: `-- Conversations Partitioning
+CREATE TABLE conversations (
+    id VARCHAR(255) PRIMARY KEY,
+    workspace_id VARCHAR(255) REFERENCES workspaces(id) ON DELETE CASCADE,
+    user_id VARCHAR(255) REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Messages & Tokens Audit Trail
+CREATE TABLE messages (
+    id VARCHAR(255) PRIMARY KEY,
+    conversation_id VARCHAR(255) REFERENCES conversations(id) ON DELETE CASCADE,
+    role VARCHAR(50) NOT NULL, -- 'user' | 'assistant'
+    content TEXT NOT NULL,
+    provider VARCHAR(100), -- 'Gemini' | 'Together' | 'Cerebras' | 'Groq'
+    token_usage JSONB, -- { "promptTokens": X, "completionTokens": Y, "totalTokens": Z }
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`
+          },
+          tradeoffs: [
+            {
+              choice: "ChromaDB vs pgvector",
+              why: "Dedicated vector store provides isolated collection indexing, sub-millisecond distance metrics, and clean out-of-the-box metadata filtering.",
+              tradeoff: "Requires maintaining a separate vector store service and syncing state, rather than query joins in a unified relational database."
+            },
+            {
+              choice: "Docker Compose vs Kubernetes",
+              why: "Single-command containerization with Docker Compose simulates production services (Web, DB, ChromaDB) perfectly without k8s orchestration overhead.",
+              tradeoff: "Manual horizontally scaled nodes and lack of native cluster self-healing features."
+            },
+            {
+              choice: "Resilient Multi-Provider Failover",
+              why: "A unified SSE stream interface prevents API service disruptions. If Gemini primary fails, it transparently falls back sequentially, guaranteeing zero-downtime.",
+              tradeoff: "Increases code complexity and introduces variance in response latency depending on the fallback provider chosen."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "TOKEN BUCKET RATE LIMITING & BULLMQ ASYNC WORKERS",
+            description: "Rate limiting is enforced at the gateway layer using a Redis Token Bucket, letting users make bursty queries while capping sustained consumption. BullMQ async workers process incoming PDF/TXT files in a separate thread pool, preventing CPU choking on the Next.js API server."
+          }
+        },
+        "eleven-lineup": {
+          title: "Eleven Lineup",
+          description:
+            "Football lineup builder with drag-and-drop team setup, user profiles, permissions, and prediction games. It combines an interactive pitch UI with full-stack account features.",
+          challenge:
+            "Handled pitch state, JWT auth in HTTP-only cookies, middleware permissions, Prisma models, and streak logic.",
+          outcome:
+            "Users can create lineups, manage profiles, and return for prediction-game activity.",
+          systemArchitecture: {
+            description: "Combines real-time interactive canvas states with protected Server Actions and database triggers to track user predictions and game streaks.",
+            diagram: ` [Drag & Drop UI] ──(Pitch State)──► [Next.js Server Actions]
+                                              │ (Middleware Role Auth)
+                                              ▼
+                                        [Prisma Client]
+                                              │
+                                              ▼
+                                        [PostgreSQL]`
+          },
+          tradeoffs: [
+            {
+              choice: "JWT in HTTP-only Cookies vs LocalStorage Tokens",
+              why: "Guards session authentication state against Cross-Site Scripting (XSS) attacks by keeping JWT tokens completely unreadable by client JavaScript.",
+              tradeoff: "Slightly complex setup to share sessions across subdomains and handles CSRF vectors explicitly."
+            },
+            {
+              choice: "Prisma ORM vs Raw SQL",
+              why: "Accelerates dashboard features and guarantees compile-time type safety across complex football player and lineup relations.",
+              tradeoff: "Abstracts raw SQL query execution, which can lead to inefficient N+1 query patterns if relation fetches aren't explicitly optimized."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "PREDICTION STREAK COMPUTATION TRIGGERS",
+            description: "User prediction streaks and lineup submissions are computed using cached database triggers, ensuring extremely low query overhead during peak football match periods."
+          }
+        },
+        "patient-operations-system": {
+          title: "Patient Operations System",
+          description:
+            "Healthcare app for patient records, appointments, and staff workflows. The screens focus on clear status, structured data, and quick access to patient information.",
+          challenge:
+            "Modeled patient and appointment data, designed role-aware flows, and built operational pages for daily use.",
+          outcome:
+            "Staff can check patient and appointment status without searching through scattered information.",
+          databaseSchema: {
+            description: "A strongly-typed, normalized healthcare relational model mapped using Prisma.",
+            sql: `// Relational Clinical Schema
+model Patient {
+  id          String        @id @default(uuid())
+  name        String
+  records     Record[]
+  appointments Appointment[]
+}
+
+model Appointment {
+  id          String   @id @default(uuid())
+  patientId   String
+  patient     Patient  @relation(fields: [patientId], references: [id])
+  status      String   -- 'pending' | 'completed' | 'cancelled'
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "Role-Based Access Control (RBAC) vs Attributes Access (ABAC)",
+              why: "Simple role structures (Doctor, Staff, Admin) keep clinical permission checking predictable, robust, and highly auditable.",
+              tradeoff: "Less dynamic than attribute-based policies, which makes custom patient-by-patient sharing rules harder to implement."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "QUERY OPTIMIZATION & STATUS ARCHIVING",
+            description: "Indexes are applied to patientId and appointment status fields to enable rapid filtering, while resolved cases are regularly archived to minimize production table scanning."
+          }
+        },
+        "rider-delivery-app": {
+          title: "Delivery Operations Platform",
+          description:
+            "Real-time logistics and dispatch platform featuring specialized courier apps, live routing telemetry, and an automated dispatch dashboard.",
+          challenge:
+            "Engineered live location synchronization, decoupled client/rider web services, handled transition states, and integrated map telemetry.",
+          outcome:
+            "Ensured consistent operational state sync, reducing delivery coordinate updates to sub-second latency.",
+          systemArchitecture: {
+            description: "An ultra-low latency logistics hub managing live telemetry coordination and dispatch queues.",
+            diagram: ` [Customer Client] ──(WebSockets)──► [Logistics Dispatch Hub]
+                                              ▲
+                                              │ (Sub-Second Updates)
+                                              ▼
+    [Rider Mobile App] ──(Firebase Sync)──► [Live Telemetry Maps]`
+          },
+          tradeoffs: [
+            {
+              choice: "Firebase Realtime DB vs Custom WebSockets",
+              why: "Guarantees sub-second coordinates synchronization between mobile couriers and dispatchers with native offline sync support.",
+              tradeoff: "Highly vendor-locked into Google Cloud infrastructure, making potential scaling transitions expensive."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "COURIER LOCATION STREAM THROTTLING",
+            description: "Rider GPS signals are throttled on-device using distance-based thresholds before transmission, cutting network overhead by up to 60% without losing route tracking accuracy."
+          }
         },
         "movie-management": {
           title: "Movie Operations Dashboard",
@@ -86,24 +241,6 @@ export const dictionaries = {
           outcome:
             "Kept sensitive logic on the server while giving Thai users a clean browser-based chat experience.",
         },
-        "eleven-lineup": {
-          title: "Eleven Lineup",
-          description:
-            "Football lineup builder with drag-and-drop team setup, user profiles, permissions, and prediction games. It combines an interactive pitch UI with full-stack account features.",
-          challenge:
-            "Handled pitch state, JWT auth in HTTP-only cookies, middleware permissions, Prisma models, and streak logic.",
-          outcome:
-            "Users can create lineups, manage profiles, and return for prediction-game activity.",
-        },
-        "patient-operations-system": {
-          title: "Patient Operations System",
-          description:
-            "Healthcare app for patient records, appointments, and staff workflows. The screens focus on clear status, structured data, and quick access to patient information.",
-          challenge:
-            "Modeled patient and appointment data, designed role-aware flows, and built operational pages for daily use.",
-          outcome:
-            "Staff can check patient and appointment status without searching through scattered information.",
-        },
         "childcare-dashboard": {
           title: "Childcare Dashboard",
           description:
@@ -112,42 +249,6 @@ export const dictionaries = {
             "Organized many data sections into one dashboard with charts, report export, and responsive layouts.",
           outcome:
             "Users can review child progress and payment status quickly, then export reports when needed.",
-        },
-        "roommate-finder": {
-          title: "Roommate Finder Platform",
-          description:
-            "Roommate matching platform with profiles, preference filters, real-time chat, reviews, and image uploads. It is built around helping users compare compatibility before contacting each other.",
-          challenge:
-            "Built Socket.io conversations, typing indicators, image handling with AWS S3, matching preferences, and review flows.",
-          outcome:
-            "Users can filter, chat, and review profiles before making a shared-living decision.",
-        },
-        "soil-iot-dashboard": {
-          title: "Soil Intelligence IoT Dashboard",
-          description:
-            "IoT dashboard for soil readings, moisture, GPS data, and crop suggestions. Sensor data from ESP32 devices is sent into a dashboard for easier field monitoring.",
-          challenge:
-            "Connected RS485 NPK sensors, GPS, ESP32 firmware, Firebase streaming, role access, and crop recommendation logic.",
-          outcome:
-            "Raw field readings become easier to understand for crop selection and fertilizer planning.",
-        },
-        "lotto-app": {
-          title: "Lotto App",
-          description:
-            "Flutter lottery app for buying tickets and managing vendor stock. Customers can browse available tickets while vendors update inventory from their side.",
-          challenge:
-            "Designed purchase flows, real-time stock state, bundle selection, vendor inventory screens, and Firebase updates.",
-          outcome:
-            "The app reduces cases where customers choose tickets that are already unavailable.",
-        },
-        "rider-delivery-app": {
-          title: "Rider Delivery App",
-          description:
-            "Flutter delivery app with separate customer and rider flows, order status, and live maps. Both sides can follow the delivery state from pickup to completion.",
-          challenge:
-            "Built role-specific mobile screens, delivery status transitions, map tracking, and Firebase synchronization.",
-          outcome:
-            "Customers and riders see the same delivery progress, which makes the flow easier to follow.",
         },
       },
     },
@@ -262,10 +363,10 @@ export const dictionaries = {
       language: "เปลี่ยนภาษา",
     },
     hero: {
-      availability: "Portfolio and selected work",
+      availability: "พร้อมร่วมงานในบทบาทสำคัญเพื่อสร้างการเติบโต",
       headline: "พชร วงษาศรี",
       intro:
-        "ผมเป็น developer เว็บนี้รวมโปรเจกต์ที่เคยทำ ทั้งเว็บแอป dashboard, AI tools, mobile app และ IoT",
+        "นักพัฒนา Full-Stack ที่เชี่ยวชาญการสร้างระบบธุรกิจขับเคลื่อนด้วย AI, สถาปัตยกรรม SaaS สมัยใหม่ และแพลตฟอร์มปฏิบัติการ",
       viewWork: "ดูผลงานที่คัดมา",
       bookCall: "นัดคุยเบื้องต้น",
       downloadResume: "ดาวน์โหลดเรซูเม่",
@@ -305,11 +406,166 @@ export const dictionaries = {
         "trainee-knowledge-assistant": {
           title: "Enterprise Knowledge Platform",
           description:
-            "แพลตฟอร์ม AI SaaS ระดับองค์กรที่พัฒนาด้วย Next.js 16, PostgreSQL และ ChromaDB รองรับระบบสิทธิ์การเข้าถึงแบบ multi-tenant, การล็อกอินผ่าน OAuth (Google, GitHub, LINE), การแชตแบบสตรีมมิ่งเรียลไทม์ และระบบสลับผู้ให้บริการ AI อัตโนมัติ (Failover)",
+            "แพลตฟอร์ม Enterprise AI SaaS พร้อมระบบจัดการ Workspace, ล็อกอินผ่าน OAuth, ระบบค้นหาข้อมูล RAG ด้วย ChromaDB และระบบสลับผู้ให้บริการ AI อัตโนมัติ",
           challenge:
-            "ออกแบบระบบยืนยันตัวตนกับผู้ให้บริการภายนอก 4 ราย, ทำระบบจำกัดคำขอ (Rate Limiter), พัฒนาระบบธีม HSL พร้อมการซิงก์ระดับ root ทันที และสร้างวงจร failover สำหรับ AI ที่ทนทานเพื่อป้องกันระบบล่ม",
+            "ออกแบบระบบยืนยันตัวตนผ่าน OAuth, สร้างวงจร Failover สลับผู้ให้บริการ AI ป้องกันระบบล่ม และพัฒนาระบบค้นหาแบบ RAG",
           outcome:
-            "ส่งมอบแพลตฟอร์มระดับโปรดักชันจำลองที่มีระบบความปลอดภัยสูง ค้นหาข้อมูลแบบ RAG ผ่าน ChromaDB และ UI ที่สวยงามลื่นไหล พร้อมระบบจำลอง Telemetry และสามารถดีพลอยได้ทันทีผ่าน Docker Compose",
+            "ได้แพลตฟอร์มระดับโปรดักชันที่มีระบบความปลอดภัยสูง ค้นหาข้อมูลผ่าน Vector Store ได้เรียลไทม์ และรองรับการทำงานผ่าน Docker Compose",
+          systemArchitecture: {
+            description: "ระบบสิทธิ์การเข้าถึง multi-tenant ถูกแยกพาร์ทิชันโดยการจัดเส้นทางสตรีมมิ่งผ่านเกตเวย์ตัวเลือก Failover ส่วนคำขอแชตที่ส่งเข้ามาจะถูกตรวจสอบปริมาณผ่านอัลกอริทึม Redis Token Bucket, นำไปดึงข้อมูล Context จาก Vector Store (ChromaDB) และส่งคำขอไปยังผู้ให้บริการที่ทำงานอยู่ในห่วงโซ่สลับเปลี่ยนระบบล่ม",
+            diagram: ` [ผู้ใช้งาน] ──(สตรีม SSE)──► [Next.js Router]
+                                 │ (ตรวจสอบสิทธิ์ & ปริมาณคำขอ)
+                                 ▼
+                         [เครื่องมือ Failover]
+                                 │
+        ┌─────────────┬──────────┼──────────┬────────────┐
+        ▼             ▼          ▼          ▼            ▼
+    [Gemini]     [Together]  [Cerebras]   [Groq]     [OpenAI]
+    (หลัก)       (สำรอง)     (สำรอง)     (สำรอง)     (สำรอง)`
+          },
+          databaseSchema: {
+            description: "โครงสร้างข้อมูล PostgreSQL แบบ Normalization เพื่อจำกัดขอบเขตของ Workspace ผู้เช่า, กำหนดบทบาทสมาชิก และบันทึกประวัติการใช้โทเค็นสำหรับการตรวจสอบ",
+            sql: `-- โครงสร้างข้อมูลประวัติแชต
+CREATE TABLE conversations (
+    id VARCHAR(255) PRIMARY KEY,
+    workspace_id VARCHAR(255) REFERENCES workspaces(id) ON DELETE CASCADE,
+    user_id VARCHAR(255) REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- บันทึกข้อความแชตและการใช้งานโทเค็นของ AI
+CREATE TABLE messages (
+    id VARCHAR(255) PRIMARY KEY,
+    conversation_id VARCHAR(255) REFERENCES conversations(id) ON DELETE CASCADE,
+    role VARCHAR(50) NOT NULL, -- 'user' | 'assistant'
+    content TEXT NOT NULL,
+    provider VARCHAR(100), -- 'Gemini' | 'Together' | 'Cerebras'
+    token_usage JSONB, -- { "promptTokens": X, "completionTokens": Y, "totalTokens": Z }
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`
+          },
+          tradeoffs: [
+            {
+              choice: "ChromaDB เทียบกับ pgvector",
+              why: "การเลือกใช้ Vector Store แยกโดยเฉพาะทำให้การทำ Indexing ของข้อมูลและการประมวลผลความใกล้เคียงเวกเตอร์เสร็จสิ้นในระดับมิลลิวินาที รวมถึงมีฟังก์ชันตัวกรองข้อมูลแบบ Metadata สำเร็จรูปที่ดีกว่า",
+              tradeoff: "ต้องดูแลและซิงค์ข้อมูลระหว่าง PostgreSQL กับ ChromaDB แยกออกเป็น 2 เซอร์วิส แทนที่จะจบในฐานข้อมูลเดียว"
+            },
+            {
+              choice: "Docker Compose เทียบกับ Kubernetes",
+              why: "ช่วยให้สร้างและทดสอบระบบทั้งหมด (Web, DB, ChromaDB) ในรูปแบบคอนเทนเนอร์ระดับโปรดักชันได้ผ่านคำสั่งเดียวโดยไม่ต้องแบกรับภาระการตั้งค่าคลัสเตอร์ที่ซับซ้อนของ Kubernetes",
+              tradeoff: "ไม่รองรับการสเกลคลัสเตอร์โหนดแบบอัตโนมัติ (Horizontal Pod Autoscaling) และการซ่อมแซมเซอร์วิสอัตโนมัติ"
+            },
+            {
+              choice: "การทำ Multi-Provider Failover สำรองหลายระบบ",
+              why: "สร้างความทนทานให้ธุรกิจ 100% ป้องกันกรณีที่ API หลัก (Gemini) ขัดข้องหรือโควตาหมด โดยระบบจะย้ายไปดึงโมเดลสำรองอย่างราบรื่นโดยผู้ใช้ไม่รู้สึกว่าแอปพลิเคชันค้างหรือล่ม",
+              tradeoff: "เพิ่มความซับซ้อนของโค้ดในการจับคู่สตรีมข้อมูล และอาจพบความเร็วในการตอบสนองต่างกันเล็กน้อยตามรุ่นโมเดล"
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "ระบบควบคุมปริมาณคำขอด้วย REDIS TOKEN BUCKET & การประมวลผลแบบ BullMQ",
+            description: "ป้องกันการเรียกใช้งาน API เกินโควตาด้วย Redis Token Bucket ในระดับเกตเวย์ (20 ครั้ง/นาที) และใช้ BullMQ เพื่อประมวลผลการอ่านไฟล์ PDF/TXT ขนาดใหญ่เป็น Background Job ป้องกันไม่ให้ CPU ของ Next.js API ทำงานหนักเกินไป"
+          }
+        },
+        "eleven-lineup": {
+          title: "Eleven Lineup",
+          description:
+            "เว็บจัดทีมฟุตบอลแบบ drag-and-drop พร้อม profile, permission และเกมทายผล รวมหน้าจอสนามที่ interactive กับระบบ account แบบ full-stack",
+          challenge:
+            "จัดการ state ของสนาม, JWT auth ผ่าน HTTP-only cookies, middleware permission, Prisma models และระบบ streak",
+          outcome:
+            "ผู้ใช้สร้าง lineup, จัดการ profile และกลับมาเล่นกิจกรรมทายผลได้",
+          systemArchitecture: {
+            description: "ประสานงานระหว่างสถานะความเคลื่อนไหวบนเว็บบอร์ดลากวาง ร่วมกับ Server Actions ที่ปลอดภัย และระบบ Trigger ในฐานข้อมูลเพื่อตรวจนับคะแนนกิจกรรมและการทายผลแบบต่อเนื่อง",
+            diagram: ` [หน้าจอจัดตัวผู้เล่น] ──(ลากวาง)──► [Next.js Server Actions]
+                                               │ (ระบบความปลอดภัยระดับสิทธิ์)
+                                               ▼
+                                         [Prisma Client]
+                                               │
+                                               ▼
+                                         [PostgreSQL]`
+          },
+          tradeoffs: [
+            {
+              choice: "JWT ใน HTTP-only Cookies เทียบกับ LocalStorage",
+              why: "ช่วยป้องกันภัยคุกคามประเภท Cross-Site Scripting (XSS) ได้อย่างมีประสิทธิภาพสูงสุด เนื่องจากสคริปต์บนหน้าเว็บจะไม่สามารถเข้าถึงหรือขโมยโทเค็นนี้ได้",
+              tradeoff: "การตั้งค่าและการแชร์เซสชันข้าม Subdomain ทำได้ยากขึ้น และต้องจัดการความปลอดภัยด้าน CSRF เพิ่มเติม"
+            },
+            {
+              choice: "Prisma ORM เทียบกับ Raw SQL",
+              why: "ช่วยเพิ่มความรวดเร็วในการพัฒนา และมอบความปลอดภัยด้านชนิดข้อมูล (Type Safety) ในการสืบค้นข้อมูลผู้เล่นและตารางจัดทีมที่เชื่อมโยงกันอย่างซับซ้อน",
+              tradeoff: "อาจส่งผลกระทบต่อประสิทธิภาพหากเกิด N+1 Query โดยไม่ตั้งใจ ซึ่งจำเป็นต้องทำการจูนนิ่งความสัมพันธ์ผ่าน include หรือ select เสมอ"
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "ระบบคัดกรองการทำงานของข้อมูลด้วย DATABASE TRIGGERS",
+            description: "การคำนวณคะแนนสะสมและประวัติการจัดตัวจะถูกส่งประมวลผลในระดับ Database Layer ผ่าน Triggers เพื่อหลีกเลี่ยงการเปิดสืบค้นหนักจากฝั่งแอปพลิเคชันในช่วงสิ้นสุดการแข่งขันฟุตบอล"
+          }
+        },
+        "patient-operations-system": {
+          title: "Patient Operations System",
+          description:
+            "ระบบจัดการข้อมูลผู้ป่วย ตารางนัดหมาย และงานของสถานพยาบาล หน้าจอเน้นสถานะที่อ่านง่าย ข้อมูลเป็นระเบียบ และเข้าถึงข้อมูลผู้ป่วยได้เร็ว",
+          challenge:
+            "ออกแบบข้อมูลผู้ป่วยและนัดหมาย, flow ตามบทบาทผู้ใช้ และหน้าจอสำหรับงานประจำวัน",
+          outcome:
+            "staff ตรวจสถานะผู้ป่วยและนัดหมายได้โดยไม่ต้องไล่หาข้อมูลหลายที่",
+          databaseSchema: {
+            description: "ออกแบบฐานข้อมูลความสัมพันธ์ด้านสุขภาพที่เสถียรและเชื่อมโยงกันชัดเจนตามมาตรฐานข้อมูลคลินิกและโรงพยาบาล",
+            sql: `// แบบจำลองฐานข้อมูลเวชระเบียนโรงพยาบาล
+model Patient {
+  id          String        @id @default(uuid())
+  name        String
+  records     Record[]
+  appointments Appointment[]
+}
+
+model Appointment {
+  id          String   @id @default(uuid())
+  patientId   String
+  patient     Patient  @relation(fields: [patientId], references: [id])
+  status      String   -- 'pending' | 'completed' | 'cancelled'
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "การตรวจสอบสิทธิ์แบบ RBAC เทียบกับ ABAC",
+              why: "โครงสร้างสิทธิ์ตามบทบาท (แพทย์, พนักงานหน้าเคาน์เตอร์, แอดมิน) ช่วยให้จำแนกความปลอดภัยของข้อมูลคนไข้ได้ชัดเจนและตรวจสอบประวัติการแก้ไขได้ง่ายที่สุด",
+              tradeoff: "มีความยืดหยุ่นน้อยกว่าแบบอิงคุณลักษณะส่วนบุคคล ซึ่งยากต่อการกำหนดข้อยกเว้นแบบเคสพิเศษเฉพาะคน"
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "ระบบจัดการดัชนีและการย้ายข้อมูลออก (Database Archiving)",
+            description: "ใช้ Database Indexing กับฟิลด์ค้นหาหลักเพื่อรักษาระดับความเร็วในการแสดงผล และทำการ Archive นัดหมายที่สิ้นสุดเกิน 1 ปีออกนอกตารางงานหลักเพื่อลดปริมาณการสแกนค้นข้อมูลดิสก์"
+          }
+        },
+        "rider-delivery-app": {
+          title: "Delivery Operations Platform",
+          description:
+            "แพลตฟอร์มบริหารงานโลจิสติกส์และระบบการส่งพัสดุแบบเรียลไทม์ ประกอบด้วยแอปพลิเคชันไรเดอร์ส่งของ, ระบบพิกัดนำทางบนแผนที่ และหน้าจอควบคุมการจ่ายงานอัตโนมัติ",
+          challenge:
+            "ทำหน้าจอตาม role, จัดการสถานะการส่ง, map tracking และ sync ข้อมูลผ่าน Firebase",
+          outcome:
+            "ลูกค้าและไรเดอร์เห็น progress เดียวกัน ทำให้ตามงานส่งของได้ง่ายขึ้น",
+          systemArchitecture: {
+            description: "ระบบควบคุมทิศทางพัสดุและวิเคราะห์งานปฏิบัติการเดินส่งของ รองรับการคำนวณตำแหน่งและการอัปเดตสถานะงานส่งพัสดุอย่างแม่นยำในระดับเสี้ยววินาที",
+            diagram: ` [ผู้สั่งซื้อสินค้า] ──(WebSockets)──► [เซ็นเตอร์ควบคุมการเดินรถ]
+                                              ▲
+                                              │ (อัปเดตสถานะเสี้ยววินาที)
+                                              ▼
+     [แอปบนมือถือไรเดอร์] ──(Firebase Sync)──► [หน้าจอพิกัดสดนำทาง]`
+          },
+          tradeoffs: [
+            {
+              choice: "Firebase Realtime DB เทียบกับ Custom WebSockets",
+              why: "ตอบสนองการอัปเดตพิกัด GPS ระหว่างไรเดอร์บนท้องถนนกับพนักงานที่ออฟฟิศได้เรียลไทม์ และช่วยซิงก์ข้อมูลกลับอัตโนมัติเมื่ออุปกรณ์ขาดการเชื่อมต่ออินเทอร์เน็ต",
+              tradeoff: "สร้างข้อผูกมัดทางเทคโนโลยีเข้ากับบริการ Google Cloud Platform ซึ่งยากต่อการย้ายระบบในอนาคตและมีค่าบริการตามปริมาณข้อมูลรับส่ง"
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "การควบคุมความถี่ข้อมูลด้วย LOCATION THROTTLING บนอุปกรณ์",
+            description: "ระบบบนแอปมือถือจะตรวจคัดกรองพิกัด GPS โดยอิงจากระยะทางที่เคลื่อนที่จริงก่อนทำการจัดส่งแพ็กเกจข้อมูลขึ้นระบบหลัก ช่วยลดทราฟฟิกเครือข่ายลงได้กว่า 60% และช่วยยืดอายุแบตเตอรี่บนมือถือของคนขับรถ"
+          }
         },
         "movie-management": {
           title: "Movie Operations Dashboard",
@@ -329,24 +585,6 @@ export const dictionaries = {
           outcome:
             "เก็บ logic ที่อ่อนไหวไว้ฝั่ง server และให้ผู้ใช้ไทยคุยกับ AI ผ่าน browser ได้ง่าย",
         },
-        "eleven-lineup": {
-          title: "Eleven Lineup",
-          description:
-            "เว็บจัดทีมฟุตบอลแบบ drag-and-drop พร้อม profile, permission และเกมทายผล รวมหน้าจอสนามที่ interactive กับระบบ account แบบ full-stack",
-          challenge:
-            "จัดการ state ของสนาม, JWT auth ผ่าน HTTP-only cookies, middleware permission, Prisma models และระบบ streak",
-          outcome:
-            "ผู้ใช้สร้าง lineup, จัดการ profile และกลับมาเล่นกิจกรรมทายผลได้",
-        },
-        "patient-operations-system": {
-          title: "Patient Operations System",
-          description:
-            "ระบบจัดการข้อมูลผู้ป่วย ตารางนัดหมาย และงานของสถานพยาบาล หน้าจอเน้นสถานะที่อ่านง่าย ข้อมูลเป็นระเบียบ และเข้าถึงข้อมูลผู้ป่วยได้เร็ว",
-          challenge:
-            "ออกแบบข้อมูลผู้ป่วยและนัดหมาย, flow ตามบทบาทผู้ใช้ และหน้าจอสำหรับงานประจำวัน",
-          outcome:
-            "staff ตรวจสถานะผู้ป่วยและนัดหมายได้โดยไม่ต้องไล่หาข้อมูลหลายที่",
-        },
         "childcare-dashboard": {
           title: "Childcare Dashboard",
           description:
@@ -355,42 +593,6 @@ export const dictionaries = {
             "จัดข้อมูลหลายหมวดให้เป็น dashboard เดียว พร้อมกราฟ, export รายงาน และ layout ที่ responsive",
           outcome:
             "ผู้ใช้ดูพัฒนาการและสถานะการชำระเงินได้เร็ว แล้ว export รายงานไปใช้งานต่อได้",
-        },
-        "roommate-finder": {
-          title: "Roommate Finder Platform",
-          description:
-            "แพลตฟอร์มหา roommate มี profile, preference filter, real-time chat, review และอัปโหลดรูป ช่วยให้ผู้ใช้เทียบความเข้ากันได้ก่อนเริ่มคุย",
-          challenge:
-            "ทำ Socket.io chat, typing indicator, จัดการรูปผ่าน AWS S3, matching preference และ review flow",
-          outcome:
-            "ผู้ใช้กรองข้อมูล แชต และดูรีวิวก่อนตัดสินใจเรื่องการอยู่ร่วมกันได้",
-        },
-        "soil-iot-dashboard": {
-          title: "Soil Intelligence IoT Dashboard",
-          description:
-            "IoT dashboard สำหรับค่าดิน ความชื้น GPS และคำแนะนำเรื่องพืช ข้อมูลจาก ESP32 ถูกส่งเข้า dashboard เพื่อดูสถานะพื้นที่ได้ง่ายขึ้น",
-          challenge:
-            "เชื่อม RS485 NPK sensors, GPS, firmware บน ESP32, Firebase streaming, role access และ logic แนะนำพืช",
-          outcome:
-            "ค่าจาก sensor ถูกแปลงเป็นข้อมูลที่อ่านง่าย สำหรับเลือกพืชและวางแผนการใช้ปุ๋ย",
-        },
-        "lotto-app": {
-          title: "Lotto App",
-          description:
-            "แอป Flutter สำหรับซื้อหวยและจัดการสต็อกของ vendor ลูกค้าดูเลขที่เปิดขายได้ ส่วน vendor จัดการ inventory จากฝั่งของตัวเอง",
-          challenge:
-            "ทำ flow การซื้อ, stock แบบ real-time, การเลือกซื้อเป็นชุด, หน้าจอ inventory และ sync ข้อมูลด้วย Firebase",
-          outcome:
-            "ช่วยลดกรณีลูกค้าเลือกใบที่หมดแล้ว และทำให้ vendor คุมเลขที่เปิดขายได้ชัดขึ้น",
-        },
-        "rider-delivery-app": {
-          title: "Rider Delivery App",
-          description:
-            "แอปส่งของด้วย Flutter มี flow แยกสำหรับลูกค้าและไรเดอร์ พร้อมสถานะออเดอร์และแผนที่ ทั้งสองฝั่งดูสถานะการส่งได้ตั้งแต่รับงานจนเสร็จ",
-          challenge:
-            "ทำหน้าจอตาม role, จัดการสถานะการส่ง, map tracking และ sync ข้อมูลผ่าน Firebase",
-          outcome:
-            "ลูกค้าและไรเดอร์เห็น progress เดียวกัน ทำให้ตามงานส่งของได้ง่ายขึ้น",
         },
       },
     },

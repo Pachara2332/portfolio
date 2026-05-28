@@ -10,6 +10,7 @@ export interface Project {
   githubBackend?: string;
   demo?: string;
   category: "web" | "iot" | "mobile" | "ai" | "other";
+  isFeatured?: boolean;
 }
 
 export interface Experience {

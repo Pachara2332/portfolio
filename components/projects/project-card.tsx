@@ -189,7 +189,7 @@ export function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-0 z-10 flex translate-y-2 flex-col bg-card/95 p-4 opacity-0 backdrop-blur-[1px] transition duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+        <div className="pointer-events-none absolute inset-0 z-10 flex translate-y-2 flex-col bg-card/95 p-4 opacity-0 backdrop-blur-[1px] transition duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 overflow-y-auto scrollbar-thin">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-[11px] font-medium text-muted-foreground">
@@ -204,7 +204,7 @@ export function ProjectCard({ project }: { project: Project }) {
             </span>
           </div>
 
-          <p className="mt-2 text-sm leading-5 text-muted-foreground">
+          <p className="mt-2 text-sm leading-5 text-muted-foreground line-clamp-3">
             {projectCopy.description}
           </p>
 
@@ -213,7 +213,7 @@ export function ProjectCard({ project }: { project: Project }) {
               <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                 {t.projects.challenge}
               </p>
-              <p className="text-xs leading-5 text-foreground/84">
+              <p className="text-xs leading-5 text-foreground/84 line-clamp-3">
                 {projectCopy.challenge}
               </p>
             </div>
@@ -221,7 +221,7 @@ export function ProjectCard({ project }: { project: Project }) {
               <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                 {t.projects.outcome}
               </p>
-              <p className="text-xs leading-5 text-muted-foreground">
+              <p className="text-xs leading-5 text-muted-foreground line-clamp-3">
                 {projectCopy.outcome}
               </p>
             </div>
