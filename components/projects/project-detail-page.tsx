@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { 
   ArrowLeft, 
   ArrowUpRight, 
+  ChevronLeft,
+  ChevronRight,
   Server, 
   Database, 
   Scale, 
@@ -17,9 +20,50 @@ import {
 import { useLanguage } from "@/components/i18n/language-provider";
 import type { Project } from "@/types";
 
+type TradeoffItem = {
+  choice: string;
+  why: string;
+  tradeoff: string;
+};
+
+type ProjectCopy = {
+  title: string;
+  description: string;
+  challenge: string;
+  outcome: string;
+  systemArchitecture?: {
+    description: string;
+    diagram: string;
+  };
+  databaseSchema?: {
+    description: string;
+    sql: string;
+  };
+  tradeoffs?: TradeoffItem[];
+  scalingAndResilience?: {
+    strategy: string;
+    description: string;
+  };
+};
+
 export function ProjectDetailPage({ project }: { project: Project }) {
   const { t } = useLanguage();
-  const projectCopy = t.projects.items[project.id as keyof typeof t.projects.items] as any;
+  const projectCopy = t.projects.items[project.id as keyof typeof t.projects.items] as ProjectCopy | undefined;
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const galleryImages = project.images ?? [];
+  const activeImage = galleryImages[activeImageIndex];
+
+  const showPreviousImage = () => {
+    setActiveImageIndex((currentIndex) =>
+      currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1
+    );
+  };
+
+  const showNextImage = () => {
+    setActiveImageIndex((currentIndex) =>
+      currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1
+    );
+  };
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
@@ -37,19 +81,6 @@ export function ProjectDetailPage({ project }: { project: Project }) {
       <article className="space-y-8">
         {/* Cover Image Header */}
         <div className="surface-card overflow-hidden rounded-2xl">
-          {project.coverImage ? (
-            <div className="relative aspect-[16/8] border-b border-border/75">
-              <Image
-                src={project.coverImage}
-                alt={`${projectCopy?.title || project.title} preview`}
-                fill
-                priority
-                sizes="(min-width: 1280px) 1200px, 100vw"
-                className="object-cover"
-              />
-            </div>
-          ) : null}
-
           {/* Standard Project Overview Info */}
           <div className="space-y-6 p-6 sm:p-8">
             <header className="space-y-3">
@@ -63,6 +94,84 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                 {projectCopy?.description || project.description}
               </p>
             </header>
+
+            {activeImage ? (
+              <section className="space-y-4">
+                <div className="flex flex-wrap items-end justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                      Project Gallery
+                    </p>
+                    <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground">
+                      {activeImage.title}
+                    </h2>
+                  </div>
+                  <p className="text-xs font-semibold text-muted-foreground">
+                    {activeImageIndex + 1} / {galleryImages.length}
+                  </p>
+                </div>
+
+                <div className="group/gallery relative overflow-hidden rounded-xl border border-border/75 bg-background">
+                  <div className="relative aspect-[16/9]">
+                    <Image
+                      src={activeImage.src}
+                      alt={activeImage.alt}
+                      fill
+                      sizes="(min-width: 1280px) 960px, 100vw"
+                      className="object-contain"
+                    />
+                  </div>
+
+                  {galleryImages.length > 1 ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={showPreviousImage}
+                        aria-label="Show previous project image"
+                        className="absolute left-3 top-1/2 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/80 bg-background/85 text-foreground shadow-lg backdrop-blur transition hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        <ChevronLeft className="size-5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={showNextImage}
+                        aria-label="Show next project image"
+                        className="absolute right-3 top-1/2 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/80 bg-background/85 text-foreground shadow-lg backdrop-blur transition hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        <ChevronRight className="size-5" />
+                      </button>
+                    </>
+                  ) : null}
+                </div>
+
+                {galleryImages.length > 1 ? (
+                  <div className="flex gap-3 overflow-x-auto pb-2">
+                    {galleryImages.map((image, index) => (
+                      <button
+                        key={image.src}
+                        type="button"
+                        onClick={() => setActiveImageIndex(index)}
+                        aria-label={`Show ${image.title} screenshot`}
+                        aria-current={index === activeImageIndex}
+                        className={`relative h-20 w-36 flex-none overflow-hidden rounded-lg border bg-background transition ${
+                          index === activeImageIndex
+                            ? "border-foreground/70 ring-2 ring-foreground/18"
+                            : "border-border/70 opacity-70 hover:border-foreground/35 hover:opacity-100"
+                        }`}
+                      >
+                        <Image
+                          src={image.src}
+                          alt=""
+                          fill
+                          sizes="144px"
+                          className="object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </section>
+            ) : null}
 
             {/* Challenge & Outcome Overview Grid */}
             <section className="grid gap-4 sm:grid-cols-2">
@@ -220,7 +329,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
             </h2>
             
             <div className="grid gap-4 md:grid-cols-2">
-              {projectCopy.tradeoffs.map((item: any, idx: number) => (
+              {projectCopy.tradeoffs.map((item, idx) => (
                 <div key={idx} className="surface-card rounded-2xl p-5 border border-border/70 space-y-4 flex flex-col justify-between transition duration-300 hover:border-foreground/15 hover:bg-card">
                   <div className="space-y-2">
                     <span className="rounded-full bg-amber-400/10 text-amber-400 border border-amber-400/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">

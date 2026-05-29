@@ -12,6 +12,33 @@ export const projects: Project[] = [
       "Delivered a containerized, highly resilient production-style SaaS platform with secure user access and real-time streaming chat.",
     techStack: ["Next.js 16", "PostgreSQL", "ChromaDB", "NextAuth.js v5", "Docker"],
     coverImage: "/assets/projects/knowledge-platform.png",
+    images: [
+      {
+        src: "/assets/projects/knowledge-platform-gallery/home.png",
+        alt: "Knowledge platform landing screen with centered search prompt",
+        title: "Landing",
+      },
+      {
+        src: "/assets/projects/knowledge-platform-gallery/sign-up.png",
+        alt: "Knowledge platform create account screen",
+        title: "Sign up",
+      },
+      {
+        src: "/assets/projects/knowledge-platform-gallery/sign-in.png",
+        alt: "Knowledge platform login screen",
+        title: "Sign in",
+      },
+      {
+        src: "/assets/projects/knowledge-platform-gallery/chat.png",
+        alt: "Knowledge platform chat workspace with sidebar and conversation",
+        title: "Chat workspace",
+      },
+      {
+        src: "/assets/projects/knowledge-platform-gallery/settings.png",
+        alt: "Knowledge platform settings modal over the chat workspace",
+        title: "Settings",
+      },
+    ],
     github: "https://github.com/Pachara2332/trainee-knowledge-assistant",
     category: "ai",
     isFeatured: true,

@@ -6,6 +6,11 @@ export interface Project {
   outcome: string;
   techStack: string[];
   coverImage?: string;
+  images?: {
+    src: string;
+    alt: string;
+    title: string;
+  }[];
   github?: string;
   githubBackend?: string;
   demo?: string;
