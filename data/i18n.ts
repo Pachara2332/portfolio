@@ -126,20 +126,54 @@ CREATE TABLE messages (
         "eleven-lineup": {
           title: "Eleven Lineup",
           description:
-            "Football lineup builder with drag-and-drop team setup, user profiles, permissions, and prediction games. It combines an interactive pitch UI with full-stack account features.",
+            "Football fan platform that combines a drag-and-drop lineup builder, league standings, fixtures, community posts, public profiles, notifications, and replayable mini games in one full-stack product.",
           challenge:
-            "Handled pitch state, JWT auth in HTTP-only cookies, middleware permissions, Prisma models, and streak logic.",
+            "Handled interactive pitch state, JWT auth in HTTP-only cookies, middleware RBAC, Prisma relations, external football data fallbacks, community interactions, and game-driven XP loops.",
           outcome:
-            "Users can create lineups, manage profiles, and return for prediction-game activity.",
+            "Users can build and save squads, check match context, post to the community, manage a public profile, and return for football quiz activities that improve retention.",
           systemArchitecture: {
-            description: "Combines real-time interactive canvas states with protected Server Actions and database triggers to track user predictions and game streaks.",
-            diagram: ` [Drag & Drop UI] ──(Pitch State)──► [Next.js Server Actions]
-                                              │ (Middleware Role Auth)
-                                              ▼
-                                        [Prisma Client]
-                                              │
-                                              ▼
-                                        [PostgreSQL]`
+            description: "The app is split around user-facing football workflows: authenticated users move between dashboard, lineup builder, community, profile, and mini-game routes while API handlers normalize football data and Prisma persists user-generated activity.",
+            diagram: ` [Next.js App Router] -- dashboard / lineup / community / games
+             |
+             v
+ [Middleware RBAC + JWT Cookies]
+             |
+             v
+ [Route Handlers + Service Layer] -- football-data.org / external team API
+             |
+             v
+ [Prisma ORM]
+             |
+             v
+ [PostgreSQL: Users, Lineups, Posts, Fixtures, Standings, Game Attempts]`
+          },
+          databaseSchema: {
+            description: "The relational model keeps football master data separate from user-generated activity, making lineup, community, and mini-game features easier to evolve independently.",
+            sql: `model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  role      Role      @default(USER)
+  lineups   Lineup[]
+  posts     Post[]
+  attempts  MiniGameAttempt[]
+}
+
+model Lineup {
+  id        String       @id @default(uuid())
+  userId    String
+  formation String
+  user      User         @relation(fields: [userId], references: [id])
+  slots     LineupSlot[]
+}
+
+model Post {
+  id        String    @id @default(uuid())
+  authorId  String
+  content   String
+  author    User      @relation(fields: [authorId], references: [id])
+  comments  Comment[]
+  likes     Like[]
+}`
           },
           tradeoffs: [
             {
@@ -151,11 +185,16 @@ CREATE TABLE messages (
               choice: "Prisma ORM vs Raw SQL",
               why: "Accelerates dashboard features and guarantees compile-time type safety across complex football player and lineup relations.",
               tradeoff: "Abstracts raw SQL query execution, which can lead to inefficient N+1 query patterns if relation fetches aren't explicitly optimized."
+            },
+            {
+              choice: "External Football APIs with Local Fallbacks",
+              why: "Standings, fixtures, teams, and player data can stay current while the app still renders a usable dashboard when provider quota or availability fails.",
+              tradeoff: "Requires normalization logic and careful stale-data handling so the UI does not mix incompatible provider formats."
             }
           ],
           scalingAndResilience: {
-            strategy: "PREDICTION STREAK COMPUTATION TRIGGERS",
-            description: "User prediction streaks and lineup submissions are computed using cached database triggers, ensuring extremely low query overhead during peak football match periods."
+            strategy: "DATA FALLBACKS, MODERATED COMMUNITY FLOWS, AND ROUTE-LEVEL AUTH GUARDS",
+            description: "Football data routes degrade to stored fixtures or empty payloads instead of crashing the dashboard. Community writes are protected by authenticated APIs, and role-aware middleware keeps admin-only data management and moderation flows separate from normal user traffic."
           }
         },
         "patient-operations-system": {
@@ -470,20 +509,54 @@ CREATE TABLE messages (
         "eleven-lineup": {
           title: "Eleven Lineup",
           description:
-            "เว็บจัดทีมฟุตบอลแบบ drag-and-drop พร้อม profile, permission และเกมทายผล รวมหน้าจอสนามที่ interactive กับระบบ account แบบ full-stack",
+            "แพลตฟอร์มสำหรับแฟนฟุตบอลที่รวม lineup builder แบบ drag-and-drop, ตารางคะแนน, โปรแกรมแข่ง, community posts, public profile, notifications และ mini games ไว้ในผลิตภัณฑ์ full-stack เดียว",
           challenge:
-            "จัดการ state ของสนาม, JWT auth ผ่าน HTTP-only cookies, middleware permission, Prisma models และระบบ streak",
+            "จัดการ state ของสนามแบบ interactive, JWT auth ผ่าน HTTP-only cookies, RBAC ด้วย middleware, ความสัมพันธ์ Prisma, fallback ข้อมูลฟุตบอลภายนอก, community interaction และ XP loop จาก mini games",
           outcome:
-            "ผู้ใช้สร้าง lineup, จัดการ profile และกลับมาเล่นกิจกรรมทายผลได้",
+            "ผู้ใช้สร้างและบันทึกทีมได้, ดูบริบทการแข่งขัน, โพสต์ใน community, จัดการ public profile และกลับมาเล่น quiz ฟุตบอลเพื่อเพิ่ม retention",
           systemArchitecture: {
-            description: "ประสานงานระหว่างสถานะความเคลื่อนไหวบนเว็บบอร์ดลากวาง ร่วมกับ Server Actions ที่ปลอดภัย และระบบ Trigger ในฐานข้อมูลเพื่อตรวจนับคะแนนกิจกรรมและการทายผลแบบต่อเนื่อง",
-            diagram: ` [หน้าจอจัดตัวผู้เล่น] ──(ลากวาง)──► [Next.js Server Actions]
-                                               │ (ระบบความปลอดภัยระดับสิทธิ์)
-                                               ▼
-                                         [Prisma Client]
-                                               │
-                                               ▼
-                                         [PostgreSQL]`
+            description: "ระบบแยกตาม workflow หลักของผู้ใช้ฟุตบอล: dashboard, lineup builder, community, profile และ mini games โดย API handlers ทำหน้าที่ normalize ข้อมูลฟุตบอล และ Prisma บันทึกกิจกรรมที่ผู้ใช้สร้างขึ้น",
+            diagram: ` [Next.js App Router] -- dashboard / lineup / community / games
+             |
+             v
+ [Middleware RBAC + JWT Cookies]
+             |
+             v
+ [Route Handlers + Service Layer] -- football-data.org / external team API
+             |
+             v
+ [Prisma ORM]
+             |
+             v
+ [PostgreSQL: Users, Lineups, Posts, Fixtures, Standings, Game Attempts]`
+          },
+          databaseSchema: {
+            description: "โครงสร้างฐานข้อมูลแยก master data ฟุตบอลออกจาก activity ที่ผู้ใช้สร้าง ทำให้ lineup, community และ mini-game ขยายต่อได้โดยไม่ผูกกันแน่นเกินไป",
+            sql: `model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  role      Role      @default(USER)
+  lineups   Lineup[]
+  posts     Post[]
+  attempts  MiniGameAttempt[]
+}
+
+model Lineup {
+  id        String       @id @default(uuid())
+  userId    String
+  formation String
+  user      User         @relation(fields: [userId], references: [id])
+  slots     LineupSlot[]
+}
+
+model Post {
+  id        String    @id @default(uuid())
+  authorId  String
+  content   String
+  author    User      @relation(fields: [authorId], references: [id])
+  comments  Comment[]
+  likes     Like[]
+}`
           },
           tradeoffs: [
             {
@@ -495,11 +568,16 @@ CREATE TABLE messages (
               choice: "Prisma ORM เทียบกับ Raw SQL",
               why: "ช่วยเพิ่มความรวดเร็วในการพัฒนา และมอบความปลอดภัยด้านชนิดข้อมูล (Type Safety) ในการสืบค้นข้อมูลผู้เล่นและตารางจัดทีมที่เชื่อมโยงกันอย่างซับซ้อน",
               tradeoff: "อาจส่งผลกระทบต่อประสิทธิภาพหากเกิด N+1 Query โดยไม่ตั้งใจ ซึ่งจำเป็นต้องทำการจูนนิ่งความสัมพันธ์ผ่าน include หรือ select เสมอ"
+            },
+            {
+              choice: "External Football APIs พร้อม Local Fallback",
+              why: "ตารางคะแนน, โปรแกรมแข่ง, ทีม และข้อมูลผู้เล่นอัปเดตได้จากภายนอก แต่ dashboard ยังเปิดใช้งานได้เมื่อ provider โควตาหมดหรือขัดข้อง",
+              tradeoff: "ต้องมี logic normalize และจัดการ stale data ให้ดี เพื่อไม่ให้ UI แสดงข้อมูลคนละรูปแบบปะปนกัน"
             }
           ],
           scalingAndResilience: {
-            strategy: "ระบบคัดกรองการทำงานของข้อมูลด้วย DATABASE TRIGGERS",
-            description: "การคำนวณคะแนนสะสมและประวัติการจัดตัวจะถูกส่งประมวลผลในระดับ Database Layer ผ่าน Triggers เพื่อหลีกเลี่ยงการเปิดสืบค้นหนักจากฝั่งแอปพลิเคชันในช่วงสิ้นสุดการแข่งขันฟุตบอล"
+            strategy: "DATA FALLBACKS, COMMUNITY MODERATION และ ROUTE-LEVEL AUTH GUARDS",
+            description: "เส้นทางข้อมูลฟุตบอล fallback เป็น fixtures ที่เก็บไว้หรือ empty payload แทนการทำให้ dashboard พัง ส่วน community write ถูกป้องกันด้วย authenticated APIs และ middleware แยก admin-only data management/moderation ออกจาก traffic ผู้ใช้ทั่วไป"
           }
         },
         "patient-operations-system": {

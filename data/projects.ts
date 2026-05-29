@@ -47,12 +47,75 @@ export const projects: Project[] = [
     id: "eleven-lineup",
     title: "Eleven Lineup",
     description:
-      "Football lineup builder with drag-and-drop squad creation, social profiles, RBAC, and prediction game mechanics.",
+      "Football fan platform combining a drag-and-drop lineup builder, league standings, fixtures, community posts, public profiles, and replayable mini games.",
     challenge:
-      "Combined interactive pitch state, custom JWT auth in HTTP-only cookies, middleware-based permissions, Prisma models, and streak-based game flows.",
+      "Combined interactive pitch state, custom JWT auth in HTTP-only cookies, middleware-based permissions, Prisma relations, external football data, and social engagement flows.",
     outcome:
-      "Shipped a full-stack SaaS-style product with clear user identity, community behavior, and replayable engagement loops.",
+      "Shipped a full-stack football product where users can build squads, follow match context, share content, manage profiles, and return for game-driven XP loops.",
     techStack: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "JWT"],
+    coverImage: "/assets/projects/eleven-lineup-gallery/landing.png",
+    images: [
+      {
+        src: "/assets/projects/eleven-lineup-gallery/landing.png",
+        alt: "Eleven Lineup landing page with stadium background and start building call to action",
+        title: "Landing",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/sign-in.png",
+        alt: "Eleven Lineup sign in screen over the stadium background",
+        title: "Sign in",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/sign-up.png",
+        alt: "Eleven Lineup create account screen over the stadium background",
+        title: "Sign up",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/main-dashboard.png",
+        alt: "Eleven Lineup dashboard with manager center, league standings, stats, and upcoming matches",
+        title: "Main dashboard",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/profile-drawer.png",
+        alt: "Eleven Lineup profile drawer showing profile information, posts, and stats",
+        title: "Profile",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/club-selector.png",
+        alt: "Eleven Lineup club selector with league filters and search input",
+        title: "Club selector",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/community-feed.png",
+        alt: "Eleven Lineup community feed with post composer and football discussion posts",
+        title: "Community",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/notifications.png",
+        alt: "Eleven Lineup notification dropdown over the community feed",
+        title: "Notifications",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/community-post.png",
+        alt: "Eleven Lineup community post with football highlight image and reactions",
+        title: "Community post",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/mini-games-hub.png",
+        alt: "Eleven Lineup mini games hub with football quiz difficulty cards",
+        title: "Mini games hub",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/who-am-i-game.png",
+        alt: "Eleven Lineup Who Am I mini game with timed football player hint",
+        title: "Who Am I game",
+      },
+      {
+        src: "/assets/projects/eleven-lineup-gallery/guess-player-game.png",
+        alt: "Eleven Lineup Guess Player mini game with blurred player image and guess input",
+        title: "Guess Player game",
+      },
+    ],
     github: "https://github.com/Pachara2332/ElevenLineUp",
     demo: "https://elevenlineup-production.up.railway.app/",
     category: "web",
