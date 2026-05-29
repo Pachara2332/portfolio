@@ -185,19 +185,81 @@ export const projects: Project[] = [
   },
   {
     id: "childcare-dashboard",
-    title: "Childcare Dashboard",
+    title: "Childrencare",
     description:
-      "Management dashboard for childcare teams tracking development, activities, savings, payments, and reports.",
+      "Thai-first childcare center management platform with PIN login, student enrollment, online admissions, attendance, leave, announcements, development records, savings, expenses, and reports.",
     challenge:
-      "Organized multiple operational domains into a dashboard with data visualization, export flows, and responsive information density.",
+      "Unified staff-only operations and public parent-facing admissions while keeping daily classroom workflows fast enough for shared-device use.",
     outcome:
-      "Helped non-technical users understand child progress and payment status quickly, then export reports for offline sharing.",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    coverImage: "/assets/projects/childcare-dashboard.svg",
+      "Delivered a working center operations system where staff can register children, review applications, record attendance, track progress, publish updates, and export records.",
+    techStack: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS 4"],
+    coverImage: "/assets/projects/childrencare-gallery/dashboard.png",
+    images: [
+      {
+        src: "/assets/projects/childrencare-gallery/pin-login.png",
+        alt: "Childrencare PIN login screen for childcare center staff",
+        title: "PIN login",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/dashboard.png",
+        alt: "Childrencare dashboard showing daily attendance and center summaries",
+        title: "Dashboard",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/children.png",
+        alt: "Childrencare children management screen with class cards and student records",
+        title: "Children",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/applications.png",
+        alt: "Childrencare online admissions review screen with status summaries",
+        title: "Admissions review",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/public-admission.png",
+        alt: "Childrencare public admission landing page for parents",
+        title: "Public admission",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/admission-form.png",
+        alt: "Childrencare admission form collecting child and guardian details",
+        title: "Admission form",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/checkin.png",
+        alt: "Childrencare check-in and check-out screen with date and class filters",
+        title: "Check-in",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/leave.png",
+        alt: "Childrencare leave management screen for reviewing student leave records",
+        title: "Leave management",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/announcements.png",
+        alt: "Childrencare parent announcements screen with category filters",
+        title: "Announcements",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/development.png",
+        alt: "Childrencare development tracking screen for individual child progress notes",
+        title: "Development",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/activities.png",
+        alt: "Childrencare daily activities screen with classroom notes per child",
+        title: "Daily activities",
+      },
+      {
+        src: "/assets/projects/childrencare-gallery/settings.png",
+        alt: "Childrencare settings screen for academic years, GPS, and PIN configuration",
+        title: "Settings",
+      },
+    ],
     github: "https://github.com/Pachara2332/childrencare",
     demo: "https://childcare-dashboard-ten.vercel.app/",
     category: "web",
-    isFeatured: false,
+    isFeatured: true,
   },
 ];
 

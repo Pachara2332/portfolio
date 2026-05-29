@@ -281,13 +281,91 @@ model Appointment {
             "Kept sensitive logic on the server while giving Thai users a clean browser-based chat experience.",
         },
         "childcare-dashboard": {
-          title: "Childcare Dashboard",
+          title: "Childrencare",
           description:
-            "Childcare dashboard for development records, activities, payments, savings, and reports. It brings several admin tasks into one place for teachers or staff.",
+            "Thai-first childcare center management platform for nurseries and preschool classrooms. It combines PIN login, student enrollment, online admission, attendance, leave, parent announcements, development notes, daily activities, savings, expenses, reports, and settings in one operations dashboard.",
           challenge:
-            "Organized many data sections into one dashboard with charts, report export, and responsive layouts.",
+            "Designed one system for two very different flows: fast internal staff work on shared devices and public parent-facing admission forms. The implementation had to keep student status, class placement, attendance, and application review consistent across dashboard pages.",
           outcome:
-            "Users can review child progress and payment status quickly, then export reports when needed.",
+            "Staff can register children, review online applications, check students in and out, manage leave, publish announcements, record development and activity notes, track savings and payments, and export operational reports from one product.",
+          systemArchitecture: {
+            description: "Childrencare is organized around center operations. A PIN-gated staff area handles dashboard, child records, applications, check-in, leave, announcements, development, activities, finance, reports, and settings. Public routes accept parent admissions and parent-facing check-in or savings flows, while shared API handlers persist records through Prisma.",
+            diagram: ` [Public Parent Routes] -- /apply /parent/checkin /parent/saving
+             |
+             v
+ [Next.js App Router + Route Handlers]
+             |
+             +--> [PIN Staff Session]
+             |        |
+             |        v
+             |   [Dashboard Modules: Children, Admissions, Check-in, Leave,
+             |    Announcements, Development, Activities, Savings, Reports]
+             |
+             v
+ [Prisma ORM]
+             |
+             v
+ [PostgreSQL: AcademicYear, ClassLevel, Child, EnrollmentApplication,
+  CheckIn, LeaveRequest, Development, DailyActivity, Announcement, Saving, Payment]`
+          },
+          databaseSchema: {
+            description: "The schema separates long-lived child identity from yearly enrollment, applications, attendance, and classroom records. This keeps academic-year movement explicit and lets reports query operational events without duplicating child profile data.",
+            sql: `model Child {
+  id           String              @id @default(uuid())
+  firstName    String
+  lastName     String
+  birthDate    DateTime?
+  status       ChildStatus         @default(ACTIVE)
+  enrollments  ChildEnrollment[]
+  checkIns     CheckIn[]
+  leaves       LeaveRequest[]
+  development  Development[]
+  activities   DailyActivity[]
+  savings      Saving[]
+  payments     Payment[]
+}
+
+model ChildEnrollment {
+  id             String       @id @default(uuid())
+  childId        String
+  academicYearId String
+  classLevelId   String
+  child          Child        @relation(fields: [childId], references: [id])
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  classLevel     ClassLevel   @relation(fields: [classLevelId], references: [id])
+}
+
+model EnrollmentApplication {
+  id             String            @id @default(uuid())
+  academicYearId String
+  classLevelId   String
+  status         ApplicationStatus @default(PENDING)
+  childName      String
+  guardianName   String
+  guardianPhone  String
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "PIN-based staff login vs full role accounts",
+              why: "Small childcare centers often use shared front-desk or classroom devices, so a short PIN lets staff enter daily workflows quickly.",
+              tradeoff: "It is simpler for operations but less granular than per-user audit trails and role-based permissions."
+            },
+            {
+              choice: "EnrollmentApplication separated from Child",
+              why: "Parent submissions can be reviewed, rejected, or approved before becoming real student records.",
+              tradeoff: "Approval needs an explicit conversion step that maps application data into child, guardian, and enrollment records."
+            },
+            {
+              choice: "Academic-year enrollment model",
+              why: "A child can move across years and class levels without rewriting the base child profile.",
+              tradeoff: "Most roster and report queries need to include the active academic year to avoid mixing historical records with current students."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "CENTER-SCOPED WORKFLOWS, EXPORTABLE RECORDS, AND PUBLIC FORM ISOLATION",
+            description: "Operational data is organized by academic year, class level, child status, and date so staff screens can filter quickly. Public admission and parent routes are isolated from staff-only screens, while CSV/PDF export paths keep reports usable even outside the live dashboard."
+          }
         },
       },
     },
