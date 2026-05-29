@@ -265,11 +265,82 @@ model Appointment {
         "movie-management": {
           title: "Movie Operations Dashboard",
           description:
-            "Movie catalog dashboard for managing titles, posters, users, and staff roles. The app separates frontend and backend work, with protected pages for content operations.",
+            "React and TypeScript movie management frontend for an exam project, with authenticated catalog operations, poster uploads, list and grid views, and role-aware controls backed by a REST API.",
           challenge:
-            "Implemented login, cookie-based auth, role checks, poster upload, search, sorting, and API integration.",
+            "Implemented login, registration, protected dashboard session checks, CRUD flows, rating validation, poster upload, search, sorting, and manager-only delete visibility while keeping backend authorization as the final guard.",
           outcome:
-            "Manager-only actions stay protected while staff can still manage daily movie content.",
+            "Delivered a responsive movie operations tool where MANAGER users can test deletion, TEAMLEADER and FLOORSTAFF users can manage routine catalog work, and session state stays tied to HttpOnly cookies through withCredentials requests.",
+          systemArchitecture: {
+            description: "The frontend runs as a Vite React app and talks to a Node/Express API through same-origin /api routing in local and Vercel environments. Auth state is loaded through /auth/me, protected routes gate the dashboard, and Axios centralizes credentialed requests and 401 handling.",
+            diagram: ` [React Router App]
+          |
+          v
+ [ProtectedRoute + Auth Store] -- /auth/me session check
+          |
+          v
+ [Axios Client withCredentials] -- VITE_API_BASE_URL=/api
+          |
+          v
+ [Express REST API]
+          |
+          +--> [Auth: login, register, logout, JWT cookie]
+          +--> [Movies: CRUD, poster upload, RBAC delete guard]
+          |
+          v
+ [Prisma ORM + PostgreSQL]`
+          },
+          databaseSchema: {
+            description: "The backend keeps users and movies simple for the exam scope while still making role checks explicit. Newly registered users are assigned FLOORSTAFF by the backend, and deletion is restricted to MANAGER users.",
+            sql: `model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  role      Role     @default(FLOORSTAFF)
+}
+
+model Movie {
+  id           Int      @id @default(autoincrement())
+  title        String
+  yearReleased Int
+  rating       Rating
+  imageUrl     String?
+}
+
+enum Role {
+  MANAGER
+  TEAMLEADER
+  FLOORSTAFF
+}
+
+enum Rating {
+  G
+  PG
+  M
+  MA
+  R
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "HttpOnly cookie session vs localStorage token",
+              why: "The browser can send the session automatically while JavaScript cannot read the token, reducing exposure if client-side code is compromised.",
+              tradeoff: "Local development and deployment need same-origin proxy or rewrite rules plus withCredentials on every API call."
+            },
+            {
+              choice: "Client-side search and sorting",
+              why: "The movie list is small and already loaded for the dashboard, so filtering by title and sorting by year, title, or rating stays instant without extra endpoints.",
+              tradeoff: "A larger catalog would eventually need API pagination and server-side query parameters."
+            },
+            {
+              choice: "Hide manager-only delete in UI while enforcing RBAC in backend",
+              why: "The interface stays clear for TEAMLEADER and FLOORSTAFF users, but the backend remains the source of truth for destructive actions.",
+              tradeoff: "Permissions are represented in both UI state and API middleware, so role changes must stay consistent across layers."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "SESSION RECOVERY, API SERVICES, AND MEMOIZED DASHBOARD DATA",
+            description: "Auth helpers clear cached user state and redirect to login on 401 responses. Movie API calls are isolated in service classes, while useMemo keeps dashboard summary cards, search results, and sorted views inexpensive to recompute."
+          }
         },
         "thai-ai-chatbot": {
           title: "Thai AI Chat Assistant",
@@ -726,11 +797,82 @@ model Appointment {
         "movie-management": {
           title: "Movie Operations Dashboard",
           description:
-            "Dashboard จัดการหนังสำหรับดูแล title, poster, user และ role ของทีมงาน แยก frontend/backend และมีหน้าที่ต้อง login ก่อนใช้งาน",
+            "Frontend จัดการภาพยนตร์ด้วย React และ TypeScript สำหรับงานสอบ มีระบบยืนยันตัวตน จัดการหนัง อัปโหลดโปสเตอร์ มุมมอง list/grid และควบคุมสิทธิ์ตาม role ผ่าน REST API",
           challenge:
-            "ทำ login, cookie-based auth, role check, อัปโหลดโปสเตอร์, ค้นหา, sort และเชื่อม API",
+            "ทำ login/register, ตรวจ session ของ dashboard, CRUD หนัง, validate rating, upload poster, search/sort และซ่อนปุ่มลบตามสิทธิ์ โดยให้ backend ตรวจ MANAGER ซ้ำอีกชั้น",
           outcome:
-            "action สำคัญถูกจำกัดตามสิทธิ์ แต่ staff ยังจัดการข้อมูลประจำวันได้สะดวก",
+            "ได้ dashboard ที่ responsive สำหรับ MANAGER, TEAMLEADER และ FLOORSTAFF โดย MANAGER ใช้ทดสอบการลบได้ ส่วน session ใช้ HttpOnly cookie และ Axios withCredentials",
+          systemArchitecture: {
+            description: "Frontend เป็น Vite React app ที่เรียก Node/Express API ผ่าน path /api ทั้งตอนรัน local และ deploy บน Vercel เพื่อให้ cookie ทำงานแบบ same-origin. ProtectedRoute โหลด /auth/me เพื่อตรวจ session และ Axios client รวมการส่ง credential กับการจัดการ 401 ไว้จุดเดียว",
+            diagram: ` [React Router App]
+          |
+          v
+ [ProtectedRoute + Auth Store] -- /auth/me session check
+          |
+          v
+ [Axios Client withCredentials] -- VITE_API_BASE_URL=/api
+          |
+          v
+ [Express REST API]
+          |
+          +--> [Auth: login, register, logout, JWT cookie]
+          +--> [Movies: CRUD, poster upload, RBAC delete guard]
+          |
+          v
+ [Prisma ORM + PostgreSQL]`
+          },
+          databaseSchema: {
+            description: "Backend ใช้ model ผู้ใช้และหนังแบบตรงไปตรงมาสำหรับ scope งานสอบ แต่ยังคงแยก role ชัดเจน ผู้ใช้ที่สมัครใหม่ถูกกำหนดเป็น FLOORSTAFF และการลบจำกัดเฉพาะ MANAGER",
+            sql: `model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  role      Role     @default(FLOORSTAFF)
+}
+
+model Movie {
+  id           Int      @id @default(autoincrement())
+  title        String
+  yearReleased Int
+  rating       Rating
+  imageUrl     String?
+}
+
+enum Role {
+  MANAGER
+  TEAMLEADER
+  FLOORSTAFF
+}
+
+enum Rating {
+  G
+  PG
+  M
+  MA
+  R
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "HttpOnly cookie session vs localStorage token",
+              why: "ให้ browser ส่ง session อัตโนมัติ โดย JavaScript อ่าน token ไม่ได้ ลดความเสี่ยงเมื่อ client มีปัญหาด้าน XSS",
+              tradeoff: "ต้องตั้ง proxy/rewrite ให้เป็น same-origin และส่ง withCredentials ทุกครั้งที่เรียก API"
+            },
+            {
+              choice: "Client-side search and sorting",
+              why: "รายการหนังมีขนาดเล็กและโหลดมาแล้ว จึงค้นหาตามชื่อและเรียงตามปี ชื่อ หรือ rating ได้เร็วโดยไม่ต้องเพิ่ม endpoint",
+              tradeoff: "ถ้าข้อมูลใหญ่ขึ้นควรย้ายไปใช้ pagination และ query ฝั่ง API"
+            },
+            {
+              choice: "Hide manager-only delete in UI while enforcing RBAC in backend",
+              why: "TEAMLEADER และ FLOORSTAFF เห็นหน้าจอที่ไม่รก แต่ backend ยังเป็นด่านสุดท้ายของ action ที่ทำลายข้อมูล",
+              tradeoff: "ต้องดูแล permission ทั้งใน UI และ middleware ให้สอดคล้องกัน"
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "SESSION RECOVERY, API SERVICES, AND MEMOIZED DASHBOARD DATA",
+            description: "Auth helper ล้าง cache ผู้ใช้และ redirect กลับ login เมื่อเจอ 401. การเรียก API ถูกแยกเป็น service classes และใช้ useMemo กับ summary card, search result และ sorted view เพื่อลดงานคำนวณซ้ำ"
+          }
         },
         "thai-ai-chatbot": {
           title: "Thai AI Chat Assistant",

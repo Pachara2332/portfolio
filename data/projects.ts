@@ -160,12 +160,44 @@ export const projects: Project[] = [
     outcome:
       "Created an internal tool pattern that makes content operations safer and faster without exposing manager-only actions to staff roles.",
     techStack: ["React 19", "TypeScript", "Vite", "React Router", "Axios", "Tailwind CSS"],
-    coverImage: "/assets/projects/movie-management.svg",
+    coverImage: "/assets/projects/movie-management-gallery/dashboard-grid.png",
+    images: [
+      {
+        src: "/assets/projects/movie-management-gallery/login.png",
+        alt: "Movie Management login screen with a split catalog hero and sign in form",
+        title: "Sign in",
+      },
+      {
+        src: "/assets/projects/movie-management-gallery/register.png",
+        alt: "Movie Management registration screen showing default floor staff account creation",
+        title: "Register",
+      },
+      {
+        src: "/assets/projects/movie-management-gallery/dashboard-list.png",
+        alt: "Movie Management protected dashboard in list view with role badge and movie actions",
+        title: "Dashboard list",
+      },
+      {
+        src: "/assets/projects/movie-management-gallery/dashboard-grid.png",
+        alt: "Movie Management protected dashboard in poster grid view with search and sorting controls",
+        title: "Dashboard grid",
+      },
+      {
+        src: "/assets/projects/movie-management-gallery/create-movie.png",
+        alt: "Movie Management create movie form with title, year, rating, and poster upload controls",
+        title: "Create movie",
+      },
+      {
+        src: "/assets/projects/movie-management-gallery/edit-movie.png",
+        alt: "Movie Management edit movie form with existing poster preview and update action",
+        title: "Edit movie",
+      },
+    ],
     github: "https://github.com/Pachara2332/movie-frontend-management",
     githubBackend: "https://github.com/Pachara2332/movie-backend-management",
     demo: "https://movie-frontend-management.vercel.app",
     category: "web",
-    isFeatured: false,
+    isFeatured: true,
   },
   {
     id: "thai-ai-chatbot",
