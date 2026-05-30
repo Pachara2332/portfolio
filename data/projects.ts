@@ -137,20 +137,6 @@ export const projects: Project[] = [
     isFeatured: true,
   },
   {
-    id: "rider-delivery-app",
-    title: "Delivery Operations Platform",
-    description:
-      "Real-time logistics and dispatch platform featuring specialized courier apps, live routing telemetry, and an automated dispatch dashboard.",
-    challenge:
-      "Engineered live location synchronization, decoupled client/rider web services, handled transition states, and integrated map telemetry.",
-    outcome:
-      "Ensured consistent operational state sync, reducing delivery coordinate updates to sub-second latency.",
-    techStack: ["Flutter", "TypeScript", "Node.js", "PostgreSQL", "Firebase"],
-    github: "https://github.com/Pachara2332/rider-delivery-app",
-    category: "mobile",
-    isFeatured: true,
-  },
-  {
     id: "movie-management",
     title: "Movie Operations Dashboard",
     description:

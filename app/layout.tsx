@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type React from "react";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
@@ -88,6 +89,7 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background font-sans text-foreground">
         {children}
+        <Analytics />
       </body>
     </html>
   );
