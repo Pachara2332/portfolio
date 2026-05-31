@@ -1,0 +1,67 @@
+<svg width="1440" height="810" viewBox="0 0 1440 810" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="810" fill="#080808"/>
+  <circle cx="1180" cy="80" r="360" fill="url(#glow)" opacity=".55"/>
+  <circle cx="180" cy="760" r="300" fill="url(#glow)" opacity=".3"/>
+  <path d="M0 655C238 575 422 597 628 674C859 760 1098 758 1440 595V810H0V655Z" fill="#101011"/>
+  <text x="88" y="122" fill="#F8B92F" font-family="Georgia, serif" font-size="32" font-weight="700" letter-spacing="8">NOIR</text>
+  <text x="88" y="214" fill="#FAF7EF" font-family="Arial, sans-serif" font-size="74" font-weight="800">Cinema, curated.</text>
+  <text x="91" y="274" fill="#A4A4AA" font-family="Arial, sans-serif" font-size="25">Luxury mobile booking with realtime seat availability.</text>
+  <rect x="90" y="335" width="172" height="54" rx="27" fill="#F8B92F"/>
+  <text x="132" y="370" fill="#080808" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="2">EXPO APP</text>
+
+  <g transform="translate(735 70)">
+    <rect width="266" height="620" rx="32" fill="#171719" stroke="#323236" stroke-width="3"/>
+    <rect x="12" y="12" width="242" height="596" rx="24" fill="#080808"/>
+    <text x="30" y="63" fill="#F8B92F" font-family="Georgia, serif" font-size="24" font-weight="700">NOIR</text>
+    <text x="30" y="118" fill="#FAF7EF" font-family="Arial, sans-serif" font-size="29" font-weight="800">Movies</text>
+    <rect x="30" y="144" width="206" height="34" rx="17" fill="#202023"/>
+    <rect x="34" y="148" width="91" height="26" rx="13" fill="#F8B92F"/>
+    <text x="51" y="166" fill="#080808" font-family="Arial, sans-serif" font-size="10" font-weight="700">NOW PLAYING</text>
+    <rect x="30" y="208" width="96" height="151" rx="10" fill="url(#posterA)" stroke="#F8B92F"/>
+    <rect x="140" y="208" width="96" height="151" rx="10" fill="url(#posterB)" stroke="#F8B92F"/>
+    <text x="30" y="386" fill="#FAF7EF" font-family="Arial, sans-serif" font-size="14" font-weight="700">The Golden Balcony</text>
+    <text x="140" y="386" fill="#FAF7EF" font-family="Arial, sans-serif" font-size="14" font-weight="700">Velvet After Dark</text>
+    <rect x="12" y="554" width="242" height="54" rx="0" fill="#1D1D20"/>
+    <circle cx="54" cy="577" r="8" stroke="#F8B92F" stroke-width="3"/>
+    <circle cx="133" cy="577" r="8" stroke="#88888E" stroke-width="3"/>
+    <circle cx="211" cy="577" r="8" stroke="#88888E" stroke-width="3"/>
+  </g>
+
+  <g transform="translate(1043 118)">
+    <rect width="266" height="620" rx="32" fill="#171719" stroke="#323236" stroke-width="3"/>
+    <rect x="12" y="12" width="242" height="596" rx="24" fill="#080808"/>
+    <text x="31" y="62" fill="#FAF7EF" font-family="Arial, sans-serif" font-size="22" font-weight="800">Select Seats</text>
+    <rect x="42" y="96" width="182" height="5" rx="2.5" fill="#F8B92F"/>
+    <text x="109" y="134" fill="#FAF7EF" font-family="Arial, sans-serif" font-size="12" font-weight="700">SCREEN</text>
+    <g fill="#E63D32">
+      <path d="M42 180h12v8H42zM60 180h12v8H60zM78 180h12v8H78zM96 180h12v8H96zM114 180h12v8h-12zM132 180h12v8h-12zM150 180h12v8h-12zM168 180h12v8h-12zM186 180h12v8h-12zM204 180h12v8h-12z"/>
+      <path d="M42 198h12v8H42zM60 198h12v8H60zM78 198h12v8H78zM96 198h12v8H96zM114 198h12v8h-12zM132 198h12v8h-12zM150 198h12v8h-12zM168 198h12v8h-12zM186 198h12v8h-12zM204 198h12v8h-12z"/>
+      <path d="M42 270h12v8H42zM60 270h12v8H60zM78 270h12v8H78zM96 270h12v8H96zM114 270h12v8h-12zM132 270h12v8h-12zM150 270h12v8h-12zM168 270h12v8h-12zM186 270h12v8h-12zM204 270h12v8h-12z"/>
+      <path d="M42 288h12v8H42zM60 288h12v8H60zM78 288h12v8H78zM96 288h12v8H96zM114 288h12v8h-12zM132 288h12v8h-12zM150 288h12v8h-12zM168 288h12v8h-12zM186 288h12v8h-12zM204 288h12v8h-12z"/>
+    </g>
+    <g fill="#7741CE">
+      <path d="M42 222h12v8H42zM60 222h12v8H60zM78 222h12v8H78zM96 222h12v8H96zM114 222h12v8h-12zM132 222h12v8h-12zM150 222h12v8h-12zM168 222h12v8h-12zM186 222h12v8h-12zM204 222h12v8h-12z"/>
+      <path d="M42 240h12v8H42zM60 240h12v8H60zM78 240h12v8H78zM96 240h12v8H96zM114 240h12v8h-12zM132 240h12v8h-12zM150 240h12v8h-12zM168 240h12v8h-12zM186 240h12v8h-12zM204 240h12v8h-12z"/>
+    </g>
+    <rect x="30" y="350" width="206" height="88" rx="12" fill="#1B1B1E" stroke="#36363B"/>
+    <text x="44" y="380" fill="#9B9BA1" font-family="Arial, sans-serif" font-size="11">SELECTED</text>
+    <text x="44" y="411" fill="#FAF7EF" font-family="Arial, sans-serif" font-size="18" font-weight="700">M17, N16</text>
+    <text x="175" y="411" fill="#F8B92F" font-family="Arial, sans-serif" font-size="18" font-weight="700">B1180</text>
+    <rect x="30" y="465" width="206" height="50" rx="14" fill="#F8B92F"/>
+    <text x="75" y="496" fill="#080808" font-family="Arial, sans-serif" font-size="15" font-weight="700">Confirm booking</text>
+  </g>
+  <defs>
+    <radialGradient id="glow">
+      <stop stop-color="#F8B92F" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#F8B92F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="posterA" x1="30" y1="208" x2="126" y2="359">
+      <stop stop-color="#EEE3C3"/>
+      <stop offset="1" stop-color="#8A6637"/>
+    </linearGradient>
+    <linearGradient id="posterB" x1="140" y1="208" x2="236" y2="359">
+      <stop stop-color="#3B1115"/>
+      <stop offset="1" stop-color="#080808"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -2,6 +2,7 @@ import { Skill } from "@/types";
 
 export const skills: Skill[] = [
   { name: "React", icon: "atom", category: "frontendMobile" },
+  { name: "React Native", icon: "smartphone", category: "frontendMobile" },
   { name: "Next.js", icon: "globe", category: "frontendMobile" },
   { name: "Angular", icon: "code", category: "frontendMobile" },
   { name: "Flutter", icon: "smartphone", category: "frontendMobile" },
@@ -16,6 +17,7 @@ export const skills: Skill[] = [
   { name: "PostgreSQL", icon: "database", category: "database" },
   { name: "MySQL", icon: "database", category: "database" },
   { name: "Firebase", icon: "flame", category: "database" },
+  { name: "Supabase", icon: "database", category: "database" },
   { name: "Prisma", icon: "database", category: "toolsOrm" },
   { name: "Git", icon: "git-branch", category: "toolsOrm" },
   { name: "Postman", icon: "zap", category: "toolsOrm" },

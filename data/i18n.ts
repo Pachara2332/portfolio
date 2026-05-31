@@ -351,6 +351,83 @@ enum Rating {
           outcome:
             "Kept sensitive logic on the server while giving Thai users a clean browser-based chat experience.",
         },
+        "noir-cinema-booking": {
+          title: "Noir Cinema Booking",
+          description:
+            "Luxury noir cinema booking app for Expo and React Native with movie discovery, nearby venues, realtime seat availability, digital tickets, and profile management.",
+          challenge:
+            "Connected persisted Supabase sessions, protected Expo Router screens, GPS-sorted cinemas, realtime seat state, and client-side booking checks inside a polished mobile flow.",
+          outcome:
+            "Users can browse screenings, compare nearby cinemas, reserve seats, review tickets, and update their profile from one focused mobile experience.",
+          systemArchitecture: {
+            description: "The Expo Router app separates public authentication routes from protected movie, cinema, ticket, and profile screens. Supabase Auth sessions persist through AsyncStorage, while the data layer reads movies, cinemas, showtimes, seats, bookings, and user profiles from PostgreSQL. Seat-map screens subscribe to Supabase Realtime changes, and nearby cinema results use Expo Location for distance sorting. React Native Maps is native-only, so web uses a platform-specific fallback with optional MapTiler support.",
+            diagram: ` [Expo Router App]
+          |
+          +--> [Auth Routes] -- Supabase Auth
+          |         |
+          |         +--> [AsyncStorage Session]
+          |
+          v
+ [Protected Tabs]
+ Movies | Cinemas | Tickets | Profile
+          |
+          +--> [Expo Location] --> GPS Distance Sorting
+          +--> [Native Map / Web Fallback]
+          |
+          v
+ [Supabase Client]
+          |
+          +--> [PostgreSQL + RLS]
+          +--> [Realtime Seat Updates]`
+          },
+          databaseSchema: {
+            description: "The schema keeps cinema catalog data separate from transaction data. A showtime links one movie to one cinema, each seat belongs to a showtime, and each booking is owned by an authenticated user. Supabase RLS policies protect profile and booking access, while the seats table is published to Realtime for availability updates.",
+            sql: `CREATE TABLE public.showtimes (
+  id UUID PRIMARY KEY,
+  movie_id UUID NOT NULL REFERENCES public.movies(id),
+  cinema_id UUID NOT NULL REFERENCES public.cinemas(id),
+  starts_at TIMESTAMPTZ NOT NULL
+);
+
+CREATE TABLE public.seats (
+  id UUID PRIMARY KEY,
+  showtime_id UUID NOT NULL REFERENCES public.showtimes(id),
+  row_label TEXT NOT NULL,
+  seat_number INTEGER NOT NULL,
+  price_modifier NUMERIC NOT NULL DEFAULT 0,
+  is_booked BOOLEAN NOT NULL DEFAULT FALSE,
+  UNIQUE (showtime_id, row_label, seat_number)
+);
+
+CREATE TABLE public.bookings (
+  id UUID PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES auth.users(id),
+  showtime_id UUID NOT NULL REFERENCES public.showtimes(id),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);`
+          },
+          tradeoffs: [
+            {
+              choice: "Supabase Realtime vs a custom socket service",
+              why: "Publishing seat changes through Supabase keeps the mobile clients synchronized without introducing a separate websocket backend.",
+              tradeoff: "Realtime updates improve visibility but do not make booking atomic. Production booking still needs a Postgres RPC transaction."
+            },
+            {
+              choice: "Client-side booking checks for the current scope",
+              why: "The first version can validate selected seats and write bookings with a compact Expo-to-Supabase flow.",
+              tradeoff: "Two users could attempt the same seat at nearly the same time. A book_seats RPC and timed seat holds are the required production hardening path."
+            },
+            {
+              choice: "Native maps with a web fallback",
+              why: "React Native Maps provides the expected mobile map experience, while a platform-specific fallback keeps the Expo web build usable.",
+              tradeoff: "The project maintains separate map implementations and MapTiler configuration for the browser path."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "ATOMIC BOOKING RPC, TIMED HOLDS, AND RLS-PROTECTED REALTIME DATA",
+            description: "The current implementation is a strong product prototype: RLS limits data access, persisted sessions keep users signed in, and Realtime refreshes seat availability. For production traffic, the next step is a Postgres book_seats RPC that locks or conditionally updates selected seats inside one transaction. Timed seat holds and payment-state transitions would prevent abandoned selections from blocking inventory."
+          }
+        },
         "childcare-dashboard": {
           title: "Childrencare",
           description:
@@ -882,6 +959,83 @@ enum Rating {
             "ทำ chat loop, AI routing ฝั่ง server, ซ่อน API key, จำกัดประวัติข้อความ และจัดการ error state",
           outcome:
             "เก็บ logic ที่อ่อนไหวไว้ฝั่ง server และให้ผู้ใช้ไทยคุยกับ AI ผ่าน browser ได้ง่าย",
+        },
+        "noir-cinema-booking": {
+          title: "Noir Cinema Booking",
+          description:
+            "แอปจองตั๋วภาพยนตร์สไตล์ luxury noir บน Expo และ React Native พร้อมระบบค้นหาหนัง โรงภาพยนตร์ใกล้เคียง ที่นั่งแบบ realtime ตั๋วดิจิทัล และโปรไฟล์ผู้ใช้",
+          challenge:
+            "เชื่อม session ของ Supabase, protected routes, การเรียงโรงภาพยนตร์ตามระยะ GPS, สถานะที่นั่ง realtime และ flow การจองไว้ในประสบการณ์มือถือที่ใช้งานต่อเนื่อง",
+          outcome:
+            "ผู้ใช้เลือกภาพยนตร์ ค้นหาโรงใกล้ตัว จองที่นั่ง ตรวจสอบตั๋ว และแก้ไขโปรไฟล์ได้จากแอปเดียว",
+          systemArchitecture: {
+            description: "แอป Expo Router แยกหน้า auth สาธารณะออกจากหน้า movies, cinemas, tickets และ profile ที่ต้องล็อกอินก่อนใช้งาน Supabase Auth เก็บ session ต่อเนื่องผ่าน AsyncStorage ส่วน data layer อ่านข้อมูลหนัง โรงภาพยนตร์ รอบฉาย ที่นั่ง การจอง และโปรไฟล์จาก PostgreSQL หน้าผังที่นั่ง subscribe การเปลี่ยนแปลงผ่าน Supabase Realtime และหน้าโรงภาพยนตร์ใกล้เคียงใช้ Expo Location เพื่อเรียงตามระยะทาง สำหรับ web จะใช้ fallback แยกต่างหากเพราะ React Native Maps รองรับเฉพาะ native",
+            diagram: ` [Expo Router App]
+          |
+          +--> [Auth Routes] -- Supabase Auth
+          |         |
+          |         +--> [AsyncStorage Session]
+          |
+          v
+ [Protected Tabs]
+ Movies | Cinemas | Tickets | Profile
+          |
+          +--> [Expo Location] --> GPS Distance Sorting
+          +--> [Native Map / Web Fallback]
+          |
+          v
+ [Supabase Client]
+          |
+          +--> [PostgreSQL + RLS]
+          +--> [Realtime Seat Updates]`
+          },
+          databaseSchema: {
+            description: "โครงสร้างฐานข้อมูลแยกข้อมูล catalog ออกจากข้อมูลธุรกรรม รอบฉายเชื่อมหนังหนึ่งเรื่องกับโรงภาพยนตร์หนึ่งแห่ง ที่นั่งแต่ละตัวผูกกับรอบฉาย และ booking เป็นของผู้ใช้ที่ล็อกอิน Supabase RLS ป้องกันการเข้าถึงโปรไฟล์และรายการจอง ส่วน seats ถูก publish สำหรับ Realtime เพื่ออัปเดตสถานะว่าง",
+            sql: `CREATE TABLE public.showtimes (
+  id UUID PRIMARY KEY,
+  movie_id UUID NOT NULL REFERENCES public.movies(id),
+  cinema_id UUID NOT NULL REFERENCES public.cinemas(id),
+  starts_at TIMESTAMPTZ NOT NULL
+);
+
+CREATE TABLE public.seats (
+  id UUID PRIMARY KEY,
+  showtime_id UUID NOT NULL REFERENCES public.showtimes(id),
+  row_label TEXT NOT NULL,
+  seat_number INTEGER NOT NULL,
+  price_modifier NUMERIC NOT NULL DEFAULT 0,
+  is_booked BOOLEAN NOT NULL DEFAULT FALSE,
+  UNIQUE (showtime_id, row_label, seat_number)
+);
+
+CREATE TABLE public.bookings (
+  id UUID PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES auth.users(id),
+  showtime_id UUID NOT NULL REFERENCES public.showtimes(id),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);`
+          },
+          tradeoffs: [
+            {
+              choice: "Supabase Realtime แทน custom socket service",
+              why: "ส่งการเปลี่ยนแปลงของที่นั่งไปยังแอปมือถือได้โดยไม่ต้องดูแล websocket backend แยกอีกชุด",
+              tradeoff: "Realtime ช่วยให้เห็นสถานะล่าสุด แต่ไม่ได้ทำให้การจองเป็น atomic ดังนั้น production ยังต้องใช้ Postgres RPC transaction"
+            },
+            {
+              choice: "ตรวจสอบการจองฝั่ง client สำหรับ scope ปัจจุบัน",
+              why: "เวอร์ชันแรกตรวจสอบที่นั่งและเขียน booking ผ่าน flow Expo-to-Supabase ที่กระชับได้",
+              tradeoff: "ผู้ใช้สองคนอาจเลือกที่นั่งเดียวกันเกือบพร้อมกัน จึงควรเพิ่ม book_seats RPC และ timed seat holds ก่อนใช้งานจริง"
+            },
+            {
+              choice: "Native maps พร้อม web fallback",
+              why: "React Native Maps ให้ประสบการณ์แผนที่ที่เหมาะกับมือถือ และ fallback แยกทำให้ Expo web ยังใช้งานได้",
+              tradeoff: "ต้องดูแล implementation ของแผนที่สองแบบและตั้งค่า MapTiler สำหรับ browser"
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "ATOMIC BOOKING RPC, TIMED HOLDS, AND RLS-PROTECTED REALTIME DATA",
+            description: "เวอร์ชันปัจจุบันเป็น product prototype ที่ครบ flow: RLS จำกัดสิทธิ์ข้อมูล session ถูกเก็บต่อเนื่อง และ Realtime อัปเดตสถานะที่นั่ง สำหรับ production ควรเพิ่ม Postgres book_seats RPC ที่ล็อกหรือ conditional update ที่นั่งทั้งหมดภายใน transaction เดียว รวมถึง timed seat holds และสถานะ payment เพื่อไม่ให้การเลือกที่ถูกทิ้งไว้บล็อก inventory"
+          }
         },
         "childcare-dashboard": {
           title: "Childcare Dashboard",

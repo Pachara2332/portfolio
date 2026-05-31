@@ -112,7 +112,13 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                 </div>
 
                 <div className="group/gallery relative overflow-hidden rounded-xl border border-border/75 bg-background">
-                  <div className="relative aspect-[16/9]">
+                  <div
+                    className={`relative ${
+                      project.category === "mobile"
+                        ? "mx-auto aspect-[9/16] w-full max-w-sm"
+                        : "aspect-[16/9]"
+                    }`}
+                  >
                     <Image
                       src={activeImage.src}
                       alt={activeImage.alt}
@@ -164,7 +170,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                           alt=""
                           fill
                           sizes="144px"
-                          className="object-cover"
+                          className={project.category === "mobile" ? "object-contain" : "object-cover"}
                         />
                       </button>
                     ))}

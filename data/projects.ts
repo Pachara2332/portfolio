@@ -202,6 +202,52 @@ export const projects: Project[] = [
     isFeatured: false,
   },
   {
+    id: "noir-cinema-booking",
+    title: "Noir Cinema Booking",
+    description:
+      "Luxury noir cinema booking app with Supabase authentication, movie discovery, nearby cinemas, realtime seat availability, ticket history, and profile management.",
+    challenge:
+      "Combined a polished mobile-first cinema experience with persisted sessions, GPS-sorted venues, realtime seat updates, and a booking flow that keeps seat state in sync.",
+    outcome:
+      "Delivered an Expo app that guides users from movie discovery to seat reservation and digital tickets while keeping the interface focused and premium.",
+    techStack: ["Expo SDK 56", "React Native", "Expo Router", "TypeScript", "Supabase"],
+    coverImage: "/assets/projects/noir-cinema-booking.svg",
+    images: [
+      {
+        src: "/assets/projects/noir-cinema-booking-gallery/movies.png",
+        alt: "Noir cinema app movies screen with now playing titles and premium noir styling",
+        title: "Now playing movies",
+      },
+      {
+        src: "/assets/projects/noir-cinema-booking-gallery/cinemas.png",
+        alt: "Noir cinema app nearby cinemas screen with map preview and distance-sorted venues",
+        title: "Nearby cinemas",
+      },
+      {
+        src: "/assets/projects/noir-cinema-booking-gallery/tickets.png",
+        alt: "Noir cinema app my tickets screen showing the empty active passes state",
+        title: "My tickets",
+      },
+      {
+        src: "/assets/projects/noir-cinema-booking-gallery/seat-map.png",
+        alt: "Noir cinema app seat selection screen with auditorium layout and seat categories",
+        title: "Seat map",
+      },
+      {
+        src: "/assets/projects/noir-cinema-booking-gallery/seat-selection.png",
+        alt: "Noir cinema app seat selection screen with selected seats and booking total",
+        title: "Booking confirmation",
+      },
+      {
+        src: "/assets/projects/noir-cinema-booking-gallery/account.png",
+        alt: "Noir cinema app account screen with membership details and personal information",
+        title: "Member profile",
+      },
+    ],
+    category: "mobile",
+    isFeatured: false,
+  },
+  {
     id: "childcare-dashboard",
     title: "Childrencare",
     description:
