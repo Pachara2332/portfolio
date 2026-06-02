@@ -219,24 +219,29 @@ export const projects: Project[] = [
         demo: "https://line-oa-member-liff.vercel.app/join?source=ORGANIC&demo=1",
         images: [
           {
-            src: "/assets/projects/line-oa-member-liff-gallery/welcome.svg",
-            alt: "LINE OA membership welcome screen with green call to action",
+            src: "/assets/projects/line-oa-member-liff-real-gallery/liff-welcome.png",
+            alt: "LINE OA membership welcome screen inside the LINE in-app browser",
             title: "LIFF welcome",
           },
           {
-            src: "/assets/projects/line-oa-member-liff-gallery/register.svg",
-            alt: "LINE OA member registration form with acquisition source",
+            src: "/assets/projects/line-oa-member-liff-real-gallery/member-registration.png",
+            alt: "LINE OA member registration form with member details and acquisition source",
             title: "Member registration",
           },
           {
-            src: "/assets/projects/line-oa-member-liff-gallery/date-picker.svg",
-            alt: "LINE OA registration birth date picker on the member form",
+            src: "/assets/projects/line-oa-member-liff-real-gallery/birth-date-picker.png",
+            alt: "LINE OA registration birth date picker open on the member form",
             title: "Birth date input",
           },
           {
-            src: "/assets/projects/line-oa-member-liff-gallery/coupons.svg",
-            alt: "LINE OA member benefits screen with claimable coupons",
+            src: "/assets/projects/line-oa-member-liff-real-gallery/member-coupons.png",
+            alt: "LINE OA member benefits screen with a welcome message and claimable coupons",
             title: "Member coupons",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-real-gallery/claimed-coupons.png",
+            alt: "LINE OA member benefits screen showing claimed and available coupons",
+            title: "Coupon claims",
           },
         ],
       },
@@ -246,19 +251,54 @@ export const projects: Project[] = [
         demo: "https://line-oa-mvp.vercel.app/login",
         images: [
           {
-            src: "/assets/projects/line-oa-member-liff-gallery/admin-login.svg",
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-login.png",
             alt: "LINE OA CRM admin dashboard login screen",
             title: "Admin login",
           },
           {
-            src: "/assets/projects/line-oa-member-liff-gallery/admin-dashboard.svg",
-            alt: "LINE OA CRM dashboard overview with member growth and coupon metrics",
-            title: "CRM overview",
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-overview-th.png",
+            alt: "LINE OA CRM dashboard overview in Thai with member growth and coupon metrics",
+            title: "CRM overview (TH)",
           },
           {
-            src: "/assets/projects/line-oa-member-liff-gallery/admin-qr-sources.svg",
-            alt: "LINE OA CRM QR source attribution management screen",
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-overview-en.png",
+            alt: "LINE OA CRM dashboard overview in English with member growth and coupon metrics",
+            title: "CRM overview (EN)",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-members.png",
+            alt: "LINE OA CRM member management table with contact details and QR attribution",
+            title: "Member management",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-coupons.png",
+            alt: "LINE OA CRM coupon management table with quotas, claims, and status",
+            title: "Coupon management",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-qr-sources.png",
+            alt: "LINE OA CRM QR source attribution table with QR codes and member counts",
             title: "QR source attribution",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-claims.png",
+            alt: "LINE OA CRM coupon claim table with claimed, used, and redeem states",
+            title: "Coupon claims",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-brands.png",
+            alt: "LINE OA CRM tenant brand management table with source, member, and coupon totals",
+            title: "Brand management",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-settings.png",
+            alt: "LINE OA CRM settings screen with integration readiness and security checklist",
+            title: "Settings",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-real-gallery/admin-logout-dialog.png",
+            alt: "LINE OA CRM logout confirmation dialog over the settings screen",
+            title: "Logout confirmation",
           },
         ],
       },
