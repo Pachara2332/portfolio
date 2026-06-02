@@ -583,8 +583,9 @@ model EnrollmentApplication {
       subtitle:
         "I like building software that is simple, useful, and maintainable.",
       notes: [
-        "I mostly work with full-stack TypeScript, from API and database structure to the screens people use.",
-        "My projects include dashboards, AI tools, mobile apps, and IoT systems.",
+        "My main focus is full-stack TypeScript, from APIs and databases to the screens people use every day. I am interested in building web and mobile applications, and in designing systems that solve real problems without adding unnecessary complexity.",
+        "My projects include dashboards, AI tools, mobile apps, LINE LIFF, and IoT systems, along with integrations for APIs, authentication, payments, and real-time data.",
+        "I enjoy learning by building, experimenting with new technologies, and making systems easier to use for both users and developers.",
       ],
       principles: [
         "Clarity before cleverness",
@@ -1114,8 +1115,9 @@ CREATE TABLE public.bookings (
       subtitle:
         "ผมชอบทำ software ที่เรียบง่าย ใช้งานได้จริง และดูแลต่อได้",
       notes: [
-        "งานหลักของผมอยู่ที่ full-stack TypeScript ตั้งแต่ API และฐานข้อมูล ไปจนถึงหน้าจอที่ผู้ใช้เห็น",
-        "โปรเจกต์ที่เคยทำมีทั้ง dashboard, AI tools, mobile app และ IoT",
+        "งานหลักของผมอยู่ที่ full-stack TypeScript ตั้งแต่ API ฐานข้อมูล ไปจนถึงหน้าจอที่ผู้ใช้ใช้งานจริง โดยสนใจการพัฒนา Web และ Mobile Application รวมถึงการออกแบบระบบที่แก้ปัญหาได้จริงมากกว่าการทำ feature ที่ซับซ้อนเกินจำเป็น",
+        "โปรเจกต์ที่เคยทำมีทั้ง dashboard, AI tools, mobile app, LINE LIFF และ IoT รวมถึงระบบที่มีการเชื่อมต่อ API, authentication, payment และ real-time data",
+        "ผมชอบเรียนรู้ผ่านการลงมือทำ ทดลองเทคโนโลยีใหม่ และพัฒนาระบบให้ใช้งานง่ายขึ้นทั้งในมุมผู้ใช้และผู้พัฒนา",
       ],
       principles: [
         "ชัดเจนก่อนสวยซับซ้อน",

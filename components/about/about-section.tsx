@@ -29,21 +29,6 @@ export function AboutSection() {
                 </p>
               ))}
             </div>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {t.about.principles.map((principle, index) => (
-                <div
-                  key={principle}
-                  className="group rounded-lg border border-border/70 bg-background/38 p-4 transition-colors hover:border-foreground/18 hover:bg-secondary/34"
-                >
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    0{index + 1}
-                  </p>
-                  <p className="mt-2 text-sm font-medium leading-6 text-foreground/84">
-                    {principle}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
         </FadeUp>
       </div>
