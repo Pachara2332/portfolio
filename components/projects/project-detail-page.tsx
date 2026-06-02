@@ -74,7 +74,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
   };
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <main className="mx-auto w-full min-w-0 max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Back Button */}
       <div className="mb-6">
         <Link
@@ -86,9 +86,9 @@ export function ProjectDetailPage({ project }: { project: Project }) {
         </Link>
       </div>
 
-      <article className="space-y-8">
+      <article className="min-w-0 space-y-8">
         {/* Cover Image Header */}
-        <div className="surface-card overflow-hidden rounded-2xl">
+        <div className="surface-card min-w-0 max-w-full overflow-hidden rounded-2xl">
           {/* Standard Project Overview Info */}
           <div className="space-y-6 p-6 sm:p-8">
             <header className="space-y-3">
@@ -147,7 +147,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                   </p>
                 </div>
 
-                <div className="group/gallery relative overflow-hidden rounded-xl border border-border/75 bg-background">
+                <div className="group/gallery relative min-w-0 max-w-full overflow-hidden rounded-xl border border-border/75 bg-background">
                   <div
                     className={`relative ${
                       project.category === "mobile"
@@ -317,7 +317,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
         
         {/* 1. System Architecture Section */}
         {projectCopy?.systemArchitecture && (
-          <section className="surface-card rounded-2xl p-6 sm:p-8 space-y-5 border border-border/70">
+          <section className="surface-card min-w-0 max-w-full rounded-2xl p-6 sm:p-8 space-y-5 border border-border/70">
             <h2 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2.5">
               <span className="p-1.5 rounded-lg bg-emerald-400/12 text-emerald-400">
                 <Server className="size-5" />
@@ -333,8 +333,8 @@ export function ProjectDetailPage({ project }: { project: Project }) {
               </div>
 
               {/* ASCII/Text-based Architecture Flow Chart Console Terminal */}
-              <div className="lg:col-span-5">
-                <div className="overflow-hidden rounded-xl border border-border/80 bg-black/90 shadow-2xl font-mono text-[10px] text-emerald-400/90 leading-normal">
+              <div className="min-w-0 lg:col-span-5">
+                <div className="max-w-full overflow-hidden rounded-xl border border-border/80 bg-black/90 shadow-2xl font-mono text-[10px] text-emerald-400/90 leading-normal">
                   <div className="flex h-7 items-center gap-1.5 border-b border-border/20 bg-zinc-900/60 px-3 justify-between">
                     <div className="flex items-center gap-1.5">
                       <span className="size-2 rounded-full bg-red-500/50" />
@@ -343,7 +343,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                     </div>
                     <span className="text-[9px] text-muted-foreground uppercase tracking-widest">architecture.flow</span>
                   </div>
-                  <pre className="p-4 overflow-x-auto select-none font-mono leading-[1.3] text-emerald-400/80">
+                  <pre className="max-w-full overflow-x-auto p-4 select-none font-mono leading-[1.3] text-emerald-400/80">
                     {projectCopy.systemArchitecture.diagram}
                   </pre>
                 </div>
@@ -354,7 +354,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
 
         {/* 2. Core Database Schema & Flow Section */}
         {projectCopy?.databaseSchema && (
-          <section className="surface-card rounded-2xl p-6 sm:p-8 space-y-5 border border-border/70">
+          <section className="surface-card min-w-0 max-w-full rounded-2xl p-6 sm:p-8 space-y-5 border border-border/70">
             <h2 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2.5">
               <span className="p-1.5 rounded-lg bg-cyan-400/12 text-cyan-400">
                 <Database className="size-5" />
@@ -368,7 +368,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
               </p>
 
               {/* SQL Database Schema Console */}
-              <div className="overflow-hidden rounded-xl border border-border/80 bg-[#0d1117] shadow-xl text-xs text-zinc-300">
+              <div className="max-w-full overflow-hidden rounded-xl border border-border/80 bg-[#0d1117] shadow-xl text-xs text-zinc-300">
                 <div className="flex h-7 items-center gap-1.5 border-b border-border/20 bg-[#161b22] px-3 justify-between">
                   <div className="flex items-center gap-2">
                     <Code className="size-3.5 text-blue-400" />
@@ -376,7 +376,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                   </div>
                   <span className="text-[9px] text-zinc-500 font-mono">POSTGRESQL</span>
                 </div>
-                <pre className="p-4 overflow-x-auto font-mono text-[11px] leading-6 text-zinc-300">
+                <pre className="max-w-full overflow-x-auto p-4 font-mono text-[11px] leading-6 text-zinc-300">
                   <code>{projectCopy.databaseSchema.sql}</code>
                 </pre>
               </div>
