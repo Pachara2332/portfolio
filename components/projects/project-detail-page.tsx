@@ -15,7 +15,8 @@ import {
   Cpu, 
   ShieldCheck, 
   Code,
-  Layers
+  Layers,
+  MessagesSquare
 } from "lucide-react";
 import { useLanguage } from "@/components/i18n/language-provider";
 import type { Project } from "@/types";
@@ -49,9 +50,16 @@ type ProjectCopy = {
 export function ProjectDetailPage({ project }: { project: Project }) {
   const { t } = useLanguage();
   const projectCopy = t.projects.items[project.id as keyof typeof t.projects.items] as ProjectCopy | undefined;
+  const [activeChildIndex, setActiveChildIndex] = useState(0);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const galleryImages = project.images ?? [];
+  const activeChild = project.children?.[activeChildIndex];
+  const galleryImages = activeChild?.images ?? project.images ?? [];
   const activeImage = galleryImages[activeImageIndex];
+
+  const selectChild = (childIndex: number) => {
+    setActiveChildIndex(childIndex);
+    setActiveImageIndex(0);
+  };
 
   const showPreviousImage = () => {
     setActiveImageIndex((currentIndex) =>
@@ -94,6 +102,34 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                 {projectCopy?.description || project.description}
               </p>
             </header>
+
+            {project.children ? (
+              <section className="space-y-3">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                  Connected product flows
+                </p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {project.children.map((child, index) => (
+                    <button
+                      key={child.title}
+                      type="button"
+                      onClick={() => selectChild(index)}
+                      aria-pressed={index === activeChildIndex}
+                      className={`rounded-xl border p-4 text-left transition ${
+                        index === activeChildIndex
+                          ? "border-emerald-400/55 bg-emerald-400/10"
+                          : "border-border/70 bg-background/45 hover:border-foreground/30 hover:bg-secondary/30"
+                      }`}
+                    >
+                      <span className="text-sm font-bold text-foreground">{child.title}</span>
+                      <span className="mt-1.5 block text-xs leading-5 text-muted-foreground">
+                        {child.description}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            ) : null}
 
             {activeImage ? (
               <section className="space-y-4">
@@ -236,7 +272,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                   <ArrowUpRight className="size-4" />
                 </a>
               ) : null}
-              {project.demo ? (
+              {project.demo && !activeChild ? (
                 <a
                   href={project.demo}
                   target="_blank"
@@ -247,6 +283,30 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                   <ArrowUpRight className="size-4" />
                 </a>
               ) : null}
+              {activeChild?.demo ? (
+                <a
+                  href={activeChild.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-10 items-center gap-2 rounded-md bg-foreground px-4 py-2 text-sm font-bold text-background transition duration-200 hover:-translate-y-0.5 hover:bg-foreground/90"
+                >
+                  Open {activeChild.title}
+                  <ArrowUpRight className="size-4" />
+                </a>
+              ) : null}
+              {project.actions?.map((action) => (
+                <a
+                  key={action.href}
+                  href={action.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-10 items-center gap-2 rounded-md border border-emerald-400/45 bg-emerald-400/10 px-4 py-2 text-sm font-bold text-emerald-300 transition duration-200 hover:-translate-y-0.5 hover:bg-emerald-400/18"
+                >
+                  <MessagesSquare className="size-4" />
+                  {action.label}
+                  <ArrowUpRight className="size-4" />
+                </a>
+              ))}
             </div>
           </div>
         </div>

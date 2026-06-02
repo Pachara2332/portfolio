@@ -11,7 +11,7 @@ export const projects: Project[] = [
     outcome:
       "Delivered a containerized, highly resilient production-style SaaS platform with secure user access and real-time streaming chat.",
     techStack: ["Next.js 16", "PostgreSQL", "ChromaDB", "NextAuth.js v5", "Docker"],
-    coverImage: "/assets/projects/knowledge-platform.png",
+    coverImage: "/assets/projects/knowledge-platform-cover.png",
     images: [
       {
         src: "/assets/projects/knowledge-platform-gallery/home.png",
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     outcome:
       "Shipped a full-stack football product where users can build squads, follow match context, share content, manage profiles, and return for game-driven XP loops.",
     techStack: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Prisma", "JWT"],
-    coverImage: "/assets/projects/eleven-lineup-gallery/landing.png",
+    coverImage: "/assets/projects/eleven-lineup-cover.png",
     images: [
       {
         src: "/assets/projects/eleven-lineup-gallery/landing.png",
@@ -195,11 +195,82 @@ export const projects: Project[] = [
     outcome:
       "Delivered a responsive AI product that feels approachable for Thai users while keeping operational concerns out of the client.",
     techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Google Gen AI SDK"],
-    coverImage: "/assets/projects/tawan-chatbot.svg",
+    coverImage: "/assets/projects/tawan-chatbot-cover.png",
     github: "https://github.com/Pachara2332/tawan-chatbot",
     demo: "https://tawan-chatbot.vercel.app/",
     category: "ai",
     isFeatured: false,
+  },
+  {
+    id: "line-oa-member-liff",
+    title: "LINE OA Membership & CRM MVP",
+    description:
+      "Multi-tenant LINE OA membership and CRM platform combining a customer LIFF app with an admin dashboard on one shared PostgreSQL database.",
+    challenge:
+      "Connected secure LIFF identity, QR attribution, coupon operations, tenant isolation, role-based admin access, QR generation, member export, and CRUD workflows.",
+    outcome:
+      "Delivered an end-to-end CRM MVP for 1-3 brands, from LINE member acquisition to admin-side campaign and customer management.",
+    techStack: ["Next.js 16", "LIFF", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS", "jose"],
+    coverImage: "/assets/projects/line-oa-membership-crm-cover.png",
+    children: [
+      {
+        title: "LIFF Member App",
+        description: "Customer registration, returning-member restore, source attribution, and coupon claim flow inside LINE.",
+        demo: "https://line-oa-member-liff.vercel.app/join?source=ORGANIC&demo=1",
+        images: [
+          {
+            src: "/assets/projects/line-oa-member-liff-gallery/welcome.svg",
+            alt: "LINE OA membership welcome screen with green call to action",
+            title: "LIFF welcome",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-gallery/register.svg",
+            alt: "LINE OA member registration form with acquisition source",
+            title: "Member registration",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-gallery/date-picker.svg",
+            alt: "LINE OA registration birth date picker on the member form",
+            title: "Birth date input",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-gallery/coupons.svg",
+            alt: "LINE OA member benefits screen with claimable coupons",
+            title: "Member coupons",
+          },
+        ],
+      },
+      {
+        title: "CRM Admin Dashboard",
+        description: "Multi-tenant dashboard for members, coupons, claims, QR sources, brands, settings, and CSV export.",
+        demo: "https://line-oa-mvp.vercel.app/login",
+        images: [
+          {
+            src: "/assets/projects/line-oa-member-liff-gallery/admin-login.svg",
+            alt: "LINE OA CRM admin dashboard login screen",
+            title: "Admin login",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-gallery/admin-dashboard.svg",
+            alt: "LINE OA CRM dashboard overview with member growth and coupon metrics",
+            title: "CRM overview",
+          },
+          {
+            src: "/assets/projects/line-oa-member-liff-gallery/admin-qr-sources.svg",
+            alt: "LINE OA CRM QR source attribution management screen",
+            title: "QR source attribution",
+          },
+        ],
+      },
+    ],
+    actions: [
+      {
+        label: "Add LINE Friend @290jjlle",
+        href: "https://line.me/R/ti/p/@290jjlle",
+      },
+    ],
+    category: "web",
+    isFeatured: true,
   },
   {
     id: "noir-cinema-booking",
@@ -211,7 +282,7 @@ export const projects: Project[] = [
     outcome:
       "Delivered an Expo app that guides users from movie discovery to seat reservation and digital tickets while keeping the interface focused and premium.",
     techStack: ["Expo SDK 56", "React Native", "Expo Router", "TypeScript", "Supabase"],
-    coverImage: "/assets/projects/noir-cinema-booking.svg",
+    coverImage: "/assets/projects/noir-cinema-booking-cover.png",
     images: [
       {
         src: "/assets/projects/noir-cinema-booking-gallery/movies.png",
@@ -257,7 +328,7 @@ export const projects: Project[] = [
     outcome:
       "Delivered a working center operations system where staff can register children, review applications, record attendance, track progress, publish updates, and export records.",
     techStack: ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Prisma", "Tailwind CSS 4"],
-    coverImage: "/assets/projects/childrencare-gallery/dashboard.png",
+    coverImage: "/assets/projects/childrencare-cover.png",
     images: [
       {
         src: "/assets/projects/childrencare-gallery/pin-login.png",

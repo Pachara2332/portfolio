@@ -428,6 +428,93 @@ CREATE TABLE public.bookings (
             description: "The current implementation is a strong product prototype: RLS limits data access, persisted sessions keep users signed in, and Realtime refreshes seat availability. For production traffic, the next step is a Postgres book_seats RPC that locks or conditionally updates selected seats inside one transaction. Timed seat holds and payment-state transitions would prevent abandoned selections from blocking inventory."
           }
         },
+        "line-oa-member-liff": {
+          title: "LINE OA Membership & CRM MVP",
+          description:
+            "Multi-tenant CRM and membership platform for LINE Official Accounts. A customer-facing LIFF app handles registration and coupon claims, while an admin dashboard manages brands, members, QR sources, coupons, claims, and CSV exports on the same database.",
+          challenge:
+            "Designed one tenant-aware data model for two connected products: a secure LIFF member journey and a role-based CRM dashboard. The platform isolates brand data while supporting QR generation, attribution, coupon quotas, member exports, and guarded CRUD operations.",
+          outcome:
+            "Delivered an end-to-end CRM MVP for 1-3 brands, from LINE acquisition and member benefits to admin-side campaign operations with SUPER_ADMIN and BRAND_ADMIN access boundaries.",
+          systemArchitecture: {
+            description: "The LIFF member app and CRM dashboard share one tenant-aware PostgreSQL database. LIFF users enter from Rich Menu or QR links, receive server-verified LINE identity, and claim coupons. Admin users authenticate separately and operate inside SUPER_ADMIN or BRAND_ADMIN scope to manage brands, sources, members, campaigns, and exports.",
+            diagram: ` [Rich Menu / QR Code] -- source code --> [LIFF /join]
+             |
+             v
+ [LINE ID Token] --> [Server Verification] --> [Member Flow]
+             v
+ [Shared Prisma ORM + PostgreSQL]
+             |
+             +--> [Brands, Members, Sources, Scans, Coupons, Claims]
+             |
+             v
+ [Admin Login] --> [SUPER_ADMIN / BRAND_ADMIN CRM Dashboard]`
+          },
+          databaseSchema: {
+            description: "Every operational record is scoped through a brand. Admin roles govern dashboard visibility, LINE identity remains unique per tenant, and source scans stay separate from registration so incomplete acquisition journeys can still be analyzed.",
+            sql: `model Brand {
+  id      String      @id @default(uuid())
+  name    String
+  admins  AdminUser[]
+  members Member[]
+  sources Source[]
+}
+
+model AdminUser {
+  id           String    @id @default(uuid())
+  username     String    @unique
+  passwordHash String
+  role         AdminRole
+  brandId      String?
+}
+
+model Member {
+  id         String        @id @default(uuid())
+  brandId    String
+  lineUserId String
+  sourceId   String?
+  claims     CouponClaim[]
+  @@unique([brandId, lineUserId])
+}
+
+model Source {
+  id      String @id @default(uuid())
+  brandId String
+  code    String
+  scans   Scan[]
+  @@unique([brandId, code])
+}
+
+model CouponClaim {
+  id         String    @id @default(uuid())
+  memberId   String
+  couponId   String
+  claimedAt  DateTime  @default(now())
+  redeemedAt DateTime?
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "Server-verified LINE ID token vs browser profile trust",
+              why: "The backend verifies the LINE token and stores its stable sub value, so member identity does not depend on editable browser state.",
+              tradeoff: "Every restore or registration flow needs a server round trip and valid LINE channel configuration."
+            },
+            {
+              choice: "Source scans before registration conversion",
+              why: "Recording visits independently preserves acquisition visibility even when a user leaves before completing the membership form.",
+              tradeoff: "The data model needs scan-to-member linking and reporting rules for incomplete conversions."
+            },
+            {
+              choice: "SUPER_ADMIN and BRAND_ADMIN dashboard scopes",
+              why: "Super admins can operate across brands while brand admins stay constrained to their assigned tenant for routine CRM work.",
+              tradeoff: "Every dashboard query and mutation must enforce tenant scope on the server, even when the UI already hides inaccessible records."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "VERIFIED IDENTITY, SOURCE ATTRIBUTION, AND ASYNC LINE AUDIENCE SYNC",
+            description: "Stable LINE user IDs let returning members restore their account and coupon state without browser persistence. Source scans remain available for conversion analysis, webhook signatures protect follow events, and audience uploads are treated as asynchronous LINE operations whose status is checked separately."
+          }
+        },
         "childcare-dashboard": {
           title: "Childrencare",
           description:
@@ -1036,6 +1123,93 @@ CREATE TABLE public.bookings (
           scalingAndResilience: {
             strategy: "ATOMIC BOOKING RPC, TIMED HOLDS, AND RLS-PROTECTED REALTIME DATA",
             description: "เวอร์ชันปัจจุบันเป็น product prototype ที่ครบ flow: RLS จำกัดสิทธิ์ข้อมูล session ถูกเก็บต่อเนื่อง และ Realtime อัปเดตสถานะที่นั่ง สำหรับ production ควรเพิ่ม Postgres book_seats RPC ที่ล็อกหรือ conditional update ที่นั่งทั้งหมดภายใน transaction เดียว รวมถึง timed seat holds และสถานะ payment เพื่อไม่ให้การเลือกที่ถูกทิ้งไว้บล็อก inventory"
+          }
+        },
+        "line-oa-member-liff": {
+          title: "LINE OA Membership & CRM MVP",
+          description:
+            "ระบบ CRM และสมาชิกแบบ multi-tenant สำหรับ LINE Official Account โดยมีทั้งเว็บ LIFF ฝั่งลูกค้าสำหรับสมัครสมาชิกและรับคูปอง รวมถึง Admin Dashboard สำหรับจัดการแบรนด์ สมาชิก QR source คูปอง การใช้สิทธิ์ และ export CSV บนฐานข้อมูลเดียวกัน",
+          challenge:
+            "ออกแบบ data model แบบ tenant-aware สำหรับสองผลิตภัณฑ์ที่เชื่อมกัน: LIFF member flow ที่ปลอดภัย และ CRM dashboard ที่ควบคุมสิทธิ์ตาม role พร้อมแยกข้อมูลแต่ละแบรนด์ รองรับ generate QR, attribution, coupon quota, member export และ CRUD ที่มี modal ยืนยัน",
+          outcome:
+            "ได้ CRM MVP ครบ flow สำหรับ 1-3 แบรนด์ ตั้งแต่การหาสมาชิกผ่าน LINE และแจกสิทธิพิเศษ ไปจนถึงงานหลังบ้านที่แบ่งขอบเขต SUPER_ADMIN และ BRAND_ADMIN ชัดเจน",
+          systemArchitecture: {
+            description: "LIFF member app และ CRM dashboard ใช้ PostgreSQL แบบ tenant-aware ร่วมกัน ผู้ใช้เปิด LIFF ผ่าน Rich Menu หรือ QR link จากนั้น server ตรวจสอบ LINE identity ก่อนเข้าสู่ member flow ส่วนผู้ดูแลเข้าสู่ระบบแยกและทำงานตาม scope ของ SUPER_ADMIN หรือ BRAND_ADMIN เพื่อจัดการแบรนด์ source สมาชิก แคมเปญ และ export",
+            diagram: ` [Rich Menu / QR Code] -- source code --> [LIFF /join]
+             |
+             v
+ [LINE ID Token] --> [Server Verification] --> [Member Flow]
+             v
+ [Shared Prisma ORM + PostgreSQL]
+             |
+             +--> [Brands, Members, Sources, Scans, Coupons, Claims]
+             |
+             v
+ [Admin Login] --> [SUPER_ADMIN / BRAND_ADMIN CRM Dashboard]`
+          },
+          databaseSchema: {
+            description: "ข้อมูลปฏิบัติการทุกชุดถูก scope ผ่านแบรนด์ role ของ admin กำหนดสิทธิ์การมองเห็น LINE identity ไม่ซ้ำกันภายใน tenant และ scan ถูกแยกจากการสมัครเพื่อวิเคราะห์ acquisition ที่ยังไม่ conversion ได้",
+            sql: `model Brand {
+  id      String      @id @default(uuid())
+  name    String
+  admins  AdminUser[]
+  members Member[]
+  sources Source[]
+}
+
+model AdminUser {
+  id           String    @id @default(uuid())
+  username     String    @unique
+  passwordHash String
+  role         AdminRole
+  brandId      String?
+}
+
+model Member {
+  id         String        @id @default(uuid())
+  brandId    String
+  lineUserId String
+  sourceId   String?
+  claims     CouponClaim[]
+  @@unique([brandId, lineUserId])
+}
+
+model Source {
+  id      String @id @default(uuid())
+  brandId String
+  code    String
+  scans   Scan[]
+  @@unique([brandId, code])
+}
+
+model CouponClaim {
+  id         String    @id @default(uuid())
+  memberId   String
+  couponId   String
+  claimedAt  DateTime  @default(now())
+  redeemedAt DateTime?
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "ตรวจสอบ LINE ID token ฝั่ง server",
+              why: "backend ตรวจสอบ token และเก็บค่า sub ที่คงที่ ทำให้ตัวตนสมาชิกไม่ขึ้นกับ state ฝั่ง browser ที่แก้ไขได้",
+              tradeoff: "ทุก flow สำหรับคืนสถานะหรือสมัครสมาชิกต้องเรียก server และตั้งค่า LINE channel ให้ถูกต้อง"
+            },
+            {
+              choice: "เก็บ source scan ก่อน conversion",
+              why: "ยังเห็นข้อมูล acquisition ได้แม้ผู้ใช้ปิดหน้าไปก่อนสมัครสมาชิกเสร็จ",
+              tradeoff: "schema และรายงานต้องรองรับ scan ที่ยังไม่ผูกกับสมาชิก"
+            },
+            {
+              choice: "แบ่งขอบเขต dashboard ด้วย SUPER_ADMIN และ BRAND_ADMIN",
+              why: "Super admin จัดการได้ข้ามแบรนด์ ส่วน brand admin ถูกจำกัดให้อยู่ใน tenant ที่รับผิดชอบสำหรับงาน CRM ประจำวัน",
+              tradeoff: "query และ mutation ของ dashboard ทุกจุดต้องตรวจ tenant scope ฝั่ง server แม้ UI จะซ่อนข้อมูลที่ไม่มีสิทธิ์แล้วก็ตาม"
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "VERIFIED IDENTITY, SOURCE ATTRIBUTION, AND ASYNC LINE AUDIENCE SYNC",
+            description: "LINE user ID ที่คงที่ช่วยคืน account และสถานะ coupon ให้สมาชิกเดิมโดยไม่พึ่ง browser storage ข้อมูล scan ใช้วิเคราะห์ conversion ได้ webhook มี signature verification และการ upload LINE audience ทำงานแบบ asynchronous โดยแยกตรวจสอบสถานะภายหลัง"
           }
         },
         "childcare-dashboard": {

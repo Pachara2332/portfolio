@@ -109,6 +109,7 @@ function ProjectPreview({ project }: { project: Project }) {
 export function ProjectCard({ project }: { project: Project }) {
   const { t } = useLanguage();
   const projectCopy = t.projects.items[project.id as keyof typeof t.projects.items];
+  const primaryDemo = project.demo ?? project.children?.[0]?.demo;
 
   return (
     <StaggerItem>
@@ -133,6 +134,19 @@ export function ProjectCard({ project }: { project: Project }) {
           <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted-foreground">
             {projectCopy.description}
           </p>
+
+          {project.actions?.map((action) => (
+            <a
+              key={action.href}
+              href={action.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-400/35 bg-emerald-400/10 px-2.5 py-1 text-[11px] font-bold text-emerald-300 transition hover:bg-emerald-400/18"
+            >
+              {action.label}
+              <ArrowUpRight className="size-3" />
+            </a>
+          ))}
 
           <div className="mt-4 flex flex-wrap gap-1.5">
             {project.techStack.slice(0, 2).map((tech) => (
@@ -175,9 +189,9 @@ export function ProjectCard({ project }: { project: Project }) {
                 {t.projects.backend}
               </a>
             ) : null}
-            {project.demo ? (
+            {primaryDemo ? (
               <a
-                href={project.demo}
+                href={primaryDemo}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-8 items-center gap-1.5 rounded-md bg-foreground px-2.5 py-1 text-xs font-semibold text-background transition duration-200 hover:-translate-y-0.5 hover:bg-foreground/90"
@@ -207,6 +221,19 @@ export function ProjectCard({ project }: { project: Project }) {
           <p className="mt-2 text-sm leading-5 text-muted-foreground line-clamp-3">
             {projectCopy.description}
           </p>
+
+          {project.actions?.map((action) => (
+            <a
+              key={action.href}
+              href={action.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-400/35 bg-emerald-400/10 px-2.5 py-1 text-[11px] font-bold text-emerald-300 transition hover:bg-emerald-400/18"
+            >
+              {action.label}
+              <ArrowUpRight className="size-3" />
+            </a>
+          ))}
 
           <div className="mt-3 grid gap-2">
             <div className="rounded-md border border-border/70 bg-background/42 p-3">

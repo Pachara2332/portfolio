@@ -1,3 +1,21 @@
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  title: string;
+}
+
+export interface ProjectAction {
+  label: string;
+  href: string;
+}
+
+export interface ProjectChild {
+  title: string;
+  description: string;
+  demo?: string;
+  images: ProjectImage[];
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -6,11 +24,9 @@ export interface Project {
   outcome: string;
   techStack: string[];
   coverImage?: string;
-  images?: {
-    src: string;
-    alt: string;
-    title: string;
-  }[];
+  images?: ProjectImage[];
+  children?: ProjectChild[];
+  actions?: ProjectAction[];
   github?: string;
   githubBackend?: string;
   demo?: string;
