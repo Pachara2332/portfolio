@@ -234,6 +234,89 @@ model Appointment {
             description: "Indexes are applied to patientId and appointment status fields to enable rapid filtering, while resolved cases are regularly archived to minimize production table scanning."
           }
         },
+        "swift-pos": {
+          title: "Swift POS",
+          description:
+            "Thai-first point-of-sale system for small and medium shops. It supports barcode checkout, weight-based selling, quick product creation, held bills, customer debt ledger, partial offline persistence, realtime inventory, Open Food Facts lookup, sales dashboards, role access, SMS OTP role password changes, realtime streams, and Thai/English language switching.",
+          challenge:
+            "Built one operational flow that has to stay fast at the counter while keeping stock, held bills, customer debt, offline recovery, analytics, role permissions, OTP verification, and realtime events consistent across tabs and external webhook updates.",
+          outcome:
+            "Cashiers can scan or type barcodes, sell weighted products, hold bills, and recover local work quickly. Managers can monitor low stock and sales performance, while admins protect role changes and role password updates with password plus Twilio Verify OTP flows.",
+          systemArchitecture: {
+            description: "Swift POS centers on the checkout screen but keeps inventory, dashboard, debt ledger, roles, local browser persistence, and realtime updates connected through Next.js route handlers. POS actions post current-sale snapshots through Server-Sent Events, checkout reduces stock, localStorage keeps held bills and offline sales recoverable, inventory listens for product and sale events, and external systems can publish stock or sale events through a guarded webhook token.",
+            diagram: ` [POS Screen] -- barcode / current sale --> [Next.js Route Handlers]
+             |
+             +--> [Checkout] -----------> [Prisma Transaction]
+             |                               |
+             |                               v
+             |                         [PostgreSQL / Neon]
+             |
+             +--> [SSE Realtime Bus] --> product.changed / sale.completed
+             |                               |
+             |                               v
+             |                         [Inventory + Mirror Displays]
+             |
+             +--> [Roles + Twilio Verify] -- OTP --> [Role Password Update]
+             |
+             +--> [Open Food Facts Lookup] -- unknown barcode --> [Add Product]`
+          },
+          databaseSchema: {
+            description: "The relational model separates products, inventory-affecting sales, role password state, and event snapshots. Checkout can run as a database transaction so each sale line and stock decrement remain consistent.",
+            sql: `model Product {
+  id        String     @id @default(uuid())
+  barcode   String     @unique
+  name      String
+  price     Decimal
+  stock     Int
+  lowStock  Int        @default(5)
+  saleItems SaleItem[]
+}
+
+model Sale {
+  id        String     @id @default(uuid())
+  total     Decimal
+  createdAt DateTime   @default(now())
+  items     SaleItem[]
+}
+
+model SaleItem {
+  id        String  @id @default(uuid())
+  saleId    String
+  productId String
+  quantity  Int
+  unitPrice Decimal
+  sale      Sale    @relation(fields: [saleId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model RolePassword {
+  role         Role     @id
+  passwordHash String
+  updatedAt    DateTime @updatedAt
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "Server-Sent Events vs WebSockets",
+              why: "Inventory and current-sale displays mostly need one-way broadcast updates, so SSE keeps realtime behavior simple and works well with standard HTTP route handlers.",
+              tradeoff: "Bidirectional realtime collaboration would need extra POST endpoints or a future WebSocket layer."
+            },
+            {
+              choice: "Role passwords plus OTP reset flow",
+              why: "Small shops often share terminals by role. Requiring a role password for every role switch and OTP for password changes makes casual privilege changes harder.",
+              tradeoff: "It is less individually auditable than named per-user accounts unless the app later adds staff identity on top."
+            },
+            {
+              choice: "Open Food Facts lookup for unknown barcodes",
+              why: "Cashiers can bootstrap product records from scanned barcodes instead of typing every product detail manually.",
+              tradeoff: "External product data can be incomplete or inconsistent, so the add-product form still needs human review before saving."
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "TRANSACTIONAL CHECKOUT, MOCKABLE SMS, AND GUARDED REALTIME WEBHOOKS",
+            description: "Checkout writes sale rows and stock changes together to avoid inventory drift. Twilio Verify can fall back to mock SMS for local testing when credentials are missing, and external realtime events can be protected with REALTIME_WEBHOOK_TOKEN before they reach subscribed inventory or POS displays."
+          }
+        },
         "rider-delivery-app": {
           title: "Delivery Operations Platform",
           description:
@@ -929,6 +1012,89 @@ model Appointment {
           scalingAndResilience: {
             strategy: "ระบบจัดการดัชนีและการย้ายข้อมูลออก (Database Archiving)",
             description: "ใช้ Database Indexing กับฟิลด์ค้นหาหลักเพื่อรักษาระดับความเร็วในการแสดงผล และทำการ Archive นัดหมายที่สิ้นสุดเกิน 1 ปีออกนอกตารางงานหลักเพื่อลดปริมาณการสแกนค้นข้อมูลดิสก์"
+          }
+        },
+        "swift-pos": {
+          title: "Swift POS",
+          description:
+            "ระบบขายหน้าร้านสำหรับร้านค้าขนาดเล็กถึงกลาง รองรับการขายด้วยบาร์โค้ด การขายตามน้ำหนัก เพิ่มสินค้าเร็ว สมุดลูกหนี้ พักบิล การเก็บข้อมูลบางส่วนแบบออฟไลน์ สต็อกแบบ realtime การเพิ่มสินค้าจาก Open Food Facts แดชบอร์ดวิเคราะห์ยอดขาย ระบบ role access การเปลี่ยนรหัส role ด้วย OTP ผ่าน SMS และระบบสองภาษาไทย/อังกฤษ",
+          challenge:
+            "รวม flow หน้าร้านที่ต้องเร็วสำหรับแคชเชียร์ เข้ากับสต็อก บิลที่พักไว้ สมุดลูกหนี้ การกู้คืนงานจากข้อมูล local แดชบอร์ด สิทธิ์ตาม role การยืนยัน OTP และ event realtime ที่ต้องตรงกันทั้งหลายแท็บและ webhook จากระบบภายนอก",
+          outcome:
+            "แคชเชียร์สแกนหรือพิมพ์บาร์โค้ด ขายสินค้าชั่งน้ำหนัก พักบิล และกู้คืนงานที่เก็บในเครื่องได้เร็ว ผู้จัดการดูยอดขายและสินค้าสต็อกต่ำได้ทันที และแอดมินควบคุมการเปลี่ยน role กับการเปลี่ยนรหัสผ่านด้วยรหัสและ Twilio Verify OTP",
+          systemArchitecture: {
+            description: "Swift POS วาง flow หลักไว้ที่หน้าขาย แต่เชื่อม Inventory, Dashboard, สมุดลูกหนี้, Roles, local browser persistence และ realtime ผ่าน Next.js route handlers หน้า POS ส่ง snapshot รายการขายปัจจุบันด้วย Server-Sent Events การ checkout ลด stock ผ่านฐานข้อมูล localStorage เก็บบิลพักและรายการขายออฟไลน์ให้กู้คืนได้ Inventory subscribe event เมื่อสินค้าเปลี่ยนหรือขายสำเร็จ และระบบภายนอกส่ง event ได้ผ่าน webhook ที่ป้องกันด้วย token",
+            diagram: ` [POS Screen] -- barcode / current sale --> [Next.js Route Handlers]
+             |
+             +--> [Checkout] -----------> [Prisma Transaction]
+             |                               |
+             |                               v
+             |                         [PostgreSQL / Neon]
+             |
+             +--> [SSE Realtime Bus] --> product.changed / sale.completed
+             |                               |
+             |                               v
+             |                         [Inventory + Mirror Displays]
+             |
+             +--> [Roles + Twilio Verify] -- OTP --> [Role Password Update]
+             |
+             +--> [Open Food Facts Lookup] -- unknown barcode --> [Add Product]`
+          },
+          databaseSchema: {
+            description: "ฐานข้อมูลแยกสินค้า รายการขาย การตัดสต็อก และรหัสของ role ออกจากกัน ทำให้ checkout สามารถทำเป็น transaction เพื่อบันทึกรายการขายและลด stock พร้อมกันได้",
+            sql: `model Product {
+  id        String     @id @default(uuid())
+  barcode   String     @unique
+  name      String
+  price     Decimal
+  stock     Int
+  lowStock  Int        @default(5)
+  saleItems SaleItem[]
+}
+
+model Sale {
+  id        String     @id @default(uuid())
+  total     Decimal
+  createdAt DateTime   @default(now())
+  items     SaleItem[]
+}
+
+model SaleItem {
+  id        String  @id @default(uuid())
+  saleId    String
+  productId String
+  quantity  Int
+  unitPrice Decimal
+  sale      Sale    @relation(fields: [saleId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model RolePassword {
+  role         Role     @id
+  passwordHash String
+  updatedAt    DateTime @updatedAt
+}`
+          },
+          tradeoffs: [
+            {
+              choice: "Server-Sent Events เทียบกับ WebSockets",
+              why: "Inventory และจอแสดงรายการขายส่วนใหญ่ต้องรับ broadcast ทางเดียว จึงใช้ SSE เพื่อให้ realtime ทำงานง่ายและเข้ากับ HTTP route handlers ได้ดี",
+              tradeoff: "ถ้าต้องการ realtime แบบสองทางเต็มรูปแบบในอนาคต อาจต้องเพิ่ม POST endpoint เฉพาะหรือย้ายบางส่วนไป WebSocket"
+            },
+            {
+              choice: "รหัสตาม role พร้อม OTP สำหรับเปลี่ยนรหัส",
+              why: "ร้านขนาดเล็กมักใช้เครื่องร่วมกันตามบทบาท การบังคับกรอกรหัสทุกครั้งที่เปลี่ยน role และใช้ OTP ตอนเปลี่ยนรหัส ช่วยลดการเปลี่ยนสิทธิ์แบบไม่ตั้งใจ",
+              tradeoff: "ตรวจสอบย้อนหลังรายบุคคลได้น้อยกว่าระบบบัญชีพนักงานแยกคน หากต้องการ audit ละเอียดต้องเพิ่ม identity ของพนักงานภายหลัง"
+            },
+            {
+              choice: "ใช้ Open Food Facts กับบาร์โค้ดที่ยังไม่มีในระบบ",
+              why: "ช่วยเติมข้อมูลตั้งต้นของสินค้าเมื่อต้องเพิ่มสินค้าใหม่จากบาร์โค้ด ลดเวลาพิมพ์ข้อมูลเองทั้งหมด",
+              tradeoff: "ข้อมูลจากภายนอกอาจไม่ครบหรือไม่ตรงกับร้าน จึงยังต้องให้ผู้ใช้ตรวจสอบในฟอร์ม Add Product ก่อนบันทึก"
+            }
+          ],
+          scalingAndResilience: {
+            strategy: "TRANSACTIONAL CHECKOUT, MOCKABLE SMS, AND GUARDED REALTIME WEBHOOKS",
+            description: "checkout บันทึกรายการขายและลด stock พร้อมกันเพื่อลดโอกาส stock เพี้ยน Twilio Verify fallback เป็น mock SMS ได้เมื่อทดสอบ local และ webhook realtime ใช้ REALTIME_WEBHOOK_TOKEN ป้องกันก่อนส่ง event ไปยัง Inventory หรือ POS display ที่ subscribe อยู่"
           }
         },
         "rider-delivery-app": {

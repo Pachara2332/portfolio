@@ -137,6 +137,62 @@ export const projects: Project[] = [
     isFeatured: true,
   },
   {
+    id: "swift-pos",
+    title: "Swift POS",
+    description:
+      "Thai-first point-of-sale system for small and medium shops with barcode sales, weight-based selling, quick product creation, held bills, debt ledger, partial offline persistence, realtime inventory, sales analytics, role access, and SMS OTP role password changes.",
+    challenge:
+      "Connected fast barcode checkout, weight-mode sales, cart holds, customer debt records, inventory state, dashboard analytics, role-protected workflows, Twilio Verify OTP, Open Food Facts product lookup, local persistence, and realtime sale/stock events in one operational app.",
+    outcome:
+      "Delivered a practical shop-floor system where cashiers can sell quickly, recover held or offline work, managers can watch stock and sales, and admins can protect role changes with password and OTP flows.",
+    techStack: ["Next.js 16", "React 19", "TypeScript", "Prisma 7", "PostgreSQL/Neon", "Chart.js", "Twilio Verify"],
+    coverImage: "/assets/projects/swift-pos-gallery/pos-counter.png",
+    images: [
+      {
+        src: "/assets/projects/swift-pos-gallery/pos-counter.png",
+        alt: "Swift POS counter screen with barcode scanner, quick sale products, cart summary, held bills, and daily close panel",
+        title: "POS counter",
+      },
+      {
+        src: "/assets/projects/swift-pos-gallery/debt-ledger.png",
+        alt: "Swift POS customer debt ledger with customer selector, new customer entry, and cart checkout panel",
+        title: "Debt ledger",
+      },
+      {
+        src: "/assets/projects/swift-pos-gallery/inventory-table.png",
+        alt: "Swift POS inventory table listing barcode, product name, category, brand, price, stock, and status",
+        title: "Inventory table",
+      },
+      {
+        src: "/assets/projects/swift-pos-gallery/dashboard-report.png",
+        alt: "Swift POS dashboard report with revenue cards, sales trend chart, stock warning, best sellers, and hourly sales",
+        title: "Sales dashboard",
+      },
+      {
+        src: "/assets/projects/swift-pos-gallery/empty-inventory.png",
+        alt: "Swift POS inventory empty state with search, category filter, and add product action",
+        title: "Inventory empty state",
+      },
+      {
+        src: "/assets/projects/swift-pos-gallery/barcode-generator.png",
+        alt: "Swift POS barcode generator with product selector, barcode label controls, and printable barcode preview",
+        title: "Barcode generator",
+      },
+      {
+        src: "/assets/projects/swift-pos-gallery/add-product.png",
+        alt: "Swift POS add product form with barcode, product name, brand, category, cost, sale price, stock, and low stock alert fields",
+        title: "Add product",
+      },
+      {
+        src: "/assets/projects/swift-pos-gallery/role-permissions.png",
+        alt: "Swift POS role permissions screen for Admin, Manager, and Cashier with OTP password reset form",
+        title: "Role permissions",
+      },
+    ],
+    category: "web",
+    isFeatured: true,
+  },
+  {
     id: "movie-management",
     title: "Movie Operations Dashboard",
     description:
