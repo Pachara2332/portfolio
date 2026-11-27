@@ -30,6 +30,11 @@ export const siteConfig: SiteConfig = {
       icon: "linkedin",
     },
     {
+      name: "TikTok",
+      url: "https://www.tiktok.com/@donnartech",
+      icon: "tiktok",
+    },
+    {
       name: "Email",
       url: "mailto:mrpacharawongsasri@gmail.com",
       icon: "mail",

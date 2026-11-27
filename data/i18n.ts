@@ -59,6 +59,33 @@ export const dictionaries = {
         web: "Full-stack app",
       },
       items: {
+        "booking-platform": {
+          title: "Booking Platform",
+          description:
+            "Online booking and pre-order system for salons, barbers, and restaurants. Each shop gets its own booking page, LINE/Messenger notifications, and QR deposit payments, with no double bookings.",
+          challenge:
+            "Many shops share one system, so each shop's data, LINE/Messenger channels, and payment settings must stay separate, and bookings must never overlap.",
+          outcome:
+            "Shops run bookings, pre-orders, and deposits online, and customers book through the web or LINE LIFF without creating an account.",
+        },
+        "donnartech-line-crm": {
+          title: "Donnar.Tech LINE OA & CRM",
+          description:
+            "LINE OA backend with a built-in CRM: a chatbot qualifies new leads automatically, and staff manage customers and leads and reply to chats from one web dashboard.",
+          challenge:
+            "Leads arrive through LINE chat at any time and need to be qualified and handed to staff without losing the conversation.",
+          outcome:
+            "The chatbot screens new leads, and staff follow up on customers, leads, and chats from a single dashboard.",
+        },
+        "koet-isan": {
+          title: "Koet Isan",
+          description:
+            "Browser life-simulation game: you are born as a person in Isan and live season by season, meeting real events from the region's history.",
+          challenge:
+            "Real regional events from 1970 onward had to fit a season-based game loop, and every event needed a source the player can open.",
+          outcome:
+            "Players pick a birth year and province, choose their own life path, and learn Isan history through sourced in-game events.",
+        },
         "trainee-knowledge-assistant": {
           title: "Enterprise Knowledge Platform",
           description:
@@ -850,6 +877,33 @@ model EnrollmentApplication {
         web: "Full-stack app",
       },
       items: {
+        "booking-platform": {
+          title: "Booking Platform",
+          description:
+            "ระบบจองคิวและสั่งล่วงหน้าออนไลน์สำหรับร้านเสริมสวย บาร์เบอร์ และร้านอาหาร แต่ละร้านมีหน้าจองของตัวเอง แจ้งเตือนผ่าน LINE/Messenger และรับมัดจำผ่าน QR โดยไม่มีจองซ้อน",
+          challenge:
+            "หลายร้านใช้ระบบเดียวกัน ข้อมูล ช่องทาง LINE/Messenger และการตั้งค่าชำระเงินของแต่ละร้านต้องแยกกัน และคิวต้องไม่ชนกัน",
+          outcome:
+            "ร้านรับจอง สั่งล่วงหน้า และมัดจำออนไลน์ได้ ลูกค้าจองผ่านเว็บหรือ LINE LIFF ได้โดยไม่ต้องสมัครสมาชิก",
+        },
+        "donnartech-line-crm": {
+          title: "Donnar.Tech LINE OA & CRM",
+          description:
+            "Backend LINE OA พร้อม CRM ในตัว chatbot คัดกรอง lead ใหม่อัตโนมัติ และทีมงานจัดการลูกค้า lead และตอบแชทได้จาก dashboard เว็บเดียว",
+          challenge:
+            "Lead เข้ามาทางแชท LINE ได้ตลอดเวลา ต้องคัดกรองและส่งต่อให้ทีมงานโดยไม่ให้บทสนทนาหลุด",
+          outcome:
+            "Chatbot คัดกรอง lead ใหม่ให้ และทีมงานติดตามลูกค้า lead และแชทได้จาก dashboard เดียว",
+        },
+        "koet-isan": {
+          title: "เกิดอีสาน",
+          description:
+            "เกมจำลองชีวิตบนเว็บ ผู้เล่นเกิดเป็นคนอีสานหนึ่งคน ใช้ชีวิตทีละฤดู และเจอเหตุการณ์จริงในประวัติศาสตร์ภาคอีสาน",
+          challenge:
+            "นำเหตุการณ์จริงของภาคอีสานตั้งแต่ปี 2513 มาใส่ในระบบเกมแบบทีละฤดู และทุกเหตุการณ์ต้องมีแหล่งอ้างอิงให้ผู้เล่นเปิดดูได้",
+          outcome:
+            "ผู้เล่นเลือกปีเกิดและจังหวัด เลือกเส้นทางชีวิตเอง และได้รู้จักประวัติศาสตร์อีสานผ่านเหตุการณ์ในเกม",
+        },
         "trainee-knowledge-assistant": {
           title: "Enterprise Knowledge Platform",
           description:

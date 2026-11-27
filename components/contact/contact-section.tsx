@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type React from "react";
 import { CheckCircle2, Loader2, Mail, Phone, Send } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/common/icons";
+import { GithubIcon, LinkedinIcon, TiktokIcon } from "@/components/common/icons";
 import { FadeUp } from "@/components/common/motion-wrapper";
 import { SectionHeading } from "@/components/common/section-heading";
 import { useLanguage } from "@/components/i18n/language-provider";
@@ -85,6 +85,15 @@ export function ContactSection() {
               >
                 <LinkedinIcon className="size-4 shrink-0" />
                 <span className="min-w-0 break-words">{t.contact.linkedinProfile}</span>
+              </a>
+              <a
+                href="https://www.tiktok.com/@donnartech"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-w-0 items-center gap-3 rounded-lg border border-border/70 bg-background/36 p-3.5 text-sm text-muted-foreground transition duration-200 hover:-translate-y-0.5 hover:border-foreground/18 hover:bg-secondary/38 hover:text-foreground"
+              >
+                <TiktokIcon className="size-4 shrink-0" />
+                <span className="min-w-0 break-all">tiktok.com/@donnartech</span>
               </a>
             </div>
           </div>

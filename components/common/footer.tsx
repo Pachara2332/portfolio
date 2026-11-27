@@ -1,7 +1,7 @@
 "use client";
 
 import { Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/common/icons";
+import { GithubIcon, LinkedinIcon, TiktokIcon } from "@/components/common/icons";
 import { useLanguage } from "@/components/i18n/language-provider";
 import { siteConfig } from "@/data/site";
 
@@ -40,6 +40,15 @@ export function Footer() {
             aria-label="LinkedIn"
           >
             <LinkedinIcon className="size-4" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@donnartech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex size-9 items-center justify-center rounded-md border border-border transition-colors hover:bg-secondary hover:text-foreground"
+            aria-label="TikTok"
+          >
+            <TiktokIcon className="size-4" />
           </a>
         </div>
       </div>

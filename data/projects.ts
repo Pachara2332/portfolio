@@ -2,6 +2,50 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    id: "booking-platform",
+    title: "Booking Platform",
+    description:
+      "Online booking and pre-order system for salons, barbers, and restaurants.",
+    challenge:
+      "Each shop needs its own booking page, notifications, and deposit payments without double bookings.",
+    outcome:
+      "Shops take bookings and pre-orders online with LINE/Messenger notifications and QR deposits.",
+    techStack: ["Next.js", "Supabase", "TypeScript", "LINE LIFF"],
+    github: "https://github.com/Pachara2332/booking-platform",
+    demo: "https://booking-platform-flame.vercel.app",
+    category: "web",
+    isFeatured: true,
+  },
+  {
+    id: "donnartech-line-crm",
+    title: "Donnar.Tech LINE OA & CRM",
+    description:
+      "LINE OA backend with a built-in CRM and lead-qualifying chatbot.",
+    challenge:
+      "New leads arrive through LINE chat and need to be qualified and followed up without staff switching tools.",
+    outcome:
+      "A chatbot qualifies leads automatically and staff manage customers and reply to chats from one dashboard.",
+    techStack: ["Node.js", "Express", "PostgreSQL", "LINE Messaging API"],
+    github: "https://github.com/Pachara2332/line-backend-donnar-api",
+    category: "web",
+    isFeatured: true,
+  },
+  {
+    id: "koet-isan",
+    title: "Koet Isan",
+    description:
+      "Browser life-simulation game where you are born in Isan and live through real regional events.",
+    challenge:
+      "Real historical events had to fit a season-by-season game loop, with sources the player can open for every event.",
+    outcome:
+      "Players pick a birth year and province, make life choices, and meet sourced events from Isan's history.",
+    techStack: ["JavaScript", "HTML", "CSS"],
+    github: "https://github.com/Pachara2332/koet-isan",
+    demo: "https://pachara2332.github.io/koet-isan/",
+    category: "other",
+    isFeatured: true,
+  },
+  {
     id: "trainee-knowledge-assistant",
     title: "Enterprise Knowledge Platform",
     description:
