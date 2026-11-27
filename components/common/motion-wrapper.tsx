@@ -1,77 +1,24 @@
-"use client";
-
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
 import React from "react";
 
-export function FadeUp({
-  children,
-  delay = 0,
-  className,
-  ...props
-}: {
+type WrapperProps = {
   children: React.ReactNode;
+  className?: string;
   delay?: number;
-  className?: string;
-} & Omit<HTMLMotionProps<"div">, "children">) {
-  const reduceMotion = useReducedMotion();
+} & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
 
+export function FadeUp({ children, className, delay: _delay, ...props }: WrapperProps) {
+  void _delay;
   return (
-    <motion.div
-      initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-96px" }}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const }}
-      className={className}
-      {...props}
-    >
+    <div className={className} {...props}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-export function Stagger({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      variants={{
-        hidden: {},
-        visible: { transition: { staggerChildren: 0.07 } },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+export function Stagger({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <div className={className}>{children}</div>;
 }
 
-export function StaggerItem({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 16 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1] as const },
-        },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+export function StaggerItem({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <div className={className}>{children}</div>;
 }

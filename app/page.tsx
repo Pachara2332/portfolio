@@ -7,7 +7,6 @@ import { ExperienceTimeline } from "@/components/experience/experience-timeline"
 import { AboutSection } from "@/components/about/about-section";
 import { ContactSection } from "@/components/contact/contact-section";
 import { Footer } from "@/components/common/footer";
-import { ScrollProgress } from "@/components/common/scroll-progress";
 import { LanguageProvider } from "@/components/i18n/language-provider";
 import { siteConfig } from "@/data/site";
 
@@ -42,7 +41,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
       />
-      <ScrollProgress />
       <Navbar />
       <main className="flex-1">
         <Hero />

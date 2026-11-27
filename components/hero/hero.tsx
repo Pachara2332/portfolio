@@ -6,6 +6,7 @@ import { GithubIcon } from "@/components/common/icons";
 import { useLanguage } from "@/components/i18n/language-provider";
 import { coreStack } from "@/data/profile";
 import { siteConfig } from "@/data/site";
+import { ResumeDialog } from "@/components/common/resume-dialog";
 
 const item = {
   hidden: { opacity: 0, y: 18 },
@@ -60,20 +61,17 @@ export function Hero() {
           <motion.div variants={item} className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <button
               onClick={() => scrollTo("projects")}
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-foreground px-5 py-2.5 text-center text-sm font-semibold text-background shadow-[0_12px_36px_oklch(0_0_0_/_0.26)] transition duration-200 hover:-translate-y-0.5 hover:bg-foreground/92 focus-visible:ring-2 focus-visible:ring-foreground/30"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground shadow-[0_12px_36px_oklch(0.5_0.19_262_/_0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-foreground/30"
             >
               {t.hero.viewWork}
               <ArrowRight className="size-4" />
             </button>
-            <a
-              href={siteConfig.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <ResumeDialog
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-border/80 bg-secondary/55 px-5 py-2.5 text-center text-sm font-medium text-foreground shadow-[0_1px_0_oklch(1_0_0_/_0.035)_inset] transition duration-200 hover:-translate-y-0.5 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-foreground/20"
             >
               <FileText className="size-4" />
               {t.hero.downloadResume}
-            </a>
+            </ResumeDialog>
             <a
               href={`mailto:${siteConfig.email}`}
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 py-2.5 text-center text-sm font-medium text-muted-foreground transition duration-200 hover:bg-secondary/60 hover:text-foreground focus-visible:ring-2 focus-visible:ring-foreground/20"

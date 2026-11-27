@@ -8,7 +8,7 @@ export const siteConfig: SiteConfig = {
     "Full-Stack Developer focused on AI-powered business systems, modern SaaS architecture, and operational platforms.",
   url: "https://pachara.dev",
   ogImage: "/og-image.png",
-  resumeUrl: "/Pachara_RESUME.pdf",
+  resume: { en: "/Pachara_CV_EN.pdf", th: "/Pachara_CV_TH.pdf" },
   navItems: [
     { label: "Home", href: "#home" },
     { label: "Projects", href: "#projects" },

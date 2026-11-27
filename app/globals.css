@@ -32,24 +32,24 @@
 }
 
 :root {
-  --background: oklch(0.105 0.004 255);
-  --foreground: oklch(0.965 0.003 255);
-  --card: oklch(0.15 0.005 255);
-  --card-foreground: oklch(0.96 0.003 255);
-  --popover: oklch(0.15 0.005 255);
-  --popover-foreground: oklch(0.96 0.003 255);
-  --primary: oklch(0.96 0.003 255);
-  --primary-foreground: oklch(0.12 0.004 255);
-  --secondary: oklch(0.19 0.006 255);
-  --secondary-foreground: oklch(0.94 0.003 255);
-  --muted: oklch(0.21 0.006 255);
-  --muted-foreground: oklch(0.7 0.012 255);
-  --accent: oklch(0.245 0.011 255);
-  --accent-foreground: oklch(0.96 0.003 255);
-  --destructive: oklch(0.67 0.17 24);
-  --border: oklch(0.255 0.007 255);
-  --input: oklch(0.24 0.007 255);
-  --ring: oklch(0.74 0.02 255);
+  --background: oklch(0.985 0.005 85);
+  --foreground: oklch(0.22 0.02 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 262);
+  --primary: oklch(0.5 0.19 262);
+  --primary-foreground: oklch(0.99 0.003 262);
+  --secondary: oklch(0.955 0.008 262);
+  --secondary-foreground: oklch(0.26 0.02 262);
+  --muted: oklch(0.95 0.007 262);
+  --muted-foreground: oklch(0.48 0.02 262);
+  --accent: oklch(0.94 0.025 262);
+  --accent-foreground: oklch(0.3 0.08 262);
+  --destructive: oklch(0.58 0.2 25);
+  --border: oklch(0.9 0.008 262);
+  --input: oklch(0.9 0.008 262);
+  --ring: oklch(0.55 0.17 262);
   --radius: 0.5rem;
 }
 
@@ -60,23 +60,15 @@
 
   html {
     scrollbar-width: thin;
-    scrollbar-color: oklch(0.34 0.007 255) transparent;
+    scrollbar-color: oklch(0.8 0.01 262) transparent;
   }
 
   body {
     @apply bg-background text-foreground;
-    background-image:
-      radial-gradient(circle at 50% -12rem, oklch(0.84 0.02 255 / 0.09), transparent 42rem),
-      linear-gradient(to right, oklch(1 0 0 / 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(1 0 0 / 0.022) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0 0 0 / 0.12), transparent 28rem);
-    background-size: auto, 64px 64px, 64px 64px, auto;
-    background-position: center top, center top, center top, center top;
-    background-attachment: scroll, fixed, fixed, scroll;
   }
 
   ::selection {
-    background: oklch(0.96 0.003 255 / 0.18);
+    background: oklch(0.5 0.19 262 / 0.18);
     color: var(--foreground);
   }
 
@@ -101,11 +93,11 @@
 
 @layer utilities {
   .surface-card {
-    @apply border border-border/80 bg-card/88 shadow-[0_1px_0_oklch(1_0_0_/_0.035)_inset,0_18px_60px_oklch(0_0_0_/_0.22)];
+    @apply border border-border/80 bg-card/88 shadow-[0_1px_2px_oklch(0.22_0.02_262_/_0.04),0_12px_40px_oklch(0.22_0.02_262_/_0.06)];
   }
 
   .surface-muted {
-    @apply border border-border/70 bg-secondary/35 shadow-[0_1px_0_oklch(1_0_0_/_0.03)_inset];
+    @apply border border-border/70 bg-secondary/60;
   }
 
   .hairline {

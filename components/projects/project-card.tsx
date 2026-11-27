@@ -135,13 +135,14 @@ export function ProjectCard({ project }: { project: Project }) {
             {projectCopy.description}
           </p>
 
+
           {project.actions?.map((action) => (
             <a
               key={action.href}
               href={action.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-400/35 bg-emerald-400/10 px-2.5 py-1 text-[11px] font-bold text-emerald-300 transition hover:bg-emerald-400/18"
+              className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-bold text-emerald-700 transition hover:bg-emerald-400/18"
             >
               {action.label}
               <ArrowUpRight className="size-3" />
@@ -228,7 +229,7 @@ export function ProjectCard({ project }: { project: Project }) {
               href={action.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-400/35 bg-emerald-400/10 px-2.5 py-1 text-[11px] font-bold text-emerald-300 transition hover:bg-emerald-400/18"
+              className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-bold text-emerald-700 transition hover:bg-emerald-400/18"
             >
               {action.label}
               <ArrowUpRight className="size-3" />

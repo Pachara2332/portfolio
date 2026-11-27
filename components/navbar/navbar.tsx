@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FileText, Languages, Menu, X } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { ResumeDialog } from "@/components/common/resume-dialog";
 import { useLanguage } from "@/components/i18n/language-provider";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { cn } from "@/lib/utils";
@@ -40,8 +41,8 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b transition-all duration-300",
         scrolled
-          ? "border-border/75 bg-background/82 shadow-[0_16px_48px_oklch(0_0_0_/_0.2)] backdrop-blur-xl"
-          : "border-transparent bg-background/30 backdrop-blur-md"
+          ? "border-border/75 bg-background shadow-sm"
+          : "border-transparent bg-background"
       )}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -88,15 +89,12 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <a
-            href={siteConfig.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <ResumeDialog
             className="inline-flex h-9 items-center gap-2 rounded-md border border-border/80 bg-secondary/55 px-3 text-sm font-medium text-foreground shadow-[0_1px_0_oklch(1_0_0_/_0.035)_inset] transition duration-200 hover:-translate-y-0.5 hover:bg-secondary"
           >
             <FileText className="size-4" />
             {t.nav.resume}
-          </a>
+          </ResumeDialog>
           <div
             role="group"
             className="inline-flex h-9 items-center gap-1 rounded-md border border-border/80 bg-secondary/55 px-1 text-sm font-medium text-foreground shadow-[0_1px_0_oklch(1_0_0_/_0.035)_inset]"
@@ -146,7 +144,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
-            className="border-t border-border/70 bg-background/96 p-4 shadow-2xl shadow-black/35 backdrop-blur-xl lg:hidden"
+            className="border-t border-border/70 bg-background p-4 shadow-lg lg:hidden"
           >
             <div className="mx-auto flex max-w-7xl flex-col gap-1">
               {siteConfig.navItems.map((item) => (
@@ -191,15 +189,12 @@ export function Navbar() {
                   ))}
                 </span>
               </div>
-              <a
-                href={siteConfig.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <ResumeDialog
                 className="mt-3 inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border/80 bg-secondary text-sm font-medium text-foreground"
               >
                 <FileText className="size-4" />
                 {t.nav.resume}
-              </a>
+              </ResumeDialog>
             </div>
           </motion.div>
         ) : null}

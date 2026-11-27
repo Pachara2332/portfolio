@@ -32,13 +32,13 @@ export const dictionaries = {
       stats: [
         { label: "Projects", value: "10+" },
         { label: "Main tools", value: "Next.js / TS" },
-        { label: "Project types", value: "Web / AI" },
+        { label: "Project types", value: "Web / Mobile / AI" },
       ],
       strengths: [
         "Web apps and dashboards",
         "Frontend and backend features",
         "AI, mobile, and IoT projects",
-        "Internship experience in bus operation systems",
+        "Full-stack developer on production insurance systems",
       ],
     },
     projects: {
@@ -724,17 +724,28 @@ model EnrollmentApplication {
     },
     experience: {
       eyebrow: "Experience",
-      title: "Internship experience",
+      title: "Work experience",
       subtitle:
-        "I worked on public bus operation systems, including passenger-facing apps, internal dashboards, backend data, and automation scripts.",
-      type: "Internship",
+        "Full-stack work on production insurance systems, after an internship building public bus operation systems.",
+      types: { work: "Full-time", internship: "Internship", freelance: "Freelance" },
       signalTitle: "What this signals",
       achievements: [
-        "Built features for both passengers and internal operation staff",
-        "Worked with login, payments, maps, camera feeds, Prisma schemas, and Linux scripts",
-        "Turned real operation workflows into screens and small backend tools",
+        "Ship to production across mobile, web, backend, and LINE in one team",
+        "Work inside real constraints: legacy runtimes, partner APIs, QA cycles, and code review",
+        "Turn business rules from insurers and operations into reliable forms and flows",
       ],
       items: {
+        "fin-fullstack": {
+          role: "Full-Stack Developer",
+          description:
+            "Build and maintain insurance sales systems: a React Native app for agents, a Node.js insurance API, customer web and LINE LIFF flows, and a LINE OA backend.",
+          highlights: [
+            "Shipped Thai ID card OCR that auto-fills non-motor application forms",
+            "Built iOS/Android home widgets and Live Activity so agents see sales updates without opening the app",
+            "Onboarded new insurance products end to end: form config, validation, API field mapping, and documents",
+            "Built LINE LIFF renewal flows and LINE OA features for customer notifications and staff handoff",
+          ],
+        },
         "bussing-fullstack": {
           role: "Full-Stack Developer Intern",
           description:
@@ -812,13 +823,13 @@ model EnrollmentApplication {
       stats: [
         { label: "โปรเจกต์", value: "10+" },
         { label: "เครื่องมือหลัก", value: "Next.js / TS" },
-        { label: "ประเภทงาน", value: "Web / AI" },
+        { label: "ประเภทงาน", value: "Web / Mobile / AI" },
       ],
       strengths: [
         "เว็บแอปและ dashboard",
         "ฟีเจอร์ฝั่ง frontend และ backend",
         "โปรเจกต์ AI, mobile และ IoT",
-        "ประสบการณ์ฝึกงานระบบเดินรถโดยสาร",
+        "Full-Stack Developer ระบบประกันภัยที่ใช้งานจริง",
       ],
     },
     projects: {
@@ -1426,17 +1437,28 @@ model CouponClaim {
     },
     experience: {
       eyebrow: "Experience",
-      title: "ประสบการณ์ฝึกงาน",
+      title: "ประสบการณ์ทำงาน",
       subtitle:
-        "ได้ทำระบบงานเดินรถโดยสาร ทั้งแอปฝั่งผู้โดยสาร dashboard ภายใน ข้อมูลฝั่ง backend และ script สำหรับงาน automation",
-      type: "Internship",
+        "งาน Full-Stack บนระบบประกันภัยที่ใช้งานจริง ต่อจากฝึกงานทำระบบเดินรถโดยสาร",
+      types: { work: "Full-time", internship: "Internship", freelance: "Freelance" },
       signalTitle: "ประสบการณ์นี้บอกอะไร",
       achievements: [
-        "ทำฟีเจอร์ทั้งฝั่งผู้โดยสารและทีม operation ภายใน",
-        "ทำงานกับ login, payment, map, camera feed, Prisma schema และ Linux script",
-        "แปลง workflow งานจริงให้เป็นหน้าจอและเครื่องมือฝั่ง backend",
+        "ส่งงานขึ้น production ได้ทั้ง mobile, web, backend และ LINE ในทีมเดียว",
+        "ทำงานภายใต้ข้อจำกัดจริง: runtime เก่า, API ของ partner, รอบ QA และ code review",
+        "แปลงเงื่อนไขธุรกิจของบริษัทประกันและทีม operation เป็นฟอร์มและ flow ที่เชื่อถือได้",
       ],
       items: {
+        "fin-fullstack": {
+          role: "Full-Stack Developer",
+          description:
+            "พัฒนาและดูแลระบบขายประกัน: แอป React Native สำหรับตัวแทน, API ประกันภัย Node.js, เว็บลูกค้าและ LINE LIFF, และ backend LINE OA",
+          highlights: [
+            "ทำ OCR บัตรประชาชนเติมฟอร์มแจ้งงาน non-motor อัตโนมัติ",
+            "ทำ home widget และ Live Activity ทั้ง iOS/Android ให้ตัวแทนเห็นยอดขายโดยไม่ต้องเปิดแอป",
+            "เปิดสินค้าประกันใหม่ครบ flow: config ฟอร์ม, validation, field mapping ฝั่ง API และเอกสาร",
+            "ทำ flow ต่ออายุบน LINE LIFF และฟีเจอร์ LINE OA สำหรับแจ้งเตือนลูกค้าและส่งต่อเจ้าหน้าที่",
+          ],
+        },
         "bussing-fullstack": {
           role: "Full-Stack Developer Intern",
           description:

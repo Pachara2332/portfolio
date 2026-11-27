@@ -41,7 +41,7 @@ export function ExperienceTimeline() {
                       </div>
                       <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border/70 bg-secondary/45 px-3 py-1.5 text-xs font-medium text-muted-foreground">
                         <BriefcaseBusiness className="size-3.5" />
-                        {t.experience.type}
+                        {t.experience.types[experience.type]}
                       </span>
                     </div>
 

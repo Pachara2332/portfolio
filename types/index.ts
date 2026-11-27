@@ -78,7 +78,7 @@ export interface SiteConfig {
   description: string;
   url: string;
   ogImage: string;
-  resumeUrl: string;
+  resume: { en: string; th: string };
   navItems: NavItem[];
   socialLinks: SocialLink[];
   email: string;

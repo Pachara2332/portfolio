@@ -143,7 +143,7 @@ export function ContactSection() {
             <button
               type="submit"
               disabled={formState === "loading" || formState === "success"}
-              className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-foreground px-5 py-2.5 text-center text-sm font-semibold text-background shadow-[0_12px_36px_oklch(0_0_0_/_0.24)] transition duration-200 hover:-translate-y-0.5 hover:bg-foreground/90 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-70"
+              className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground shadow-[0_12px_36px_oklch(0.5_0.19_262_/_0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-primary/90 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-70"
             >
               {formState === "loading" ? (
                 <>
