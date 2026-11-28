@@ -6,8 +6,8 @@ export const siteConfig: SiteConfig = {
   title: "Pachara Wongsasri | Full-Stack Systems Engineer",
   description:
     "Full-Stack Developer focused on AI-powered business systems, modern SaaS architecture, and operational platforms.",
-  url: "https://pachara.dev",
-  ogImage: "/og-image.png",
+  url: "https://portfolio-three-delta-scjek3jdc2.vercel.app",
+  ogImage: "/opengraph-image",
   resume: { en: "/Pachara_CV_EN.pdf", th: "/Pachara_CV_TH.pdf" },
   navItems: [
     { label: "Home", href: "#home" },

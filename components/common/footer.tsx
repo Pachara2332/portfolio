@@ -9,7 +9,7 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="border-t border-border">
+    <footer className="border-t border-border pb-24 sm:pb-0">
       <div className="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-8 text-sm text-muted-foreground sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
         <div>
           <p className="font-medium text-foreground">Pachara Wongsasri</p>

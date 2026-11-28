@@ -12,6 +12,7 @@ export const experiences: Experience[] = [
       "Shipped Thai ID card OCR to auto-fill non-motor application forms",
       "Built iOS/Android home widgets and Live Activity for agent sales updates",
       "Onboarded new insurance products end to end: form config, validation, API mapping, and documents",
+      "Worked with insurance partners on product rules, application fields, and API specs",
     ],
     techStack: ["React Native", "Next.js", "Node.js", "MySQL", "Knex", "LINE LIFF"],
     type: "work",

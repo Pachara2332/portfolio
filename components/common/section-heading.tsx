@@ -9,38 +9,26 @@ interface SectionHeadingProps {
 }
 
 export function SectionHeading({
-  eyebrow,
+  eyebrow: _eyebrow,
   title,
   subtitle,
   align = "left",
   className,
 }: SectionHeadingProps) {
+  void _eyebrow;
   return (
     <div
       className={cn(
-        "mb-12 max-w-3xl lg:mb-14",
+        "mb-8 max-w-3xl",
         align === "center" && "mx-auto text-center",
         className
       )}
     >
-      {eyebrow ? (
-        <div
-          className={cn(
-            "mb-4 flex items-center gap-3",
-            align === "center" && "justify-center"
-          )}
-        >
-          <span className="h-px w-8 bg-foreground/24" />
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            {eyebrow}
-          </p>
-        </div>
-      ) : null}
-      <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+      <h2 className="text-balance text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">
         {title}
       </h2>
       {subtitle ? (
-        <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-muted-foreground sm:text-lg">
+        <p className="mt-2 max-w-2xl text-pretty text-base leading-7 text-muted-foreground">
           {subtitle}
         </p>
       ) : null}

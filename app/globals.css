@@ -32,25 +32,25 @@
 }
 
 :root {
-  --background: oklch(0.985 0.005 85);
-  --foreground: oklch(0.22 0.02 262);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.02 262);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.02 262);
-  --primary: oklch(0.5 0.19 262);
-  --primary-foreground: oklch(0.99 0.003 262);
-  --secondary: oklch(0.955 0.008 262);
-  --secondary-foreground: oklch(0.26 0.02 262);
-  --muted: oklch(0.95 0.007 262);
-  --muted-foreground: oklch(0.48 0.02 262);
-  --accent: oklch(0.94 0.025 262);
-  --accent-foreground: oklch(0.3 0.08 262);
-  --destructive: oklch(0.58 0.2 25);
-  --border: oklch(0.9 0.008 262);
-  --input: oklch(0.9 0.008 262);
-  --ring: oklch(0.55 0.17 262);
-  --radius: 0.5rem;
+  --background: #ffffff;
+  --foreground: #14213d;
+  --card: #ffffff;
+  --card-foreground: #14213d;
+  --popover: #ffffff;
+  --popover-foreground: #14213d;
+  --primary: #2457f5;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f5fa;
+  --secondary-foreground: #14213d;
+  --muted: #f3f5fa;
+  --muted-foreground: #5b6478;
+  --accent: #eaf0ff;
+  --accent-foreground: #1d47c8;
+  --destructive: #d92d20;
+  --border: #e6e9f0;
+  --input: #e6e9f0;
+  --ring: #2457f5;
+  --radius: 0.75rem;
 }
 
 @layer base {
@@ -91,6 +91,19 @@
   }
 }
 
+@keyframes story-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes heart-pop {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  15% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  30% { transform: translate(-50%, -50%) scale(0.95); }
+  45%, 80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
 @layer utilities {
   .surface-card {
     @apply border border-border/80 bg-card/88 shadow-[0_1px_2px_oklch(0.22_0.02_262_/_0.04),0_12px_40px_oklch(0.22_0.02_262_/_0.06)];
@@ -102,6 +115,19 @@
 
   .hairline {
     @apply bg-gradient-to-r from-transparent via-foreground/14 to-transparent;
+  }
+
+  .story-ring {
+    background: conic-gradient(from 210deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5, #feda75);
+  }
+
+  .story-progress {
+    transform-origin: left;
+    animation: story-progress 5s linear forwards;
+  }
+
+  .heart-pop {
+    animation: heart-pop 0.9s ease-out forwards;
   }
 
   .text-balance {

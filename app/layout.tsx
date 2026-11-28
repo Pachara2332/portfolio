@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import type React from "react";
 import localFont from "next/font/local";
+import { IBM_Plex_Sans_Thai } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "../node_modules/next/dist/next-devtools/server/font/geist-latin.woff2",
+const plexThai = IBM_Plex_Sans_Thai({
+  subsets: ["latin", "thai"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-geist-sans",
   display: "swap",
 });
@@ -49,20 +51,11 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.title,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.ogImage],
   },
   robots: {
     index: true,
@@ -85,7 +78,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("dark h-full scroll-smooth antialiased", geistSans.variable, geistMono.variable)}
+      className={cn("h-full scroll-smooth antialiased", plexThai.variable, geistMono.variable)}
     >
       <body className="min-h-full bg-background font-sans text-foreground">
         {children}
