@@ -78,7 +78,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
       {/* Back Button */}
       <div className="mb-6">
         <Link
-          href="/#projects"
+          href="/"
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
         >
           <ArrowLeft className="size-4" />
@@ -92,7 +92,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
           {/* Standard Project Overview Info */}
           <div className="space-y-6 p-6 sm:p-8">
             <header className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="text-xs font-semibold text-muted-foreground">
                 {t.projects.categories[project.category]}
               </p>
               <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -105,7 +105,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
 
             {project.children ? (
               <section className="space-y-3">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                <p className="text-xs font-bold text-muted-foreground">
                   Connected product flows
                 </p>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -135,7 +135,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
               <section className="space-y-4">
                 <div className="flex flex-wrap items-end justify-between gap-3">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                    <p className="text-xs font-bold text-muted-foreground">
                       Project Gallery
                     </p>
                     <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground">
@@ -218,13 +218,13 @@ export function ProjectDetailPage({ project }: { project: Project }) {
             {/* Challenge & Outcome Overview Grid */}
             <section className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-xl border border-border/70 bg-background/45 p-5">
-                <p className="mb-1.5 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                <p className="mb-1.5 text-xs font-bold text-muted-foreground">
                   {t.projects.challenge}
                 </p>
                 <p className="text-sm leading-6 text-foreground/85">{projectCopy?.challenge || project.challenge}</p>
               </div>
               <div className="rounded-xl border border-border/70 bg-secondary/28 p-5">
-                <p className="mb-1.5 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                <p className="mb-1.5 text-xs font-bold text-muted-foreground">
                   {t.projects.outcome}
                 </p>
                 <p className="text-sm leading-6 text-muted-foreground">{projectCopy?.outcome || project.outcome}</p>
@@ -233,7 +233,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
 
             {/* Standard Tech Stack */}
             <section>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground flex items-center gap-1.5">
+              <p className="mb-2 text-xs font-bold text-muted-foreground flex items-center gap-1.5">
                 <Layers className="size-4" /> Tech Stack
               </p>
               <div className="flex flex-wrap gap-2">
@@ -341,7 +341,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
                       <span className="size-2 rounded-full bg-yellow-500/50" />
                       <span className="size-2 rounded-full bg-emerald-500/50" />
                     </div>
-                    <span className="text-[9px] text-muted-foreground uppercase tracking-widest">architecture.flow</span>
+                    <span className="text-[9px] text-muted-foreground tracking-widest">architecture.flow</span>
                   </div>
                   <pre className="max-w-full overflow-x-auto p-4 select-none font-mono leading-[1.3] text-emerald-400/80">
                     {projectCopy.systemArchitecture.diagram}
@@ -398,7 +398,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
               {projectCopy.tradeoffs.map((item, idx) => (
                 <div key={idx} className="surface-card rounded-2xl p-5 border border-border/70 space-y-4 flex flex-col justify-between transition duration-300 hover:border-foreground/15 hover:bg-card">
                   <div className="space-y-2">
-                    <span className="rounded-full bg-amber-400/10 text-amber-400 border border-amber-400/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">
+                    <span className="rounded-full bg-amber-400/10 text-amber-400 border border-amber-400/20 px-2 py-0.5 text-[10px] font-bold tracking-widest">
                       Decision {idx + 1}
                     </span>
                     <h3 className="text-base font-bold text-foreground mt-2">{item.choice}</h3>
@@ -406,13 +406,13 @@ export function ProjectDetailPage({ project }: { project: Project }) {
 
                   <div className="space-y-3 pt-3 border-t border-border/40 mt-auto">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-400 flex items-center gap-1">
+                      <p className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
                         <ShieldCheck className="size-3" /> Rationale (Why)
                       </p>
                       <p className="text-xs text-muted-foreground leading-5 mt-1">{item.why}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-rose-400 flex items-center gap-1">
+                      <p className="text-[10px] font-bold text-rose-400 flex items-center gap-1">
                         <Activity className="size-3" /> Tradeoff (Consequences)
                       </p>
                       <p className="text-xs text-muted-foreground leading-5 mt-1">{item.tradeoff}</p>
@@ -435,7 +435,7 @@ export function ProjectDetailPage({ project }: { project: Project }) {
             </h2>
             
             <div className="rounded-xl border border-purple-500/10 bg-purple-500/[0.02] p-5 space-y-3">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-purple-400">
+              <p className="text-xs font-bold text-purple-400">
                 {projectCopy.scalingAndResilience.strategy}
               </p>
               <p className="text-sm leading-7 text-muted-foreground">

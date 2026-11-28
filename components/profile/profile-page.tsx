@@ -16,6 +16,8 @@ import {
   Layers,
   LayoutGrid,
   Mail,
+  Pin,
+  Share2,
   MapPin,
   MessageCircle,
   Smartphone,
@@ -32,6 +34,7 @@ import { ExperienceTimeline } from "@/components/experience/experience-timeline"
 import { CertificatesSection } from "@/components/certificates/certificates-section";
 import { cn } from "@/lib/utils";
 import { PostModal } from "@/components/profile/post-modal";
+import { ShareSheet, ToolsSheet } from "@/components/profile/profile-sheets";
 import type { Project } from "@/types";
 
 type Filter = "all" | "web" | "mobile" | "ai" | "line" | "game";
@@ -89,6 +92,9 @@ function TopBar() {
               </button>
             ))}
           </div>
+          <ShareSheet className="inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-secondary">
+            <Share2 className="size-4" />
+          </ShareSheet>
           <ResumeDialog className="hidden h-9 items-center gap-1.5 rounded-full border border-border px-3.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary sm:inline-flex">
             <FileText className="size-4" />
             {t.nav.resume}
@@ -208,7 +214,7 @@ function ProfileHeader() {
             className="size-20 rounded-full object-cover transition-transform group-hover:scale-[1.03] sm:size-36"
           />
         </span>
-        <span className="absolute bottom-full left-0 mb-1 w-max max-w-[10rem] rounded-2xl bg-background px-3 py-1.5 text-[11px] font-medium leading-tight text-foreground shadow-[0_2px_12px_rgba(20,33,61,0.15)] sm:max-w-[14rem] sm:text-xs">
+        <span className="absolute bottom-full left-0 mb-1 w-max max-w-[9rem] rounded-2xl text-center bg-background px-3 py-1.5 text-[11px] font-medium leading-tight text-foreground shadow-[0_2px_12px_rgba(20,33,61,0.15)] sm:text-xs">
           {t.profile.note}
           <span className="absolute -bottom-1 left-8 size-2 rotate-45 bg-background sm:left-16" />
         </span>
@@ -245,9 +251,18 @@ function ProfileHeader() {
         </div>
         <ul className="mt-3 flex gap-6 text-sm sm:gap-10 sm:text-base">
           {stats.map((stat) => (
-            <li key={stat.label} className="flex flex-col sm:flex-row sm:gap-1.5">
-              <span className="font-semibold text-foreground">{stat.value}</span>
-              <span className="text-muted-foreground">{stat.label}</span>
+            <li key={stat.label}>
+              {stat.label === t.profile.stats.tools ? (
+                <ToolsSheet className="flex flex-col text-left hover:opacity-70 sm:flex-row sm:gap-1.5">
+                  <span className="font-semibold text-foreground">{stat.value}</span>
+                  <span className="text-muted-foreground underline decoration-dotted underline-offset-4">{stat.label}</span>
+                </ToolsSheet>
+              ) : (
+                <span className="flex flex-col sm:flex-row sm:gap-1.5">
+                  <span className="font-semibold text-foreground">{stat.value}</span>
+                  <span className="text-muted-foreground">{stat.label}</span>
+                </span>
+              )}
             </li>
           ))}
         </ul>
@@ -376,7 +391,11 @@ function ProjectTile({ project, liked, onOpen }: { project: Project; liked: bool
           </div>
         </div>
       )}
-      {isGallery ? <Layers className="absolute right-2 top-2 size-5 text-white drop-shadow" aria-hidden /> : null}
+      {pinnedIds.includes(project.id) ? (
+        <Pin className="absolute right-2 top-2 size-5 fill-white text-white drop-shadow" aria-label={t.profile.pinned} />
+      ) : isGallery ? (
+        <Layers className="absolute right-2 top-2 size-5 text-white drop-shadow" aria-hidden />
+      ) : null}
       <div className="absolute inset-0 flex flex-col justify-end bg-[#14213d]/75 p-3 text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-4">
         <p className="text-sm font-semibold sm:text-base">{title}</p>
         <p className="mt-1 hidden text-xs text-white/80 sm:block">{project.techStack.slice(0, 3).join(", ")}</p>
@@ -429,6 +448,8 @@ function Services() {
 }
 
 const tiktokUrl = "https://www.tiktok.com/@donnartech";
+const reelVideos = ["salon", "food", "clinic"];
+const pinnedIds = ["booking-platform", "trainee-knowledge-assistant", "koet-isan"];
 
 function Reels() {
   const { t } = useLanguage();
@@ -443,7 +464,22 @@ function Reels() {
 
   return (
     <div className="py-8">
-      <p className="mx-auto max-w-md text-center text-sm text-muted-foreground">{t.profile.reelsIntro}</p>
+      <div className="grid grid-cols-3 gap-1">
+        {reelVideos.map((name) => (
+          <video
+            key={name}
+            src={`/assets/reels/booking-${name}.mp4`}
+            poster={`/assets/reels/booking-${name}.jpg`}
+            className="aspect-[9/16] w-full rounded-[4px] bg-secondary object-cover"
+            muted
+            loop
+            playsInline
+            controls
+            preload="none"
+          />
+        ))}
+      </div>
+      <p className="mx-auto mt-8 max-w-md text-center text-sm text-muted-foreground">{t.profile.reelsIntro}</p>
       <blockquote className="tiktok-embed mx-auto mt-4" cite={tiktokUrl} data-unique-id="donnartech" data-embed-type="creator" style={{ maxWidth: 780, minWidth: 288 }}>
         <section>
           <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center rounded-full bg-foreground px-5 text-sm font-semibold text-background">
@@ -462,7 +498,9 @@ export function ProfilePage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [liked, setLiked] = useState<string[]>([]);
   const activeMatch = filters.find((item) => item.key === filter)?.match ?? (() => true);
-  const visibleProjects = projects.filter(activeMatch);
+  const visibleProjects = projects
+    .filter(activeMatch)
+    .sort((a, b) => Number(pinnedIds.includes(b.id)) - Number(pinnedIds.includes(a.id)));
   const openProject = openIndex === null ? null : visibleProjects[openIndex];
   const toggleLike = (id: string) =>
     setLiked((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));

@@ -26,7 +26,11 @@ function getStoredLanguage(): Language {
   }
 
   const savedLanguage = window.localStorage.getItem(languageStorageKey);
-  return savedLanguage === "en" || savedLanguage === "th" ? savedLanguage : "en";
+  if (savedLanguage === "en" || savedLanguage === "th") {
+    return savedLanguage;
+  }
+
+  return window.navigator.language.toLowerCase().startsWith("th") ? "th" : "en";
 }
 
 function subscribeToLanguageChange(callback: () => void) {

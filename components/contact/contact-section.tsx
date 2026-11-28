@@ -15,28 +15,13 @@ export function ContactSection() {
   const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormState("loading");
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to send message");
-      }
-
-      setFormState("success");
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setFormState("idle"), 4500);
-    } catch {
-      setFormState("error");
-      setTimeout(() => setFormState("idle"), 3500);
-    }
+    const subject = encodeURIComponent(`Portfolio contact from ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}\n\n${formData.name}\n${formData.email}`);
+    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
+    setFormState("success");
+    setTimeout(() => setFormState("idle"), 4500);
   };
 
   return (
